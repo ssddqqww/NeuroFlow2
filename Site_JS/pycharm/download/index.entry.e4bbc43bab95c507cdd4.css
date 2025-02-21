@@ -1,6 +1,0 @@
-.download-button-with-os-wrapper.wt-col-auto-fill,.download-button-with-os-wrapper.wt-col-inline{max-width:calc(100% - var(--wt-horizontal-layout-gutter)*2)}.download-button-with-os,.download-button-with-os-wrapper .nextversion-fresh-standard-download-button{max-width:100%}
-.apple-silicon-block{padding:8px 12px;display:inline-block;background-color:rgba(25,25,28,.05);background-color:var(--rs-color-black-t5);border-radius:8px}.section-download-dark .apple-silicon-block{background-color:hsla(0,0%,100%,.05);background-color:var(--rs-color-white-t5)}
-.product-info__logo{width:48px;height:48px}
-.build-info{padding:12px 24px 24px;background-color:rgba(25,25,28,.05);background-color:var(--rs-color-black-t5);border-radius:8px}.build-info__screenshot{margin-bottom:-8px;border-radius:8px}.build-info__links{display:flex;flex-direction:column;row-gap:8px}
-.section-download-dark{background-color:#000}
-.pycharm-ai-download-banner{background-color:#12275f;background-image:url(../../www/pycharm/download/img/ai-banner-bg.3576f2939ba835b6ea13ef5d80561964.svg);background-repeat:no-repeat;background-size:auto 100%;background-position:50%;padding-bottom:32px}
