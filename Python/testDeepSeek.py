@@ -17,4 +17,6 @@ for chunk in response:
         full_response.append(part)
 
 # Для сохранения полного ответа в переменной
-final_answer = ''.join(full_response)
+final_answer = ''.join(full_response)   
+
+
