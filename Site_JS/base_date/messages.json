@@ -1,0 +1,24 @@
+{
+  "messages": [
+    {
+      "id": 1740925836042,
+      "text": "tha's ok",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20%40gmail.com",
+      "timestamp": "2025-03-02T14:30:36.042Z",
+      "likes": [],
+      "dislikes": []
+    },
+    {
+      "id": 1740925614131,
+      "text": "I am pepa pig, btw go sleep",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20%40gmail.com",
+      "timestamp": "2025-03-02T14:26:54.131Z",
+      "likes": [
+        "kirillypenko20%40gmail.com"
+      ],
+      "dislikes": []
+    }
+  ]
+}
