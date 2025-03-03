@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Теми форуму - iLanding</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .topics-container {
+      padding: 120px 0 60px;
+    }
+    .topic-input {
+      margin-bottom: 20px;
+    }
+    .topic-list {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .topic-item {
+      background: #f8f9fa;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .topic-item:hover {
+      background: #e9ecef;
+      transform: translateY(-2px);
+    }
+    .topic-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #0d6efd;
+      margin-bottom: 10px;
+    }
+    .topic-meta {
+      font-size: 0.9em;
+      color: #6c757d;
+    }
+    .auth-message {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .hidden {
+      display: none;
+    }
+    .create-topic-btn {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="../index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">iLanding</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#services">Services</a></li>
+          <li><a href="../index.html#pricing">Pricing</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div id="authButtons">
+        <a class="btn-getstarted" href="../Login/login.html" id="loginBtn">Увійти</a>
+        <a class="btn-getstarted hidden" href="#" id="logoutBtn">Вийти</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="topics-container">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="text-center mb-4">Теми форуму</h2>
+            
+            <div id="createTopicSection" class="hidden">
+              <button class="btn btn-primary create-topic-btn" onclick="showCreateTopicForm()">
+                Створити нову тему
+              </button>
+              
+              <div id="topicForm" class="topic-input hidden">
+                <div class="form-group">
+                  <input type="text" id="topicTitle" class="form-control" placeholder="Назва теми">
+                </div>
+                <button onclick="createTopic()" class="btn btn-primary mt-2">Створити</button>
+              </div>
+            </div>
+
+            <div id="authMessage" class="auth-message">
+              Будь ласка, <a href="../Login/login.html">увійдіть</a> щоб створити тему
+            </div>
+
+            <div id="topicList" class="topic-list">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <!-- ... existing footer code ... -->
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    let currentUser = null;
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    async function loadTopics() {
+      try {
+        const response = await fetch('http://localhost:3000/api/topics');
+        const topics = await response.json();
+        
+        const topicList = document.getElementById('topicList');
+        topicList.innerHTML = '';
+        
+        topics.forEach(topic => {
+          const topicElement = document.createElement('div');
+          topicElement.className = 'topic-item';
+          topicElement.onclick = () => window.location.href = `forum.html?topicId=${topic.id}`;
+          
+          topicElement.innerHTML = `
+            <div class="topic-title">${topic.title}</div>
+            <div class="topic-meta">
+              Створено: ${topic.author} | ${new Date(topic.createdAt).toLocaleString()}
+            </div>
+          `;
+          
+          topicList.appendChild(topicElement);
+        });
+      } catch (error) {
+        console.error('Помилка при завантаженні тем:', error);
+      }
+    }
+
+    function showCreateTopicForm() {
+      document.getElementById('topicForm').classList.remove('hidden');
+    }
+
+    async function createTopic() {
+      if (!currentUser) return;
+
+      const title = document.getElementById('topicTitle').value;
+      if (!title.trim()) return;
+
+      try {
+        const response = await fetch('http://localhost:3000/api/topics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title,
+            author: currentUser.name,
+            authorEmail: currentUser.email
+          })
+        });
+
+        if (response.ok) {
+          document.getElementById('topicTitle').value = '';
+          document.getElementById('topicForm').classList.add('hidden');
+          await loadTopics();
+        } else {
+          console.error('Помилка при створенні теми');
+        }
+      } catch (error) {
+        console.error('Помилка при відправці теми:', error);
+      }
+    }
+
+    function checkAuth() {
+      const userEmail = getCookie('userEmail');
+      const userName = decodeURIComponent(getCookie('userName') || '');
+      
+      if (userEmail && userName) {
+        currentUser = {
+          email: userEmail,
+          name: userName
+        };
+        document.getElementById('createTopicSection').classList.remove('hidden');
+        document.getElementById('authMessage').classList.add('hidden');
+        document.getElementById('loginBtn').classList.add('hidden');
+        document.getElementById('logoutBtn').classList.remove('hidden');
+      } else {
+        document.getElementById('createTopicSection').classList.add('hidden');
+        document.getElementById('authMessage').classList.remove('hidden');
+        document.getElementById('loginBtn').classList.remove('hidden');
+        document.getElementById('logoutBtn').classList.add('hidden');
+      }
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.cookie = 'userEmail=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      currentUser = null;
+      checkAuth();
+      window.location.href = '../Login/login.html';
+    });
+
+    window.onload = function() {
+      checkAuth();
+      loadTopics();
+    };
+  </script>
+</body>
+</html> 

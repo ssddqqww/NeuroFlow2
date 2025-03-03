@@ -1,0 +1,33 @@
+{
+  "topics": [
+    {
+      "id": 1741027249445,
+      "title": "new topic",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20%40gmail.com",
+      "createdAt": "2025-03-03T18:40:49.445Z",
+      "messageIds": [
+        1741027256488,
+        1741027262814
+      ]
+    },
+    {
+      "id": 1741019518357,
+      "title": "пепа",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20%40gmail.com",
+      "createdAt": "2025-03-03T16:31:58.357Z",
+      "messageIds": [
+        1741027272542
+      ]
+    },
+    {
+      "id": 1741019406430,
+      "title": "пепа піг керує світом",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20%40gmail.com",
+      "createdAt": "2025-03-03T16:30:06.430Z",
+      "messageIds": []
+    }
+  ]
+}
