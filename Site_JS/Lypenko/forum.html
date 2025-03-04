@@ -39,6 +39,12 @@
       padding: 15px;
       margin-bottom: 10px;
       border-radius: 8px;
+      border-left: 4px solid #0d6efd;
+      transition: all 0.3s ease;
+    }
+    .message-item:hover {
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transform: translateX(5px);
     }
     .message-time {
       font-size: 0.8em;
@@ -47,6 +53,14 @@
     .message-author {
       font-weight: bold;
       color: #0d6efd;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .message-author img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
     }
     .auth-message {
       text-align: center;
@@ -68,7 +82,7 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: all 0.2s;
     }
     .like-button {
       background-color: #e7f5e7;
@@ -83,6 +97,78 @@
     .dislike-button.active {
       background-color: #dc3545;
       color: white;
+    }
+    .reply-button {
+      background: none;
+      border: none;
+      color: #0d6efd;
+      cursor: pointer;
+      padding: 5px 10px;
+      font-size: 0.9em;
+      transition: all 0.2s;
+    }
+    .reply-button:hover {
+      color: #0a58ca;
+      text-decoration: underline;
+    }
+    .reply-form {
+      margin-top: 10px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 4px;
+      border: 1px solid #dee2e6;
+    }
+    .replies {
+      margin-left: 20px;
+      margin-top: 10px;
+      border-left: 2px solid #dee2e6;
+      padding-left: 15px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .replies.expanded {
+      max-height: none;
+    }
+    .replies-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #0d6efd;
+      cursor: pointer;
+      font-size: 0.9em;
+      margin: 5px 0;
+      padding: 5px 0;
+      user-select: none;
+    }
+    .replies-toggle:hover {
+      color: #0a58ca;
+    }
+    .replies-toggle i {
+      transition: transform 0.3s ease;
+    }
+    .replies-toggle.expanded i {
+      transform: rotate(180deg);
+    }
+    .replies-count {
+      background: #e9ecef;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8em;
+    }
+    .message-content {
+      margin: 10px 0;
+    }
+    .message-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .message-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
   </style>
 </head>
@@ -264,29 +350,78 @@
           return;
         }
         
+        // Групуємо повідомлення за батьківськими ID
+        const messageMap = new Map();
+        const rootMessages = [];
+        
+        // Спочатку створюємо мапу всіх повідомлень
         messages.forEach(message => {
+          messageMap.set(message.id, { ...message, replies: [] });
+        });
+        
+        // Тепер групуємо повідомлення
+        messages.forEach(message => {
+          if (!message.parentId) {
+            rootMessages.push(messageMap.get(message.id));
+          } else {
+            const parent = messageMap.get(message.parentId);
+            if (parent) {
+              parent.replies.push(messageMap.get(message.id));
+            }
+          }
+        });
+        
+        // Відображаємо повідомлення
+        function renderMessage(message, level = 0) {
           const messageElement = document.createElement('div');
           messageElement.className = 'message-item';
           const userLiked = message.likes?.includes(currentUser?.email) || false;
           const userDisliked = message.dislikes?.includes(currentUser?.email) || false;
           
           messageElement.innerHTML = `
-            <div class="message-author">${message.author}</div>
-            <p>${message.text}</p>
-            <div class="message-time">${new Date(message.timestamp).toLocaleString()}</div>
-            <div class="reaction-buttons">
-              <button class="reaction-button like-button ${userLiked ? 'active' : ''}" 
-                      onclick="handleReaction(${message.id}, 'like')">
-                👍 <span class="like-count">${message.likes?.length || 0}</span>
-              </button>
-              <button class="reaction-button dislike-button ${userDisliked ? 'active' : ''}" 
-                      onclick="handleReaction(${message.id}, 'dislike')">
-                👎 <span class="dislike-count">${message.dislikes?.length || 0}</span>
-              </button>
+            <div class="message-author">
+              <img src="${message.authorPicture || '../assets/img/default-avatar.png'}" alt="${message.author}">
+              ${message.author}
             </div>
+            <div class="message-content">${message.text}</div>
+            <div class="message-actions">
+              <div class="message-meta">
+                <div class="message-time">${new Date(message.timestamp).toLocaleString()}</div>
+                <button class="reply-button" onclick="showReplyForm(${message.id})">
+                  Відповісти
+                </button>
+              </div>
+              <div class="reaction-buttons">
+                <button class="reaction-button like-button ${userLiked ? 'active' : ''}" 
+                        onclick="handleReaction(${message.id}, 'like')">
+                  👍 <span class="like-count">${message.likes?.length || 0}</span>
+                </button>
+                <button class="reaction-button dislike-button ${userDisliked ? 'active' : ''}" 
+                        onclick="handleReaction(${message.id}, 'dislike')">
+                  👎 <span class="dislike-count">${message.dislikes?.length || 0}</span>
+                </button>
+              </div>
+            </div>
+            <div id="replyForm${message.id}" class="reply-form hidden">
+              <textarea class="form-control mb-2" rows="2" placeholder="Напишіть вашу відповідь..."></textarea>
+              <button class="btn btn-primary btn-sm" onclick="submitReply(${message.id})">Відправити</button>
+            </div>
+            ${message.replies.length > 0 ? `
+              <div class="replies-toggle" onclick="toggleReplies(${message.id})">
+                <i class="bi bi-chevron-down"></i>
+                <span>Відповіді</span>
+                <span class="replies-count">${message.replies.length}</span>
+              </div>
+              <div id="replies${message.id}" class="replies">
+                ${message.replies.map(reply => renderMessage(reply, level + 1)).join('')}
+              </div>
+            ` : ''}
           `;
-          messageList.appendChild(messageElement);
-        });
+          
+          return messageElement.outerHTML;
+        }
+        
+        messageList.innerHTML = rootMessages.map(message => renderMessage(message)).join('');
       } catch (error) {
         console.error('Помилка при завантаженні повідомлень:', error);
       }
@@ -374,6 +509,64 @@
         }
       } catch (error) {
         console.error('Помилка при відправці реакції:', error);
+      }
+    }
+
+    function showReplyForm(messageId) {
+      if (!currentUser) {
+        alert('Будь ласка, увійдіть щоб відповісти');
+        return;
+      }
+      
+      const replyForm = document.getElementById(`replyForm${messageId}`);
+      replyForm.classList.remove('hidden');
+    }
+
+    async function submitReply(parentId) {
+      if (!currentUser || !currentTopicId) return;
+      
+      const replyForm = document.getElementById(`replyForm${parentId}`);
+      const textarea = replyForm.querySelector('textarea');
+      const messageText = textarea.value.trim();
+      
+      if (!messageText) return;
+      
+      try {
+        const response = await fetch(`http://localhost:3000/api/topics/${currentTopicId}/messages`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            text: messageText,
+            author: currentUser.name,
+            authorEmail: currentUser.email,
+            parentId: parentId
+          })
+        });
+        
+        if (response.ok) {
+          textarea.value = '';
+          replyForm.classList.add('hidden');
+          await loadMessages();
+        } else {
+          console.error('Помилка при додаванні відповіді');
+        }
+      } catch (error) {
+        console.error('Помилка при відправці відповіді:', error);
+      }
+    }
+
+    function toggleReplies(messageId) {
+      const repliesContainer = document.getElementById(`replies${messageId}`);
+      const toggleButton = repliesContainer.previousElementSibling;
+      
+      if (repliesContainer.classList.contains('expanded')) {
+        repliesContainer.classList.remove('expanded');
+        toggleButton.classList.remove('expanded');
+      } else {
+        repliesContainer.classList.add('expanded');
+        toggleButton.classList.add('expanded');
       }
     }
 
