@@ -27,133 +27,186 @@
     .forum-container {
       padding: 120px 0 60px;
       min-height: calc(100vh - 80px);
+      background: #f8f9fa;
     }
     
     .forum-content {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      overflow: hidden;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
     }
     
     .forum-header {
-      padding: 20px;
-      background: #fff;
-      border-bottom: 1px solid #dee2e6;
+      padding: 0 0 30px 0;
+      background: transparent;
+      color: #2c3e50;
+      border-bottom: 2px solid #e9ecef;
+      margin-bottom: 30px;
+    }
+    
+    .forum-header h2 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+    
+    .back-button {
+      color: #6c757d;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .back-button:hover {
+      color: #0d6efd;
+      transform: translateX(-5px);
     }
     
     .message-list {
-      padding: 20px;
-      background: #f8f9fa;
+      padding: 0;
+      background: transparent;
       min-height: 400px;
-      max-height: 600px;
-      overflow-y: auto;
+      max-height: none;
     }
     
     .message-input {
-      padding: 20px;
-      background: #fff;
-      border-top: 1px solid #dee2e6;
+      padding: 30px 0;
+      background: transparent;
+      border-top: 2px solid #e9ecef;
+      margin-top: 30px;
     }
     
     .message-item {
       background: white;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid #e9ecef;
+    }
+    
+    .message-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     
     .message-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
     
     .message-author {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     
     .message-author img {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       object-fit: cover;
+      border: 2px solid #e9ecef;
+    }
+    
+    .message-author span {
+      font-weight: 500;
+      color: #2c3e50;
+    }
+    
+    .message-time {
+      color: #6c757d;
+      font-size: 0.9rem;
     }
     
     .message-content {
       color: #34495e;
-      line-height: 1.5;
-      margin: 10px 0;
+      line-height: 1.6;
+      margin: 15px 0;
+      font-size: 1.05rem;
     }
     
     .message-actions {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
-      padding-top: 10px;
+      margin-top: 15px;
+      padding-top: 15px;
       border-top: 1px solid #eee;
     }
     
     .reactions-container {
       display: flex;
-      gap: 8px;
+      gap: 10px;
     }
     
     .reaction-button {
-      background: none;
+      background: #f8f9fa;
       border: 1px solid #e0e0e0;
       border-radius: 20px;
-      padding: 4px 12px;
+      padding: 6px 14px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: all 0.2s ease;
+      font-size: 0.95rem;
     }
     
     .reaction-button:hover {
-      background-color: #f5f5f5;
+      background-color: #e9ecef;
+      transform: translateY(-1px);
     }
     
     .reaction-button.active {
       background-color: #e3f2fd;
       border-color: #2196f3;
+      color: #1976d2;
     }
     
     .reply-button {
       background: none;
       border: none;
       color: #0d6efd;
-      padding: 4px 12px;
+      padding: 6px 14px;
       cursor: pointer;
       transition: all 0.2s;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     
     .reply-button:hover {
       color: #0a58ca;
-      text-decoration: underline;
+      text-decoration: none;
     }
     
     .reply-form {
-      margin-top: 10px;
-      padding: 10px;
+      margin-top: 15px;
+      padding: 15px;
       background: #f8f9fa;
-      border-radius: 8px;
+      border-radius: 12px;
       display: none;
+      border: 1px solid #e9ecef;
     }
     
     .reply-form.show {
       display: block;
+      animation: slideDown 0.3s ease;
     }
     
     .replies {
       margin-left: 40px;
-      margin-top: 10px;
+      margin-top: 15px;
       padding-left: 20px;
       border-left: 2px solid #dee2e6;
       max-height: 0;
@@ -162,7 +215,7 @@
     }
     
     .replies.expanded {
-      max-height: 1000px;
+      max-height: 2000px;
     }
     
     .replies-toggle {
@@ -171,8 +224,9 @@
       gap: 8px;
       color: #0d6efd;
       cursor: pointer;
-      padding: 8px 0;
-      font-size: 0.9em;
+      padding: 10px 0;
+      font-size: 0.95rem;
+      font-weight: 500;
     }
     
     .replies-toggle i {
@@ -185,23 +239,68 @@
     
     .replies-count {
       background: #e9ecef;
-      padding: 2px 8px;
+      padding: 3px 10px;
       border-radius: 12px;
-      font-size: 0.8em;
+      font-size: 0.85rem;
+      color: #495057;
     }
     
     .auth-message {
       text-align: center;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
+      padding: 25px;
+      background: white;
+      border-radius: 12px;
       margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #e9ecef;
     }
     
-    .auth-buttons {
-      display: flex;
-      gap: 10px;
+    .auth-message a {
+      color: #0d6efd;
+      text-decoration: none;
+      font-weight: 500;
     }
+    
+    .auth-message a:hover {
+      text-decoration: underline;
+    }
+    
+    .message-input textarea {
+      border-radius: 12px;
+      border: 1px solid #dee2e6;
+      padding: 15px;
+      resize: none;
+      transition: all 0.3s ease;
+    }
+    
+    .message-input textarea:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+    
+    .message-input button {
+      border-radius: 12px;
+      padding: 10px 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .message-input button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
     .d-none {
       display: none !important;
     }
@@ -244,7 +343,7 @@
           <div class="col-lg-10">
             <div class="forum-content">
               <div class="forum-header">
-                <a href="topics.html" class="btn btn-outline-secondary mb-3">
+                <a href="topics.html" class="back-button">
                   <i class="bi bi-arrow-left"></i> Повернутися до списку тем
                 </a>
                 <h2 class="topic-title" id="topicTitle"></h2>

@@ -626,10 +626,14 @@
       "authorEmail": "kirillypenko20@gmail.com",
       "timestamp": "2025-03-07T14:07:09.331Z",
       "likes": [],
-      "dislikes": [],
+      "dislikes": [
+        "kirillypenko20@gmail.com"
+      ],
       "love": [],
       "laugh": [],
-      "wow": [],
+      "wow": [
+        "kirillypenko20@gmail.com"
+      ],
       "topicId": 1741356418352,
       "parentId": 1741356422334
     },
@@ -639,11 +643,15 @@
       "author": "robot venomchik",
       "authorEmail": "kirillypenko20@gmail.com",
       "timestamp": "2025-03-07T14:07:14.430Z",
-      "likes": [],
+      "likes": [
+        "kirillypenko20@gmail.com"
+      ],
       "dislikes": [],
       "love": [],
       "laugh": [],
-      "wow": [],
+      "wow": [
+        "kirillypenko20@gmail.com"
+      ],
       "topicId": 1741356418352,
       "parentId": 1741356429331
     },
@@ -654,12 +662,288 @@
       "authorEmail": "kirillypenko20@gmail.com",
       "timestamp": "2025-03-07T14:07:19.947Z",
       "likes": [],
-      "dislikes": [],
+      "dislikes": [
+        "kirillypenko20@gmail.com"
+      ],
       "love": [],
       "laugh": [],
       "wow": [],
       "topicId": 1741356418352,
       "parentId": 1741356434430
+    },
+    {
+      "id": 1741356805116,
+      "text": "21512",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:25.116Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356807761,
+      "text": "цуейемйуце",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:27.761Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356809799,
+      "text": "23ак123ме1",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:29.799Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356812047,
+      "text": "кцуецуке4326",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:32.047Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356813176,
+      "text": "к2ке234",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:33.176Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356813590,
+      "text": "4е32е",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:33.590Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356813777,
+      "text": "432",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:33.777Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356814057,
+      "text": "е3",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:34.057Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356814353,
+      "text": "34",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:34.353Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356814527,
+      "text": "н",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:34.527Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356814690,
+      "text": "436",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:34.690Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356815007,
+      "text": "134",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:35.007Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356815165,
+      "text": "6",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:35.165Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356815350,
+      "text": "у",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:35.350Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356815673,
+      "text": "уіар",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:35.673Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356815848,
+      "text": "кр",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:35.848Z",
+      "likes": [],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356816169,
+      "text": "2",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:36.169Z",
+      "likes": [
+        "kirillypenko20@gmail.com"
+      ],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [
+        "kirillypenko20@gmail.com"
+      ],
+      "topicId": 1741356418352,
+      "parentId": null
+    },
+    {
+      "id": 1741356821882,
+      "text": "чому",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:41.882Z",
+      "likes": [
+        "kirillypenko20@gmail.com"
+      ],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": 1741356816169
+    },
+    {
+      "id": 1741356826474,
+      "text": "ббо так",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "timestamp": "2025-03-07T14:13:46.474Z",
+      "likes": [
+        "kirillypenko20@gmail.com"
+      ],
+      "dislikes": [],
+      "love": [],
+      "laugh": [],
+      "wow": [],
+      "topicId": 1741356418352,
+      "parentId": 1741356821882
     }
   ]
 }
