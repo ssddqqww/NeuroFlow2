@@ -26,149 +26,184 @@
   <style>
     .forum-container {
       padding: 120px 0 60px;
+      min-height: calc(100vh - 80px);
     }
-    .message-input {
-      margin-bottom: 20px;
+    
+    .forum-content {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      overflow: hidden;
     }
+    
+    .forum-header {
+      padding: 20px;
+      background: #fff;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
     .message-list {
-      max-height: 500px;
+      padding: 20px;
+      background: #f8f9fa;
+      min-height: 400px;
+      max-height: 600px;
       overflow-y: auto;
     }
+    
+    .message-input {
+      padding: 20px;
+      background: #fff;
+      border-top: 1px solid #dee2e6;
+    }
+    
     .message-item {
-      background: #f8f9fa;
-      padding: 15px;
-      margin-bottom: 10px;
+      background: white;
       border-radius: 8px;
-      border-left: 4px solid #0d6efd;
-      transition: all 0.3s ease;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .message-item:hover {
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transform: translateX(5px);
+    
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
     }
-    .message-time {
-      font-size: 0.8em;
-      color: #6c758d;
-    }
+    
     .message-author {
-      font-weight: bold;
-      color: #0d6efd;
       display: flex;
       align-items: center;
       gap: 10px;
     }
+    
     .message-author img {
       width: 32px;
       height: 32px;
       border-radius: 50%;
+      object-fit: cover;
     }
-    .auth-message {
-      text-align: center;
-      margin: 20px 0;
+    
+    .message-content {
+      color: #34495e;
+      line-height: 1.5;
+      margin: 10px 0;
     }
-    .hidden {
-      display: none;
-    }
-    .reaction-buttons {
+    
+    .message-actions {
       display: flex;
-      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
       margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
     }
+    
+    .reactions-container {
+      display: flex;
+      gap: 8px;
+    }
+    
     .reaction-button {
+      background: none;
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      padding: 4px 12px;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 5px;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
-    .like-button {
-      background-color: #e7f5e7;
+    
+    .reaction-button:hover {
+      background-color: #f5f5f5;
     }
-    .like-button.active {
-      background-color: #28a745;
-      color: white;
+    
+    .reaction-button.active {
+      background-color: #e3f2fd;
+      border-color: #2196f3;
     }
-    .dislike-button {
-      background-color: #ffe7e7;
-    }
-    .dislike-button.active {
-      background-color: #dc3545;
-      color: white;
-    }
+    
     .reply-button {
       background: none;
       border: none;
       color: #0d6efd;
+      padding: 4px 12px;
       cursor: pointer;
-      padding: 5px 10px;
-      font-size: 0.9em;
       transition: all 0.2s;
     }
+    
     .reply-button:hover {
       color: #0a58ca;
       text-decoration: underline;
     }
+    
     .reply-form {
       margin-top: 10px;
       padding: 10px;
-      background: #fff;
-      border-radius: 4px;
-      border: 1px solid #dee2e6;
+      background: #f8f9fa;
+      border-radius: 8px;
+      display: none;
     }
+    
+    .reply-form.show {
+      display: block;
+    }
+    
     .replies {
-      margin-left: 20px;
+      margin-left: 40px;
       margin-top: 10px;
+      padding-left: 20px;
       border-left: 2px solid #dee2e6;
-      padding-left: 15px;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease-out;
     }
+    
     .replies.expanded {
-      max-height: none;
+      max-height: 1000px;
     }
+    
     .replies-toggle {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
       color: #0d6efd;
       cursor: pointer;
+      padding: 8px 0;
       font-size: 0.9em;
-      margin: 5px 0;
-      padding: 5px 0;
-      user-select: none;
     }
-    .replies-toggle:hover {
-      color: #0a58ca;
-    }
+    
     .replies-toggle i {
       transition: transform 0.3s ease;
     }
+    
     .replies-toggle.expanded i {
       transform: rotate(180deg);
     }
+    
     .replies-count {
       background: #e9ecef;
       padding: 2px 8px;
       border-radius: 12px;
       font-size: 0.8em;
     }
-    .message-content {
-      margin: 10px 0;
+    
+    .auth-message {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      margin: 20px 0;
     }
-    .message-actions {
+    
+    .auth-buttons {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
+      gap: 10px;
     }
-    .message-meta {
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .d-none {
+      display: none !important;
     }
   </style>
 </head>
@@ -194,9 +229,9 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <div id="authButtons">
-        <a class="btn-getstarted" href="../Login/login.html" id="loginBtn">Увійти</a>
-        <a class="btn-getstarted hidden" href="#" id="logoutBtn">Вийти</a>
+      <div id="authButtons" class="auth-buttons">
+        <a class="btn-getstarted d-none" href="../Login/login.html" id="loginBtn">Увійти</a>
+        <a class="btn-getstarted d-none" href="#" id="logoutBtn">Вийти</a>
       </div>
 
     </div>
@@ -206,26 +241,27 @@
     <section class="forum-container">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <h2 class="text-center mb-4">Форум</h2>
-            
-            <div id="topicTitle" class="text-center mb-4">
-              <h3></h3>
-              <a href="topics.html" class="btn btn-secondary mb-4">Повернутися до списку тем</a>
-            </div>
-
-            <div id="messageInput" class="message-input hidden">
-              <div class="form-group">
-                <textarea id="messageText" class="form-control" rows="3" placeholder="Напишіть ваше повідомлення..."></textarea>
+          <div class="col-lg-10">
+            <div class="forum-content">
+              <div class="forum-header">
+                <a href="topics.html" class="btn btn-outline-secondary mb-3">
+                  <i class="bi bi-arrow-left"></i> Повернутися до списку тем
+                </a>
+                <h2 class="topic-title" id="topicTitle"></h2>
               </div>
-              <button onclick="addMessage()" class="btn btn-primary mt-2">Відправити</button>
-            </div>
 
-            <div id="authMessage" class="auth-message">
-              Будь ласка, <a href="../Login/login.html">увійдіть</a> щоб написати повідомлення
-            </div>
+              <div class="message-list" id="messageList"></div>
 
-            <div id="messageList" class="message-list">
+              <div id="authMessage" class="auth-message d-none">
+                Будь ласка, <a href="../Login/login.html">увійдіть</a> щоб написати повідомлення
+              </div>
+
+              <div id="messageInput" class="message-input d-none">
+                <div class="input-group">
+                  <textarea id="messageText" class="form-control" rows="2" placeholder="Напишіть ваше повідомлення..."></textarea>
+                  <button onclick="addMessage()" class="btn btn-primary ms-2">Відправити</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -296,11 +332,18 @@
   <script>
     let currentUser = null;
     let currentTopicId = null;
+    let messages = [];
+    let expandedReplies = new Set();
 
     function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=').map(c => c.trim());
+        if (cookieName === name) {
+          return cookieValue;
+        }
+      }
+      return null;
     }
 
     function getTopicIdFromUrl() {
@@ -328,7 +371,8 @@
           return;
         }
         
-        document.getElementById('topicTitle').querySelector('h3').textContent = topic.title;
+        document.getElementById('topicTitle').textContent = topic.title;
+        document.title = `${topic.title} - Форум`;
       } catch (error) {
         console.error('Помилка при завантаженні деталей теми:', error);
       }
@@ -340,119 +384,62 @@
         if (!topicId) return;
         
         const response = await fetch(`http://localhost:3000/api/topics/${topicId}/messages`);
-        const messages = await response.json();
-        
-        const messageList = document.getElementById('messageList');
-        messageList.innerHTML = '';
-        
-        if (messages.length === 0) {
-          messageList.innerHTML = '<div class="text-center">У цій темі ще немає повідомлень</div>';
-          return;
-        }
-        
-        // Групуємо повідомлення за батьківськими ID
-        const messageMap = new Map();
-        const rootMessages = [];
-        
-        // Спочатку створюємо мапу всіх повідомлень
-        messages.forEach(message => {
-          messageMap.set(message.id, { ...message, replies: [] });
-        });
-        
-        // Тепер групуємо повідомлення
-        messages.forEach(message => {
-          if (!message.parentId) {
-            rootMessages.push(messageMap.get(message.id));
-          } else {
-            const parent = messageMap.get(message.parentId);
-            if (parent) {
-              parent.replies.push(messageMap.get(message.id));
-            }
-          }
-        });
-        
-        // Відображаємо повідомлення
-        function renderMessage(message, level = 0) {
-          const messageElement = document.createElement('div');
-          messageElement.className = 'message-item';
-          const userLiked = message.likes?.includes(currentUser?.email) || false;
-          const userDisliked = message.dislikes?.includes(currentUser?.email) || false;
-          
-          messageElement.innerHTML = `
-            <div class="message-author">
-              <img src="${message.authorPicture || '../assets/img/default-avatar.png'}" alt="${message.author}">
-              ${message.author}
-            </div>
-            <div class="message-content">${message.text}</div>
-            <div class="message-actions">
-              <div class="message-meta">
-                <div class="message-time">${new Date(message.timestamp).toLocaleString()}</div>
-                <button class="reply-button" onclick="showReplyForm(${message.id})">
-                  Відповісти
-                </button>
-              </div>
-              <div class="reaction-buttons">
-                <button class="reaction-button like-button ${userLiked ? 'active' : ''}" 
-                        onclick="handleReaction(${message.id}, 'like')">
-                  👍 <span class="like-count">${message.likes?.length || 0}</span>
-                </button>
-                <button class="reaction-button dislike-button ${userDisliked ? 'active' : ''}" 
-                        onclick="handleReaction(${message.id}, 'dislike')">
-                  👎 <span class="dislike-count">${message.dislikes?.length || 0}</span>
-                </button>
-              </div>
-            </div>
-            <div id="replyForm${message.id}" class="reply-form hidden">
-              <textarea class="form-control mb-2" rows="2" placeholder="Напишіть вашу відповідь..."></textarea>
-              <button class="btn btn-primary btn-sm" onclick="submitReply(${message.id})">Відправити</button>
-            </div>
-            ${message.replies.length > 0 ? `
-              <div class="replies-toggle" onclick="toggleReplies(${message.id})">
-                <i class="bi bi-chevron-down"></i>
-                <span>Відповіді</span>
-                <span class="replies-count">${message.replies.length}</span>
-              </div>
-              <div id="replies${message.id}" class="replies">
-                ${message.replies.map(reply => renderMessage(reply, level + 1)).join('')}
-              </div>
-            ` : ''}
-          `;
-          
-          return messageElement.outerHTML;
-        }
-        
-        messageList.innerHTML = rootMessages.map(message => renderMessage(message)).join('');
+        const data = await response.json();
+        messages = data;
+        displayMessages();
       } catch (error) {
         console.error('Помилка при завантаженні повідомлень:', error);
       }
     }
 
-    window.onload = function() {
-      checkAuth();
-      loadTopicDetails();
-      loadMessages();
-    };
-
     function checkAuth() {
+      console.log('Перевірка авторизації...');
+      console.log('Всі куки:', document.cookie);
+      
       const userEmail = getCookie('userEmail');
       const userName = getCookie('userName');
       
+      console.log('userEmail:', userEmail);
+      console.log('userName:', userName);
+
+      const messageInput = document.getElementById('messageInput');
+      const authMessage = document.getElementById('authMessage');
+      const loginBtn = document.getElementById('loginBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+      
       if (userEmail && userName) {
+        console.log('Користувач авторизований');
         currentUser = {
-          email: userEmail,
+          email: decodeURIComponent(userEmail).replace(/%40/g, '@'),
           name: decodeURIComponent(userName)
         };
-        document.getElementById('messageInput').classList.remove('hidden');
-        document.getElementById('authMessage').classList.add('hidden');
-        document.getElementById('loginBtn').classList.add('hidden');
-        document.getElementById('logoutBtn').classList.remove('hidden');
+        
+        if (messageInput) messageInput.classList.remove('d-none');
+        if (authMessage) authMessage.classList.add('d-none');
+        if (loginBtn) loginBtn.classList.add('d-none');
+        if (logoutBtn) logoutBtn.classList.remove('d-none');
       } else {
-        document.getElementById('messageInput').classList.add('hidden');
-        document.getElementById('authMessage').classList.remove('hidden');
-        document.getElementById('loginBtn').classList.remove('hidden');
-        document.getElementById('logoutBtn').classList.add('hidden');
+        console.log('Користувач не авторизований');
+        currentUser = null;
+        
+        if (messageInput) messageInput.classList.add('d-none');
+        if (authMessage) authMessage.classList.remove('d-none');
+        if (loginBtn) loginBtn.classList.remove('d-none');
+        if (logoutBtn) logoutBtn.classList.add('d-none');
       }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM завантажено');
+      checkAuth();
+    });
+
+    window.onload = async function() {
+      console.log('Вікно завантажено');
+      checkAuth();
+      await loadTopicDetails();
+      await loadMessages();
+    };
 
     async function addMessage() {
       if (!currentUser || !currentTopicId) return;
@@ -484,9 +471,9 @@
       }
     }
 
-    async function handleReaction(messageId, type) {
-      if (!currentUser || !currentTopicId) {
-        alert('Будь ласка, увійдіть щоб поставити реакцію');
+    async function handleReaction(messageId, reactionType) {
+      if (!currentUser) {
+        showAuthMessage('Будь ласка, увійдіть в систему, щоб додавати реакції');
         return;
       }
 
@@ -497,7 +484,7 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            type,
+            type: reactionType,
             userEmail: currentUser.email
           })
         });
@@ -508,18 +495,36 @@
           console.error('Помилка при додаванні реакції');
         }
       } catch (error) {
-        console.error('Помилка при відправці реакції:', error);
+        console.error('Помилка при обробці реакції:', error);
       }
     }
 
     function showReplyForm(messageId) {
       if (!currentUser) {
-        alert('Будь ласка, увійдіть щоб відповісти');
+        showAuthMessage('Будь ласка, увійдіть щоб відповісти');
         return;
       }
       
       const replyForm = document.getElementById(`replyForm${messageId}`);
-      replyForm.classList.remove('hidden');
+      if (replyForm) {
+        replyForm.classList.toggle('show');
+      }
+    }
+
+    function toggleReplies(messageId) {
+      const repliesContainer = document.getElementById(`replies${messageId}`);
+      const toggleButton = document.querySelector(`[data-toggle-replies="${messageId}"]`);
+      
+      if (repliesContainer && toggleButton) {
+        repliesContainer.classList.toggle('expanded');
+        toggleButton.classList.toggle('expanded');
+        
+        if (repliesContainer.classList.contains('expanded')) {
+          expandedReplies.add(messageId);
+        } else {
+          expandedReplies.delete(messageId);
+        }
+      }
     }
 
     async function submitReply(parentId) {
@@ -541,32 +546,30 @@
             text: messageText,
             author: currentUser.name,
             authorEmail: currentUser.email,
-            parentId: parentId
+            parentId: parentId,
+            topicId: currentTopicId
           })
         });
         
         if (response.ok) {
           textarea.value = '';
-          replyForm.classList.add('hidden');
+          replyForm.classList.remove('show');
           await loadMessages();
+          
+          // Відновлюємо стан розгорнутості після оновлення повідомлень
+          expandedReplies.forEach(messageId => {
+            const repliesContainer = document.getElementById(`replies${messageId}`);
+            const toggleButton = document.querySelector(`[data-toggle-replies="${messageId}"]`);
+            if (repliesContainer && toggleButton) {
+              repliesContainer.classList.add('expanded');
+              toggleButton.classList.add('expanded');
+            }
+          });
         } else {
           console.error('Помилка при додаванні відповіді');
         }
       } catch (error) {
         console.error('Помилка при відправці відповіді:', error);
-      }
-    }
-
-    function toggleReplies(messageId) {
-      const repliesContainer = document.getElementById(`replies${messageId}`);
-      const toggleButton = repliesContainer.previousElementSibling;
-      
-      if (repliesContainer.classList.contains('expanded')) {
-        repliesContainer.classList.remove('expanded');
-        toggleButton.classList.remove('expanded');
-      } else {
-        repliesContainer.classList.add('expanded');
-        toggleButton.classList.add('expanded');
       }
     }
 
@@ -585,6 +588,116 @@
       checkAuth();
       window.location.href = '../Login/login.html';
     });
+
+    function displayMessages() {
+      const messageList = document.querySelector('.message-list');
+      messageList.innerHTML = '';
+
+      // Створюємо об'єкт для зберігання відповідей
+      const repliesByParentId = {};
+      
+      // Групуємо відповіді за parentId
+      messages.forEach(message => {
+        if (message.parentId) {
+          if (!repliesByParentId[message.parentId]) {
+            repliesByParentId[message.parentId] = [];
+          }
+          repliesByParentId[message.parentId].push(message);
+        }
+      });
+
+      // Функція для відображення повідомлення та його відповідей
+      function displayMessage(message, level = 0) {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message-item';
+        messageElement.dataset.messageId = message.id;
+        messageElement.style.marginLeft = `${level * 40}px`;
+
+        const likes = message.likes?.length || 0;
+        const dislikes = message.dislikes?.length || 0;
+        const loves = message.love?.length || 0;
+        const laughs = message.laugh?.length || 0;
+        const wows = message.wow?.length || 0;
+
+        const userHasLiked = message.likes?.includes(currentUser?.email);
+        const userHasDisliked = message.dislikes?.includes(currentUser?.email);
+        const userHasLoved = message.love?.includes(currentUser?.email);
+        const userHasLaughed = message.laugh?.includes(currentUser?.email);
+        const userHasWowed = message.wow?.includes(currentUser?.email);
+
+        const replies = repliesByParentId[message.id] || [];
+        const isExpanded = expandedReplies.has(message.id);
+
+        messageElement.innerHTML = `
+          <div class="message-header">
+            <div class="message-author">
+              <img src="${message.authorPicture || '../assets/img/default-avatar.png'}" alt="${message.author}">
+              <span>${message.author}</span>
+            </div>
+            <div class="message-time">${new Date(message.timestamp).toLocaleString()}</div>
+          </div>
+          <div class="message-content">${message.text}</div>
+          <div class="message-actions">
+            <div class="reactions-container">
+              <button class="reaction-button ${userHasLiked ? 'active' : ''}" onclick="handleReaction(${message.id}, 'like')">
+                👍 <span class="reaction-count">${likes}</span>
+              </button>
+              <button class="reaction-button ${userHasDisliked ? 'active' : ''}" onclick="handleReaction(${message.id}, 'dislike')">
+                👎 <span class="reaction-count">${dislikes}</span>
+              </button>
+              <button class="reaction-button ${userHasLoved ? 'active' : ''}" onclick="handleReaction(${message.id}, 'love')">
+                ❤️ <span class="reaction-count">${loves}</span>
+              </button>
+              <button class="reaction-button ${userHasLaughed ? 'active' : ''}" onclick="handleReaction(${message.id}, 'laugh')">
+                😂 <span class="reaction-count">${laughs}</span>
+              </button>
+              <button class="reaction-button ${userHasWowed ? 'active' : ''}" onclick="handleReaction(${message.id}, 'wow')">
+                😮 <span class="reaction-count">${wows}</span>
+              </button>
+            </div>
+            <button class="reply-button" onclick="showReplyForm(${message.id})">
+              Відповісти
+            </button>
+          </div>
+          <div id="replyForm${message.id}" class="reply-form">
+            <textarea class="form-control mb-2" rows="2" placeholder="Напишіть вашу відповідь..."></textarea>
+            <button class="btn btn-primary btn-sm" onclick="submitReply(${message.id})">Відправити</button>
+          </div>
+          ${replies.length > 0 ? `
+            <div class="replies-toggle ${isExpanded ? 'expanded' : ''}" data-toggle-replies="${message.id}" onclick="toggleReplies(${message.id})">
+              <i class="bi bi-chevron-down"></i>
+              <span>Відповіді</span>
+              <span class="replies-count">${replies.length}</span>
+            </div>
+            <div id="replies${message.id}" class="replies ${isExpanded ? 'expanded' : ''}">
+              ${replies.map(reply => {
+                const replyElement = document.createElement('div');
+                replyElement.innerHTML = displayMessage(reply, level + 1);
+                return replyElement.innerHTML;
+              }).join('')}
+            </div>
+          ` : ''}
+        `;
+
+        return messageElement.outerHTML;
+      }
+
+      // Відображаємо тільки батьківські повідомлення
+      messages
+        .filter(message => !message.parentId)
+        .forEach(message => {
+          messageList.innerHTML += displayMessage(message);
+        });
+    }
+
+    function showAuthMessage(message) {
+      const authMessage = document.getElementById('authMessage');
+      authMessage.textContent = message;
+      authMessage.classList.remove('d-none');
+      setTimeout(() => {
+        authMessage.classList.add('d-none');
+      }, 3000);
+    }
   </script>
 </body>
 </html>

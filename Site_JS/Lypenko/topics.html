@@ -219,8 +219,8 @@
       
       if (userEmail && userName) {
         currentUser = {
-          email: userEmail,
-          name: userName
+          email: decodeURIComponent(userEmail).replace(/%40/g, '@'),
+          name: decodeURIComponent(userName)
         };
         document.getElementById('createTopicSection').classList.remove('hidden');
         document.getElementById('authMessage').classList.add('hidden');
