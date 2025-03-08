@@ -26,45 +26,176 @@
   <style>
     .topics-container {
       padding: 120px 0 60px;
+      min-height: calc(100vh - 80px);
+      background: url('/Site_JS/assets/img/forum_bg.webp') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
     }
+
+    .topics-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+    }
+
+    .topics-content {
+      position: relative;
+      z-index: 1;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    .topics-header {
+      padding: 0 0 30px 0;
+      background: transparent;
+      color: #2c3e50;
+      border-bottom: 2px solid #e9ecef;
+      margin-bottom: 30px;
+    }
+
+    .topics-header h2 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
     .topic-input {
-      margin-bottom: 20px;
+      margin: 30px 0;
+      padding: 30px 0;
+      border-top: 2px solid #e9ecef;
+      border-bottom: 2px solid #e9ecef;
     }
+
     .topic-list {
-      max-height: 600px;
-      overflow-y: auto;
+      padding: 0;
+      background: transparent;
+      min-height: 400px;
+      max-height: none;
+      overflow-y: visible;
     }
+
     .topic-item {
-      background: #f8f9fa;
+      background: white;
       padding: 20px;
-      margin-bottom: 15px;
-      border-radius: 8px;
+      margin-bottom: 20px;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #e9ecef;
     }
+
     .topic-item:hover {
-      background: #e9ecef;
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     .topic-title {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #0d6efd;
-      margin-bottom: 10px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 12px;
     }
+
     .topic-meta {
-      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 15px;
       color: #6c757d;
+      font-size: 0.95rem;
     }
+
+    .topic-meta i {
+      margin-right: 5px;
+    }
+
     .auth-message {
       text-align: center;
+      padding: 25px;
+      background: white;
+      border-radius: 12px;
       margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #e9ecef;
     }
-    .hidden {
-      display: none;
+
+    .auth-message a {
+      color: #0d6efd;
+      text-decoration: none;
+      font-weight: 500;
     }
+
+    .auth-message a:hover {
+      text-decoration: underline;
+    }
+
     .create-topic-btn {
       margin-bottom: 20px;
+      padding: 12px 25px;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .create-topic-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+    }
+
+    #topicForm {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #e9ecef;
+      margin-bottom: 30px;
+    }
+
+    #topicForm input {
+      border-radius: 12px;
+      border: 1px solid #dee2e6;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+
+    #topicForm input:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+
+    #topicForm button {
+      border-radius: 12px;
+      padding: 10px 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    #topicForm button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -100,26 +231,30 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
-            <h2 class="text-center mb-4">Теми форуму</h2>
-            
-            <div id="createTopicSection" class="hidden">
-              <button class="btn btn-primary create-topic-btn" onclick="showCreateTopicForm()">
-                Створити нову тему
-              </button>
-              
-              <div id="topicForm" class="topic-input hidden">
-                <div class="form-group">
-                  <input type="text" id="topicTitle" class="form-control" placeholder="Назва теми">
-                </div>
-                <button onclick="createTopic()" class="btn btn-primary mt-2">Створити</button>
+            <div class="topics-content">
+              <div class="topics-header">
+                <h2>Теми форуму</h2>
               </div>
-            </div>
+              
+              <div id="createTopicSection" class="hidden">
+                <button class="btn btn-primary create-topic-btn" onclick="showCreateTopicForm()">
+                  <i class="bi bi-plus-lg"></i> Створити нову тему
+                </button>
+                
+                <div id="topicForm" class="hidden">
+                  <div class="form-group">
+                    <input type="text" id="topicTitle" class="form-control" placeholder="Назва теми">
+                  </div>
+                  <button onclick="createTopic()" class="btn btn-primary">Створити</button>
+                </div>
+              </div>
 
-            <div id="authMessage" class="auth-message">
-              Будь ласка, <a href="../Login/login.html">увійдіть</a> щоб створити тему
-            </div>
+              <div id="authMessage" class="auth-message">
+                Будь ласка, <a href="../Login/login.html">увійдіть</a> щоб створити тему
+              </div>
 
-            <div id="topicList" class="topic-list">
+              <div id="topicList" class="topic-list">
+              </div>
             </div>
           </div>
         </div>
@@ -167,7 +302,8 @@
           topicElement.innerHTML = `
             <div class="topic-title">${topic.title}</div>
             <div class="topic-meta">
-              Створено: ${topic.author} | ${new Date(topic.createdAt).toLocaleString()}
+              <span><i class="bi bi-person"></i> ${topic.author}</span>
+              <span><i class="bi bi-clock"></i> ${new Date(topic.createdAt).toLocaleString()}</span>
             </div>
           `;
           

@@ -27,10 +27,25 @@
     .forum-container {
       padding: 120px 0 60px;
       min-height: calc(100vh - 80px);
-      background: #f8f9fa;
+      background: url('/Site_JS/assets/img/forum_bg.webp') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+    
+    .forum-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
     }
     
     .forum-content {
+      position: relative;
+      z-index: 1;
       background: transparent;
       box-shadow: none;
       border-radius: 0;
