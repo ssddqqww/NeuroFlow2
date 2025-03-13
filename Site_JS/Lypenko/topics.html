@@ -197,6 +197,65 @@
         transform: translateY(0);
       }
     }
+
+    .topic-actions {
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+    }
+    
+    .topic-actions button {
+      padding: 4px 12px;
+      font-size: 0.9rem;
+    }
+    
+    .edit-form {
+      display: none;
+      margin-top: 10px;
+    }
+    
+    .edit-form.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+    .topic-item {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid #e9ecef;
+      position: relative;
+    }
+
+    .topic-content {
+      margin-bottom: 15px;
+    }
+
+    .edit-form {
+      display: none;
+      margin: 15px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border: 1px solid #e9ecef;
+    }
+
+    .edit-form.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    .topic-actions-edit {
+      display: flex;
+      gap: 8px;
+    }
+
+    .topic-actions-edit button {
+      padding: 4px 8px;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 
@@ -297,16 +356,35 @@
         topics.forEach(topic => {
           const topicElement = document.createElement('div');
           topicElement.className = 'topic-item';
-          topicElement.onclick = () => window.location.href = `forum.html?topicId=${topic.id}`;
-          
+
           topicElement.innerHTML = `
-            <div class="topic-title">${topic.title}</div>
+            <div class="topic-content" id="topicContent${topic.id}" onclick="window.location.href = 'forum.html?topicId=${topic.id}'">
+              <div class="topic-title">${topic.title}</div>
+            </div>
+            <div class="edit-form" id="editForm${topic.id}">
+              <input type="text" class="form-control mb-2" value="${topic.title}">
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary btn-sm" onclick="saveEdit(${topic.id})">Зберегти</button>
+                <button class="btn btn-secondary btn-sm" onclick="cancelEdit(${topic.id})">Скасувати</button>
+              </div>
+            </div>
             <div class="topic-meta">
               <span><i class="bi bi-person"></i> ${topic.author}</span>
               <span><i class="bi bi-clock"></i> ${new Date(topic.createdAt).toLocaleString()}</span>
+              ${topic.edited ? `<span class="text-muted">(відредаговано ${new Date(topic.editedAt).toLocaleString()})</span>` : ''}
+              ${topic.authorEmail === currentUser?.email ? `
+                <div class="topic-actions-edit">
+                  <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); showEditForm(${topic.id})">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" onclick="event.stopPropagation(); deleteTopic(${topic.id})">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              ` : ''}
             </div>
           `;
-          
+
           topicList.appendChild(topicElement);
         });
       } catch (error) {
@@ -352,7 +430,7 @@
     function checkAuth() {
       const userEmail = getCookie('userEmail');
       const userName = decodeURIComponent(getCookie('userName') || '');
-      
+
       if (userEmail && userName) {
         currentUser = {
           email: decodeURIComponent(userEmail).replace(/%40/g, '@'),
@@ -383,6 +461,81 @@
       checkAuth();
       loadTopics();
     };
+
+    function showEditForm(topicId) {
+      const contentElement = document.getElementById(`topicContent${topicId}`);
+      const editForm = document.getElementById(`editForm${topicId}`);
+
+      if (contentElement && editForm) {
+        contentElement.style.display = 'none';
+        editForm.classList.add('show');
+      }
+    }
+
+    function cancelEdit(topicId) {
+      const contentElement = document.getElementById(`topicContent${topicId}`);
+      const editForm = document.getElementById(`editForm${topicId}`);
+
+      if (contentElement && editForm) {
+        contentElement.style.display = 'block';
+        editForm.classList.remove('show');
+      }
+    }
+
+    async function saveEdit(topicId) {
+      const editForm = document.getElementById(`editForm${topicId}`);
+      const input = editForm.querySelector('input');
+      const newTitle = input.value.trim();
+      const contentElement = document.getElementById(`topicContent${topicId}`);
+
+      if (!newTitle || newTitle === contentElement.querySelector('.topic-title').textContent) {
+        cancelEdit(topicId);
+        return;
+      }
+
+      try {
+        const response = await fetch(`http://localhost:3000/api/topics/${topicId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: newTitle,
+            userEmail: currentUser.email
+          })
+        });
+
+        if (response.ok) {
+          await loadTopics();
+        } else {
+          const error = await response.json();
+          alert(error.error || 'Помилка при редагуванні теми');
+        }
+      } catch (error) {
+        console.error('Помилка при редагуванні теми:', error);
+        alert('Помилка при редагуванні теми');
+      }
+    }
+
+    async function deleteTopic(topicId) {
+      if (!confirm('Ви впевнені, що хочете видалити цю тему? Це також видалить всі повідомлення в ній.')) return;
+      
+      try {
+        const response = await fetch(`http://localhost:3000/api/topics/${topicId}?userEmail=${encodeURIComponent(currentUser.email)}`, {
+          method: 'DELETE'
+        });
+        
+        if (response.ok) {
+          await loadTopics();
+        } else {
+          const error = await response.json();
+          alert(error.error || 'Помилка при видаленні теми');
+        }
+      } catch (error) {
+        console.error('Помилка при видаленні теми:', error);
+        alert('Помилка при видаленні теми');
+      }
+    }
   </script>
 </body>
 </html> 

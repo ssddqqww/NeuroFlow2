@@ -319,6 +319,52 @@
     .d-none {
       display: none !important;
     }
+    
+    .message-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .message-edited {
+      color: #6c757d;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    
+    .message-actions-edit {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .message-actions-edit button {
+      padding: 4px 8px;
+      font-size: 0.9rem;
+    }
+    
+    .edit-message-form {
+      display: none;
+      margin: 10px 0;
+    }
+    
+    .edit-message-form.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+    
+    .edit-form {
+      display: none;
+      margin: 15px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border: 1px solid #e9ecef;
+    }
+    
+    .edit-form.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
   </style>
 </head>
 
@@ -748,9 +794,29 @@
               <img src="${message.authorPicture || '../assets/img/default-avatar.png'}" alt="${message.author}">
               <span>${message.author}</span>
             </div>
-            <div class="message-time">${new Date(message.timestamp).toLocaleString()}</div>
+            <div class="message-meta">
+              <div class="message-time">${new Date(message.timestamp).toLocaleString()}</div>
+              ${message.edited ? `<div class="message-edited">(відредаговано ${new Date(message.editedAt).toLocaleString()})</div>` : ''}
+              ${message.authorEmail === currentUser?.email ? `
+                <div class="message-actions-edit">
+                  <button class="btn btn-sm btn-outline-primary" onclick="showEditForm(${message.id})">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" onclick="deleteMessage(${message.id})">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              ` : ''}
+            </div>
           </div>
-          <div class="message-content">${message.text}</div>
+          <div class="message-content" id="messageContent${message.id}">${message.text}</div>
+          <div class="edit-form" id="editForm${message.id}">
+            <textarea class="form-control mb-2" rows="3">${message.text}</textarea>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm" onclick="saveEdit(${message.id})">Зберегти</button>
+              <button class="btn btn-secondary btn-sm" onclick="cancelEdit(${message.id})">Скасувати</button>
+            </div>
+          </div>
           <div class="message-actions">
             <div class="reactions-container">
               <button class="reaction-button ${userHasLiked ? 'active' : ''}" onclick="handleReaction(${message.id}, 'like')">
@@ -811,6 +877,81 @@
       setTimeout(() => {
         authMessage.classList.add('d-none');
       }, 3000);
+    }
+
+    async function showEditForm(messageId) {
+      const contentElement = document.getElementById(`messageContent${messageId}`);
+      const editForm = document.getElementById(`editForm${messageId}`);
+      
+      if (contentElement && editForm) {
+        contentElement.style.display = 'none';
+        editForm.classList.add('show');
+      }
+    }
+    
+    async function cancelEdit(messageId) {
+      const contentElement = document.getElementById(`messageContent${messageId}`);
+      const editForm = document.getElementById(`editForm${messageId}`);
+      
+      if (contentElement && editForm) {
+        contentElement.style.display = 'block';
+        editForm.classList.remove('show');
+      }
+    }
+    
+    async function saveEdit(messageId) {
+      const editForm = document.getElementById(`editForm${messageId}`);
+      const textarea = editForm.querySelector('textarea');
+      const newText = textarea.value.trim();
+      const contentElement = document.getElementById(`messageContent${messageId}`);
+      
+      if (!newText || newText === contentElement.textContent) {
+        cancelEdit(messageId);
+        return;
+      }
+      
+      try {
+        const response = await fetch(`http://localhost:3000/api/messages/${messageId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            text: newText,
+            userEmail: currentUser.email
+          })
+        });
+        
+        if (response.ok) {
+          await loadMessages();
+        } else {
+          const error = await response.json();
+          alert(error.error || 'Помилка при редагуванні повідомлення');
+        }
+      } catch (error) {
+        console.error('Помилка при редагуванні повідомлення:', error);
+        alert('Помилка при редагуванні повідомлення');
+      }
+    }
+    
+    async function deleteMessage(messageId) {
+      if (!confirm('Ви впевнені, що хочете видалити це повідомлення? Це також видалить всі відповіді на нього.')) return;
+      
+      try {
+        const response = await fetch(`http://localhost:3000/api/messages/${messageId}?userEmail=${encodeURIComponent(currentUser.email)}`, {
+          method: 'DELETE'
+        });
+        
+        if (response.ok) {
+          await loadMessages();
+        } else {
+          const error = await response.json();
+          alert(error.error || 'Помилка при видаленні повідомлення');
+        }
+      } catch (error) {
+        console.error('Помилка при видаленні повідомлення:', error);
+        alert('Помилка при видаленні повідомлення');
+      }
     }
   </script>
 </body>
