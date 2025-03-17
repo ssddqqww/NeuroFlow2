@@ -321,6 +321,25 @@
     </section>
   </main>
 
+  <!-- Modal for delete confirmation -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Підтвердження видалення</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Ви впевнені, що хочете видалити цю тему? Це також видалить всі повідомлення в ній.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Видалити</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer id="footer" class="footer">
     <!-- ... existing footer code ... -->
   </footer>
@@ -338,6 +357,7 @@
 
   <script>
     let currentUser = null;
+    let topicToDelete = null;
 
     function getCookie(name) {
       const value = `; ${document.cookie}`;
@@ -345,14 +365,47 @@
       if (parts.length === 2) return parts.pop().split(';').shift();
     }
 
+    function censorText(text) {
+      const words = text.split(/\s+/);
+      return words
+        .map(word => {
+          if (word.length < 3) return word;
+
+          const cleanWord = word.replace(/[^a-zA-Zа-яА-ЯїЇіІєЄґҐ]/g, '').toLowerCase();
+
+          const badWords = [
+            'хуй', 'пиз', 'пізд', 'бля', 'сук', 'їба', 'нах', 'еба', 'під', 'муд', 'дроч', 'сра', 'гов', 'піс', 'зал', 'шлюха', 'єбать',
+            'fuck', 'suck', 'dick', 'cock', 'shit', 'ass', 'bitch', 'cunt', 'pussy', 'bastard', 'damn', 'fucker', 'motherfucker',
+            'asshole', 'prick', 'twat', 'wank', 'whore', 'slut'
+          ];
+
+          const isSuspicious =
+            badWords.some(bad => cleanWord.includes(bad)) ||
+            /(.)\1{2,}/.test(cleanWord) ||
+            /[бпвфхжгк][лтдкщшч][аяеиіоуї]/.test(cleanWord) ||
+            /[сзц][кпб][аяеиоуї]/.test(cleanWord) ||
+            /[йєґхжшчщ][бпвф][яюєї]/.test(cleanWord) ||
+            (word === word.toUpperCase() && word.length > 3) ||
+            /[\w][@#$%^&*0-9]+[\w]/.test(word) ||
+            /([бпвфгкдт])[бпвфгкдт][аяеиоуї]/.test(cleanWord) ||
+            /^(ху|пі|су|бл|еб|йоб|їб)/i.test(cleanWord);
+
+          if (isSuspicious) {
+            return '*'.repeat(word.length);
+          }
+          return word;
+        })
+        .join(' ');
+    }
+
     async function loadTopics() {
       try {
         const response = await fetch('http://localhost:3000/api/topics');
         const topics = await response.json();
-        
+
         const topicList = document.getElementById('topicList');
         topicList.innerHTML = '';
-        
+
         topics.forEach(topic => {
           const topicElement = document.createElement('div');
           topicElement.className = 'topic-item';
@@ -377,7 +430,7 @@
                   <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); showEditForm(${topic.id})">
                     <i class="bi bi-pencil"></i>
                   </button>
-                  <button class="btn btn-sm btn-outline-danger" onclick="event.stopPropagation(); deleteTopic(${topic.id})">
+                  <button class="btn btn-sm btn-outline-danger" onclick="event.stopPropagation(); showDeleteModal(${topic.id})">
                     <i class="bi bi-trash"></i>
                   </button>
                 </div>
@@ -402,6 +455,8 @@
       const title = document.getElementById('topicTitle').value;
       if (!title.trim()) return;
 
+      const censoredTitle = censorText(title);
+
       try {
         const response = await fetch('http://localhost:3000/api/topics', {
           method: 'POST',
@@ -409,7 +464,7 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            title,
+            title: censoredTitle,
             author: currentUser.name,
             authorEmail: currentUser.email
           })
@@ -493,6 +548,8 @@
         return;
       }
 
+      const censoredTitle = censorText(newTitle);
+
       try {
         const response = await fetch(`http://localhost:3000/api/topics/${topicId}`, {
           method: 'PUT',
@@ -500,7 +557,7 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            title: newTitle,
+            title: censoredTitle,
             userEmail: currentUser.email
           })
         });
@@ -509,33 +566,45 @@
           await loadTopics();
         } else {
           const error = await response.json();
-          alert(error.error || 'Помилка при редагуванні теми');
+          console.error('Помилка при редагуванні теми:', error.error);
         }
       } catch (error) {
         console.error('Помилка при редагуванні теми:', error);
-        alert('Помилка при редагуванні теми');
       }
     }
 
-    async function deleteTopic(topicId) {
-      if (!confirm('Ви впевнені, що хочете видалити цю тему? Це також видалить всі повідомлення в ній.')) return;
-      
-      try {
-        const response = await fetch(`http://localhost:3000/api/topics/${topicId}?userEmail=${encodeURIComponent(currentUser.email)}`, {
-          method: 'DELETE'
-        });
-        
-        if (response.ok) {
-          await loadTopics();
-        } else {
-          const error = await response.json();
-          alert(error.error || 'Помилка при видаленні теми');
+    function showDeleteModal(topicId) {
+      topicToDelete = topicId;
+      const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+      deleteModal.show();
+    }
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', async function() {
+      if (topicToDelete) {
+        try {
+          const response = await fetch(`http://localhost:3000/api/topics/${topicToDelete}?userEmail=${encodeURIComponent(currentUser.email)}`, {
+            method: 'DELETE'
+          });
+
+          if (response.ok) {
+            await loadTopics();
+          } else {
+            const error = await response.json();
+            console.error('Помилка при видаленні теми:', error.error);
+          }
+        } catch (error) {
+          console.error('Помилка при видаленні теми:', error);
+        } finally {
+          topicToDelete = null;
+          const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+          deleteModal.hide();
         }
-      } catch (error) {
-        console.error('Помилка при видаленні теми:', error);
-        alert('Помилка при видаленні теми');
       }
+    });
+
+    async function deleteTopic(topicId) {
+      showDeleteModal(topicId);
     }
   </script>
 </body>
-</html> 
+</html>
