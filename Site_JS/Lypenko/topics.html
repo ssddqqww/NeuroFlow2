@@ -256,6 +256,34 @@
       padding: 4px 8px;
       font-size: 0.9rem;
     }
+     /* Додамо стилі для контейнера з пошуком і кнопкою */
+    .action-container {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .search-container {
+      flex-grow: 1;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 12px;
+      border: 1px solid #dee2e6;
+      transition: all 0.3s ease;
+    }
+
+    .search-container input:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+
+    .create-topic-btn {
+      white-space: nowrap; /* Щоб текст кнопки не переносився */
+    }
   </style>
 </head>
 
@@ -294,24 +322,36 @@
               <div class="topics-header">
                 <h2>Теми форуму</h2>
               </div>
-              
-              <div id="createTopicSection" class="hidden">
-                <button class="btn btn-primary create-topic-btn" onclick="showCreateTopicForm()">
-                  <i class="bi bi-plus-lg"></i> Створити нову тему
-                </button>
-                
-                <div id="topicForm" class="hidden">
-                  <div class="form-group">
-                    <input type="text" id="topicTitle" class="form-control" placeholder="Назва теми">
-                  </div>
-                  <button onclick="createTopic()" class="btn btn-primary">Створити</button>
+
+              <!-- Контейнер для пошуку та кнопки "Додати тему" -->
+              <div class="action-container">
+                <!-- Поле пошуку -->
+                <div class="search-container">
+                  <input type="text" id="searchInput" placeholder="Пошук за назвою теми..." oninput="filterTopics()">
+                </div>
+
+                <!-- Кнопка "Додати тему" -->
+                <div id="createTopicSection" class="hidden">
+                  <button class="btn btn-primary create-topic-btn" onclick="showCreateTopicForm()">
+                    <i class="bi bi-plus-lg"></i> Створити нову тему
+                  </button>
                 </div>
               </div>
 
+              <!-- Форма для створення теми -->
+              <div id="topicForm" class="hidden">
+                <div class="form-group">
+                  <input type="text" id="topicTitle" class="form-control" placeholder="Назва теми">
+                </div>
+                <button onclick="createTopic()" class="btn btn-primary">Створити</button>
+              </div>
+
+              <!-- Повідомлення про авторизацію -->
               <div id="authMessage" class="auth-message">
                 Будь ласка, <a href="../Login/login.html">увійдіть</a> щоб створити тему
               </div>
 
+              <!-- Список тем -->
               <div id="topicList" class="topic-list">
               </div>
             </div>
@@ -445,6 +485,62 @@
       }
     }
 
+    let allTopics = []; // Змінна для зберігання всіх тем
+
+    async function loadTopics() {
+      try {
+        const response = await fetch('http://localhost:3000/api/topics');
+        allTopics = await response.json(); // Зберігаємо всі теми
+        filterTopics(); // Викликаємо фільтрацію після завантаження
+      } catch (error) {
+        console.error('Помилка при завантаженні тем:', error);
+      }
+    }
+
+    function filterTopics() {
+      const searchText = document.getElementById('searchInput').value.toLowerCase();
+      const filteredTopics = allTopics.filter(topic =>
+        topic.title.toLowerCase().includes(searchText)
+      );
+
+      const topicList = document.getElementById('topicList');
+      topicList.innerHTML = '';
+
+      filteredTopics.forEach(topic => {
+        const topicElement = document.createElement('div');
+        topicElement.className = 'topic-item';
+
+        topicElement.innerHTML = `
+          <div class="topic-content" id="topicContent${topic.id}" onclick="window.location.href = 'forum.html?topicId=${topic.id}'">
+            <div class="topic-title">${topic.title}</div>
+          </div>
+          <div class="edit-form" id="editForm${topic.id}">
+            <input type="text" class="form-control mb-2" value="${topic.title}">
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm" onclick="saveEdit(${topic.id})">Зберегти</button>
+              <button class="btn btn-secondary btn-sm" onclick="cancelEdit(${topic.id})">Скасувати</button>
+            </div>
+          </div>
+          <div class="topic-meta">
+            <span><i class="bi bi-person"></i> ${topic.author}</span>
+            <span><i class="bi bi-clock"></i> ${new Date(topic.createdAt).toLocaleString()}</span>
+            ${topic.edited ? `<span class="text-muted">(відредаговано ${new Date(topic.editedAt).toLocaleString()})</span>` : ''}
+            ${topic.authorEmail === currentUser?.email ? `
+              <div class="topic-actions-edit">
+                <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); showEditForm(${topic.id})">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="event.stopPropagation(); showDeleteModal(${topic.id})">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+        topicList.appendChild(topicElement);
+      });
+    }
     function showCreateTopicForm() {
       document.getElementById('topicForm').classList.remove('hidden');
     }
