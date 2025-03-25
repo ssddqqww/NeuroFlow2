@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Топ повідомлень - iLanding</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="../assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .top-messages-container {
+      padding: 120px 0 60px;
+      min-height: calc(100vh - 80px);
+      background: url('/Site_JS/assets/img/forum_bg.webp') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+    
+    .top-messages-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+    }
+    
+    .top-messages-content {
+      position: relative;
+      z-index: 1;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    
+    .top-messages-header {
+      padding: 0 0 30px 0;
+      background: transparent;
+      color: #2c3e50;
+      border-bottom: 2px solid #e9ecef;
+      margin-bottom: 30px;
+    }
+    
+    .top-messages-header h2 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+    
+    .back-button {
+      color: #6c757d;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .back-button:hover {
+      color: #0d6efd;
+      transform: translateX(-5px);
+    }
+    
+    .message-list {
+      padding: 0;
+      background: transparent;
+      min-height: 400px;
+      max-height: none;
+    }
+    
+    .message-item {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid #e9ecef;
+    }
+    
+    .message-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .message-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .message-author img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e9ecef;
+    }
+    
+    .message-author span {
+      font-weight: 500;
+      color: #2c3e50;
+    }
+    
+    .message-time {
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+    
+    .message-content {
+      color: #34495e;
+      line-height: 1.6;
+      margin: 15px 0;
+      font-size: 1.05rem;
+    }
+    
+    .message-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+    
+    .reactions-container {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .reaction-button {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      padding: 6px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+    
+    .reaction-button.active {
+      background-color: #e3f2fd;
+      border-color: #2196f3;
+      color: #1976d2;
+    }
+    
+    .reaction-count {
+      font-weight: 500;
+    }
+    .message-item {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      padding: 20px;
+      border-radius: 8px;
+      background: white;
+      margin-bottom: 15px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .message-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .topic-title {
+      font-size: 1.2rem;
+      color: #2c3e50;
+      margin: 0;
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .message-meta {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="../index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">iLanding</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="../index.html#services">Services</a></li>
+          <li><a href="../index.html#pricing">Pricing</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div id="authButtons" class="auth-buttons">
+        <a class="btn-getstarted d-none" href="../Login/login.html" id="loginBtn">Увійти</a>
+        <a class="btn-getstarted d-none" href="#" id="logoutBtn">Вийти</a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="top-messages-container">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="top-messages-content">
+              <div class="top-messages-header">
+                <a href="topics.html" class="back-button">
+                  <i class="bi bi-arrow-left"></i> Повернутися до списку тем
+                </a>
+                <h2>Топ повідомлень</h2>
+              </div>
+
+              <div class="message-list" id="messageList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">iLanding</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copy1right</span> <strong class="px-1 sitename">iLanding</strong> <span>All Rights Reserved</span></p>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <script src="../assets/js/main.js"></script>
+
+  <script>
+    let messages = [];
+    let topics = [];
+
+    async function loadData() {
+      try {
+        const [messagesResponse, topicsResponse] = await Promise.all([
+          fetch('../base_date/messages.json'),
+          fetch('../base_date/topics.json')
+        ]);
+
+        if (!messagesResponse.ok || !topicsResponse.ok) {
+          throw new Error('Не вдалося завантажити дані');
+        }
+
+        const messagesData = await messagesResponse.json();
+        const topicsData = await topicsResponse.json();
+
+        messages = messagesData.messages || [];
+        topics = topicsData.topics || [];
+
+        displayTopicsSortedByMessages();
+      } catch (error) {
+        console.error('Помилка при завантаженні даних:', error);
+        document.getElementById('messageList').innerHTML = '<p>Помилка при завантаженні даних.</p>';
+      }
+    }
+
+    function displayTopicsSortedByMessages() {
+      const messageList = document.getElementById('messageList');
+      messageList.innerHTML = '';
+
+      if (topics.length === 0) {
+        messageList.innerHTML = '<p>Теми не знайдено.</p>';
+        return;
+      }
+
+      // Додаємо кількість повідомлень до кожної теми
+      const topicsWithStats = topics.map(topic => {
+        const topicMessages = messages.filter(msg => msg.topicId === topic.id);
+        const lastMessage = topicMessages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))[0];
+
+        return {
+          ...topic,
+          messageCount: topicMessages.length,
+          lastMessageTime: lastMessage ? new Date(lastMessage.timestamp) : null,
+          lastMessageAuthor: lastMessage ? lastMessage.author : null
+        };
+      });
+
+      // Сортуємо теми за кількістю повідомлень (від найбільшої)
+      topicsWithStats.sort((a, b) => b.messageCount - a.messageCount);
+
+      // Відображаємо теми
+      topicsWithStats.forEach(topic => {
+        const topicElement = document.createElement('div');
+        topicElement.className = 'message-item';
+        topicElement.onclick = () => window.location.href = `forum.html?topicId=${topic.id}`;
+
+        topicElement.innerHTML = `
+          <div class="message-header">
+            <h3 class="topic-title">${topic.title}</h3>
+            <span class="badge bg-primary">${topic.messageCount} повідомлень</span>
+          </div>
+          <div class="message-meta">
+            ${topic.lastMessageTime
+              ? `<span>Останнє повідомлення: <strong>${topic.lastMessageAuthor}</strong> (${topic.lastMessageTime.toLocaleString()})</span>`
+              : '<span>Ще немає повідомлень</span>'
+            }
+          </div>
+        `;
+
+        messageList.appendChild(topicElement);
+      });
+    }
+
+    window.onload = loadData;
+  </script>
+
+</body>
+
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
