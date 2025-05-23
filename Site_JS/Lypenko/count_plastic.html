@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор сліду відходів</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+    <h1 class="text-2xl font-bold mb-4 text-center">Калькулятор сліду відходів</h1>
+    <form id="wasteForm" class="space-y-4">
+      <div>
+        <label for="bottles" class="block text-sm font-medium text-gray-700">Пластикові пляшки (шт/тиждень)</label>
+        <input type="number" id="bottles" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="coffeeCups" class="block text-sm font-medium text-gray-700">Кавові стаканчики (шт/тиждень)</label>
+        <input type="number" id="coffeeCups" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="bags" class="block text-sm font-medium text-gray-700">Пластикові пакети (шт/тиждень)</label>
+        <input type="number" id="bags" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="foodContainers" class="block text-sm font-medium text-gray-700">Пластикове паковання їжі (шт/тиждень)</label>
+        <input type="number" id="foodContainers" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="utensils" class="block text-sm font-medium text-gray-700">Одноразові прилади/соломинки (шт/тиждень)</label>
+        <input type="number" id="utensils" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="officePaper" class="block text-sm font-medium text-gray-700">Офісний папір (аркуші А4, шт/тиждень)</label>
+        <input type="number" id="officePaper" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="magazines" class="block text-sm font-medium text-gray-700">Газети/журнали (шт/тиждень)</label>
+        <input type="number" id="magazines" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="cardboard" class="block text-sm font-medium text-gray-700">Картон/коробки (шт/тиждень)</label>
+        <input type="number" id="cardboard" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="glassBottles" class="block text-sm font-medium text-gray-700">Скляні пляшки (шт/тиждень)</label>
+        <input type="number" id="glassBottles" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <div>
+        <label for="metalCans" class="block text-sm font-medium text-gray-700">Металеві банки (шт/тиждень)</label>
+        <input type="number" id="metalCans" min="0" class="mt-1 p-2 w-full border rounded-md" placeholder="0">
+      </div>
+      <button type="submit" class="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Розрахувати</button>
+    </form>
+    <div id="result" class="mt-4"></div>
+    <canvas id="wasteChart" class="mt-4"></canvas>
+  </div>
+
+  <script>
+    const wasteForm = document.getElementById('wasteForm');
+    const resultDiv = document.getElementById('result');
+    let wasteChart;
+
+    wasteForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const bottles = parseInt(document.getElementById('bottles').value) || 0;
+      const coffeeCups = parseInt(document.getElementById('coffeeCups').value) || 0;
+      const bags = parseInt(document.getElementById('bags').value) || 0;
+      const foodContainers = parseInt(document.getElementById('foodContainers').value) || 0;
+      const utensils = parseInt(document.getElementById('utensils').value) || 0;
+      const officePaper = parseInt(document.getElementById('officePaper').value) || 0;
+      const magazines = parseInt(document.getElementById('magazines').value) || 0;
+      const cardboard = parseInt(document.getElementById('cardboard').value) || 0;
+      const glassBottles = parseInt(document.getElementById('glassBottles').value) || 0;
+      const metalCans = parseInt(document.getElementById('metalCans').value) || 0;
+
+      const weights = {
+        bottles: 10, // 0.5 л пластикова пляшка ≈ 10 г
+        coffeeCups: 15, // стаканчик з кришкою ≈ 15 г
+        bags: 5, // пакет ≈ 5 г
+        foodContainers: 20, // контейнер ≈ 20 г
+        utensils: 3, // виделка/соломинка ≈ 3 г
+        officePaper: 5, // аркуш А4 ≈ 5 г
+        magazines: 50, // газета/журнал ≈ 50 г
+        cardboard: 200, // коробка ≈ 200 г
+        glassBottles: 200, // скляна пляшка 0.5 л ≈ 200 г
+        metalCans: 15 // алюмінієва банка ≈ 15 г
+      };
+
+      const prices = {
+        plastic: 5, // 5 грн/кг
+        officePaper: 3, // 3 грн/кг
+        magazines: 3, // 3 грн/кг
+        cardboard: 2.5, // 2.5 грн/кг
+        glass: 1, // 1 грн/кг
+        metal: 30 // 30 грн/кг
+      };
+
+      const plasticWeight =
+        bottles * weights.bottles +
+        coffeeCups * weights.coffeeCups +
+        bags * weights.bags +
+        foodContainers * weights.foodContainers +
+        utensils * weights.utensils;
+      const paperWeight =
+        officePaper * weights.officePaper +
+        magazines * weights.magazines +
+        cardboard * weights.cardboard;
+      const glassWeight = glassBottles * weights.glassBottles;
+      const metalWeight = metalCans * weights.metalCans;
+      const totalWeight = plasticWeight + paperWeight + glassWeight + metalWeight;
+
+      const paperDetails = {
+        officePaper: officePaper * weights.officePaper,
+        magazines: magazines * weights.magazines,
+        cardboard: cardboard * weights.cardboard
+      };
+
+      const earnings =
+        (plasticWeight / 1000) * prices.plastic +
+        (paperDetails.officePaper / 1000) * prices.officePaper +
+        (paperDetails.magazines / 1000) * prices.magazines +
+        (paperDetails.cardboard / 1000) * prices.cardboard +
+        (glassWeight / 1000) * prices.glass +
+        (metalWeight / 1000) * prices.metal;
+
+      let tips = [];
+      if (bottles > 5) tips.push('Використовуйте багаторазову пляшку для води.');
+      if (coffeeCups > 3) tips.push('Інвестуйте у багаторазовий термогорнятко.');
+      if (bags > 5) tips.push('Беріть тканинну сумку для покупок.');
+      if (foodContainers > 3) tips.push('Купуйте продукти на вагу у власних контейнерах.');
+      if (utensils > 5) tips.push('Носіть багаторазові столові прилади.');
+      if (officePaper > 50) tips.push('Переходьте на цифрові документи або здавайте папір на переробку.');
+      if (magazines > 5) tips.push('Здавайте газети та журнали в пункти переробки.');
+      if (cardboard > 3) tips.push('Здавайте чистий картон окремо, уникайте забруднення.');
+      if (glassBottles > 5) tips.push('Здавайте скляні пляшки в пункти прийому.');
+      if (metalCans > 5) tips.push('Здавайте алюмінієві банки, вони мають високу цінність.');
+
+      resultDiv.innerHTML = `
+        <div class="border p-4 rounded-md">
+          <h2 class="text-lg font-semibold">Ваш слід відходів: ${(totalWeight / 1000).toFixed(2)} кг/тиждень</h2>
+          <p>Це приблизно ${(totalWeight * 52 / 1000).toFixed(1)} кг на рік!</p>
+          <p><strong>Деталізація паперових відходів:</strong></p>
+          <ul class="list-disc pl-5">
+            <li>Офісний папір: ${(paperDetails.officePaper / 1000).toFixed(2)} кг</li>
+            <li>Газети/журнали: ${(paperDetails.magazines / 1000).toFixed(2)} кг</li>
+            <li>Картон/коробки: ${(paperDetails.cardboard / 1000).toFixed(2)} кг</li>
+          </ul>
+          <p><strong>Потенційний заробіток від переробки:</strong> ${earnings.toFixed(2)} грн/тиждень (${(earnings * 52).toFixed(2)} грн/рік)</p>
+          ${tips.length > 0 ? '<p><strong>Поради для зменшення:</strong></p><ul class="list-disc pl-5">' + tips.map(tip => `<li>${tip}</li>`).join('') + '</ul>' : ''}
+        </div>
+      `;
+
+      if (wasteChart) wasteChart.destroy();
+      const ctx = document.getElementById('wasteChart').getContext('2d');
+      wasteChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Пластик', 'Папір', 'Скло', 'Метал'],
+          datasets: [{
+            label: 'Вага відходів (г)',
+            data: [plasticWeight, paperWeight, glassWeight, metalWeight],
+            backgroundColor: ['#34D399', '#FBBF24', '#60A5FA', '#A78BFA']
+          }]
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'Вага (г)' } }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

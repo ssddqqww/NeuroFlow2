@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMap — Зелені технології світу</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <style>
+    #map { height: 600px; }
+    .profile-panel { display: none; }
+    .profile-panel.active { display: block; }
+    #status { color: red; }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold text-center mb-4">EcoMap — Зелені технології світу</h1>
+    <div class="mb-4 flex flex-col sm:flex-row gap-4">
+      <input type="text" id="search" class="p-2 border rounded-md flex-1" placeholder="Введіть запит, наприклад: plastic recycling, solar energy, переробка">
+      <select id="categoryFilter" class="p-2 border rounded-md">
+        <option value="all">Усі категорії</option>
+        <option value="renewable">Відновлювальна енергія</option>
+        <option value="recycling">Переробка</option>
+        <option value="innovation">Інновації</option>
+      </select>
+      <select id="countryFilter" class="p-2 border rounded-md">
+        <option value="all">Усі країни</option>
+        <option value="Ukraine">Україна</option>
+        <option value="USA">США</option>
+        <option value="Germany">Німеччина</option>
+        <option value="Japan">Японія</option>
+        <option value="Brazil">Бразилія</option>
+      </select>
+      <button id="fetchPlaces" class="p-2 bg-green-500 text-white rounded-md">Оновити місця</button>
+    </div>
+    <div id="status" class="mb-2"></div>
+    <div id="map" class="rounded-lg shadow-lg"></div>
+    <div id="profile" class="profile-panel mt-4 p-4 bg-white rounded-lg shadow-lg"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([50.4501, 30.5234], 10); // Центр на Київ
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const statusDiv = document.getElementById('status');
+    const enterprises = [
+      {
+        name: "Сонячна Ферма Київ",
+        category: "renewable",
+        country: "Ukraine",
+        lat: 50.4501,
+        lng: 30.5234,
+        description: "Виробництво електроенергії за допомогою сонячних панелей.",
+        technologies: "Сонячні панелі, інвертори",
+        contact: "info@solarfarm.kyiv.ua",
+        news: "Новий проєкт на 10 МВт запущено у 2025 році!",
+        image: "https://via.placeholder.com/150",
+        source: "manual"
+      },
+      {
+        name: "ЕкоПереробка Львів",
+        category: "recycling",
+        country: "Ukraine",
+        lat: 49.8397,
+        lng: 24.0297,
+        description: "Переробка пластикових відходів у нові продукти.",
+        technologies: "Сортування, грануляція пластику",
+        contact: "contact@ecolviv.ua",
+        news: "Відкрито новий цех у 2025 році.",
+        image: "https://via.placeholder.com/150",
+        source: "manual"
+      }
+    ];
+
+    const markers = [];
+    let allEnterprises = [...enterprises];
+
+    const GOOGLE_API_KEY = 'AIzaSyCoCnpkLP7MsSU1YnLjQs8tG_kTgaK3ks8';
+    const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+
+    // Функція для відображення статусу
+    function setStatus(message, isError = false) {
+      statusDiv.textContent = message;
+      statusDiv.style.color = isError ? 'red' : 'green';
+    }
+
+    // Функція для отримання місць із Google Places API
+    async function fetchGooglePlaces(query, lat, lng, radius = 20000) {
+      if (!query) {
+        setStatus('Введіть пошуковий запит', true);
+        return [];
+      }
+
+      const url = `${CORS_PROXY}https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&keyword=${encodeURIComponent(query)}&key=${GOOGLE_API_KEY}`;
+
+      setStatus('Завантаження даних із Google Places...');
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Google Places Response:', data);
+        if (data.status === "OK") {
+          setStatus(`Знайдено ${data.results.length} місць із Google Places`);
+          return data.results.map(place => ({
+            name: place.name,
+            category: document.getElementById('categoryFilter').value || "recycling",
+            country: place.vicinity.split(',').pop().trim() || "Невідомо",
+            lat: place.geometry.location.lat,
+            lng: place.geometry.location.lng,
+            description: place.types.join(', ') || "Немає опису",
+            technologies: "Невідомо",
+            contact: place.formatted_phone_number || "Невідомо",
+            news: "Немає новин",
+            image: "https://via.placeholder.com/150", // Уникаємо фото через CORS
+            source: "google"
+          }));
+        } else if (data.status === "ZERO_RESULTS") {
+          setStatus('Нічого не знайдено в Google Places для цього запиту', true);
+          return [];
+        } else if (data.status === "REQUEST_DENIED") {
+          setStatus('Помилка Google Places: Запит відхилено. Перевірте API-ключ.', true);
+          return [];
+        } else if (data.status === "OVER_QUERY_LIMIT") {
+          setStatus('Помилка Google Places: Перевищено ліміт запитів.', true);
+          return [];
+        } else {
+          setStatus(`Помилка Google Places: ${data.status} - ${data.error_message || 'Невідома помилка'}`, true);
+          return [];
+        }
+      } catch (error) {
+        setStatus(`Помилка при запиті до Google Places: ${error.message}`, true);
+        console.error('Google Places Error:', error);
+        return [];
+      }
+    }
+
+    // Функція для отримання місць із Overpass API
+    async function fetchOverpassPlaces(query, lat, lng, radius = 20000) {
+      if (!query) {
+        setStatus('Введіть пошуковий запит', true);
+        return [];
+      }
+
+      // Визначаємо, чи запит є кириличним
+      const isCyrillic = /[\u0400-\u04FF]/.test(query);
+      let overpassQuery;
+
+      if (isCyrillic) {
+        // Для кириличних запитів шукаємо лише в name
+        overpassQuery = `
+          [out:json];
+          (
+            node[amenity~"recycling|waste"](around:${radius},${lat},${lng})[name~"${query}",i];
+            node[power=generator](around:${radius},${lat},${lng})[name~"${query}",i];
+            node[destination~"research|technology"](around:${radius},${lat},${lng})[name~"${query}",i];
+            node[name~"${query}",i](around:${radius},${lat},${lng});
+          );
+          out body;
+        `;
+      } else {
+        // Для англійських запитів використовуємо теги
+        const queryTag = query.toLowerCase().replace(/\s+/g, '_');
+        overpassQuery = `
+          [out:json];
+          (
+            node[amenity~"recycling|waste"](around:${radius},${lat},${lng});
+            node[power=generator](around:${radius},${lat},${lng});
+            node[destination~"research|technology"](around:${radius},${lat},${lng});
+            node[name~"${query}",i](around:${radius},${lat},${lng});
+          );
+          out body;
+        `;
+      }
+
+      const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(overpassQuery)}`;
+
+      setStatus('Завантаження даних із OpenStreetMap...');
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.elements.length > 0) {
+          setStatus(`Знайдено ${data.elements.length} місць із OpenStreetMap`);
+          return data.elements.map(node => ({
+            name: node.tags.name || "Без назви",
+            category: document.getElementById('categoryFilter').value || "recycling",
+            country: node.tags["addr:country"] || "Невідомо",
+            lat: node.lat,
+            lng: node.lon,
+            description: node.tags.description || "Пункт переробки або зеленої технології",
+            technologies: node.tags["recycling:type"] || node.tags["generator:source"] || "Невідомо",
+            contact: node.tags.contact || "Невідомо",
+            news: "Немає новин",
+            image: "https://via.placeholder.com/150",
+            source: "overpass"
+          }));
+        } else {
+          setStatus('Нічого не знайдено в OpenStreetMap');
+          return [];
+        }
+      } catch (error) {
+        setStatus(`Помилка при запиті до Overpass API: ${error.message}`, true);
+        console.error('Overpass Error:', error);
+        return [];
+      }
+    }
+
+    // Функція для оновлення маркерів
+    function updateMarkers() {
+      markers.forEach(({ marker }) => map.removeLayer(marker));
+      markers.length = 0;
+
+      allEnterprises.forEach(enterprise => {
+        const markerColor = {
+          renewable: 'green',
+          recycling: 'blue',
+          innovation: 'red'
+        }[enterprise.category] || 'gray';
+
+        const marker = L.circleMarker([enterprise.lat, enterprise.lng], {
+          color: markerColor,
+          radius: 8
+        }).addTo(map);
+
+        marker.bindPopup(`
+          <b>${enterprise.name}</b><br>
+          ${enterprise.country}<br>
+          ${enterprise.description}<br>
+          <button onclick="showProfile('${enterprise.name}')" class="bg-blue-500 text-white px-2 py-1 rounded mt-2">Детальніше</button>
+        `);
+        markers.push({ marker, enterprise });
+      });
+    }
+
+    // Функція для відображення профілю
+    function showProfile(name) {
+      const enterprise = allEnterprises.find(e => e.name === name);
+      if (!enterprise) return;
+      const profileDiv = document.getElementById('profile');
+      profileDiv.innerHTML = `
+        <h2 class="text-xl font-semibold">${enterprise.name} (${enterprise.country})</h2>
+        <img src="${enterprise.image}" alt="${enterprise.name}" class="my-2 rounded">
+        <p><strong>Опис:</strong> ${enterprise.description}</p>
+        <p><strong>Технології:</strong> ${enterprise.technologies}</p>
+        <p><strong>Контакти:</strong> ${enterprise.contact}</p>
+        <p><strong>Новини:</strong> ${enterprise.news}</p>
+        <p><strong>Джерело:</strong> ${enterprise.source === "google" ? "Google Places" : enterprise.source === "overpass" ? "OpenStreetMap" : "Ручне введення"}</p>
+        <button onclick="closeProfile()" class="bg-red-500 text-white px-2 py-1 rounded mt-2">Закрити</button>
+      `;
+      profileDiv.classList.add('active');
+    }
+
+    // Функція для закриття профілю
+    function closeProfile() {
+      const profileDiv = document.getElementById('profile');
+      profileDiv.classList.remove('active');
+      profileDiv.innerHTML = '';
+    }
+
+    // Функція для фільтрації маркерів
+    function filterMarkers(category, country) {
+      markers.forEach(({ marker, enterprise }) => {
+        const categoryMatch = category === 'all' || enterprise.category === category;
+        const countryMatch = country === 'all' || enterprise.country === country;
+        if (categoryMatch && countryMatch) {
+          marker.addTo(map);
+        } else {
+          map.removeLayer(marker);
+        }
+      });
+    }
+
+    // Пошук за текстом (фільтрація локальних даних)
+    document.getElementById('search').addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+      markers.forEach(({ marker, enterprise }) => {
+        if (
+          enterprise.name.toLowerCase().includes(query) ||
+          enterprise.description.toLowerCase().includes(query) ||
+          enterprise.country.toLowerCase().includes(query)
+        ) {
+          marker.addTo(map);
+        } else {
+          map.removeLayer(marker);
+        }
+      });
+    });
+
+    // Оновлення місць через API
+    document.getElementById('fetchPlaces').addEventListener('click', async function() {
+      const query = document.getElementById('search').value.trim();
+      const category = document.getElementById('categoryFilter').value;
+      const country = document.getElementById('countryFilter').value;
+      const { lat, lng } = map.getCenter();
+
+      setStatus('Оновлення даних...');
+
+      const googlePlaces = await fetchGooglePlaces(query, lat, lng);
+      const overpassPlaces = await fetchOverpassPlaces(query, lat, lng);
+
+      allEnterprises = [...enterprises, ...googlePlaces, ...overpassPlaces];
+
+      if (allEnterprises.length === enterprises.length) {
+        setStatus('Нічого не знайдено. Спробуйте інший запит або регіон.');
+      } else {
+        setStatus(`Загалом знайдено ${allEnterprises.length} місць`);
+      }
+
+      updateMarkers();
+      filterMarkers(category, country);
+    });
+
+    // Обробники для фільтрів
+    document.getElementById('categoryFilter').addEventListener('change', function() {
+      const category = this.value;
+      const country = document.getElementById('countryFilter').value;
+      filterMarkers(category, country);
+    });
+
+    document.getElementById('countryFilter').addEventListener('change', function() {
+      const country = this.value;
+      const category = document.getElementById('categoryFilter').value;
+      filterMarkers(category, country);
+    });
+
+    // Ініціалізація
+    updateMarkers();
+    setStatus('Введіть запит і натисніть "Оновити місця". Приклади: plastic recycling, solar energy, переробка.');
+  </script>
+</body>
+</html>

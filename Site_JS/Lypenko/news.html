@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Section</title>
+    <!-- AOS Library for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .section {
+            padding: 60px 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .news-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .news-item:hover {
+            transform: translateY(-5px);
+        }
+        .news-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .news-item h3 {
+            font-size: 1.5em;
+            margin: 15px;
+            color: #333;
+        }
+        .news-item p {
+            margin: 0 15px 15px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .error-message {
+            text-align: center;
+            color: red;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section id="news" class="section" style="background-color: rgb(241, 248, 256);">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title">Ecology News</h2>
+            <div class="news-container" id="newsContainer">
+                <!-- News items will be dynamically inserted here -->
+            </div>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </section>
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Mock data as a fallback
+        const mockNews = [
+            {
+                title: "Global Efforts to Reduce Carbon Emissions",
+                description: "Countries worldwide are adopting new policies to cut carbon emissions by 2030.",
+                image: "https://placehold.co/300x200?text=Carbon+Emissions"
+            },
+            {
+                title: "Coral Reef Restoration Success",
+                description: "Scientists report progress in restoring damaged coral reefs in the Pacific.",
+                image: "https://placehold.co/300x200?text=Coral+Reef"
+            },
+            {
+                title: "Renewable Energy Surges",
+                description: "Solar and wind energy adoption reaches record highs in 2025.",
+                image: "https://placehold.co/300x200?text=Renewable+Energy"
+            },
+            {
+                title: "Deforestation Rates Decline",
+                description: "New conservation efforts lead to a significant drop in deforestation in 2025.",
+                image: "https://placehold.co/300x200?text=Deforestation"
+            },
+            {
+                title: "Plastic Waste Reduction Initiatives",
+                description: "Global campaigns successfully reduce single-use plastic consumption.",
+                image: "https://placehold.co/300x200?text=Plastic+Waste"
+            },
+            {
+                title: "Urban Green Spaces Expansion",
+                description: "Cities worldwide invest in green spaces to combat urban heat and pollution.",
+                image: "https://placehold.co/300x200?text=Green+Spaces"
+            }
+        ];
+
+        async function fetchEcologyNews() {
+            const apiKey = '7aafc30a5dae0270c0c64f9ea89b3161'; // Replace with your GNews API key
+            const url = `https://gnews.io/api/v4/search?q=ecology+environment&lang=en&max=6&token=${apiKey}`;
+            const newsContainer = document.getElementById('newsContainer');
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        throw new Error('Access denied. Please verify your GNews API key or check plan restrictions.');
+                    } else if (response.status === 401) {
+                        throw new Error('Invalid API key. Please verify your GNews API key.');
+                    } else if (response.status === 429) {
+                        throw new Error('Rate limit exceeded. Try again later.');
+                    } else if (response.status === 426) {
+                        throw new Error('API requires an upgrade. Check GNews plan or protocol requirements.');
+                    } else {
+                        throw new Error(`HTTP error ${response.status}: ${response.statusText}`);
+                    }
+                }
+                const data = await response.json();
+                const articles = data.articles || [];
+
+                if (articles.length === 0) {
+                    throw new Error('No news articles found for the query.');
+                }
+
+                newsContainer.innerHTML = ''; // Clear existing content
+
+                articles.forEach((article, index) => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.setAttribute('data-aos', 'fade-up');
+                    newsItem.setAttribute('data-aos-delay', `${100 * (index + 1)}`);
+
+                    const imageUrl = article.image || 'https://placehold.co/300x200?text=No+Image';
+                    // Alternative: Use local image if available
+                    // const imageUrl = article.image || '/images/placeholder.jpg';
+                    const title = article.title || 'No Title';
+                    const description = article.description || 'No description available.';
+
+                    newsItem.innerHTML = `
+                        <img src="${imageUrl}" alt="${title}">
+                        <h3>${title}</h3>
+                        <p>${description}</p>
+                    `;
+
+                    newsContainer.appendChild(newsItem);
+                });
+
+                AOS.refresh(); // Refresh AOS to include new elements
+            } catch (error) {
+                console.error('Error fetching news:', error.message);
+                errorMessage.textContent = error.message || 'Failed to load news. Displaying sample data.';
+                errorMessage.style.display = 'block';
+
+                // Fallback to mock data
+                newsContainer.innerHTML = '';
+                mockNews.forEach((article, index) => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.setAttribute('data-aos', 'fade-up');
+                    newsItem.setAttribute('data-aos-delay', `${100 * (index + 1)}`);
+
+                    newsItem.innerHTML = `
+                        <img src="${article.image}" alt="${article.title}">
+                        <h3>${article.title}</h3>
+                        <p>${article.description}</p>
+                    `;
+
+                    newsContainer.appendChild(newsItem);
+                });
+
+                AOS.refresh();
+            }
+        }
+
+        // Fetch news when the page loads
+        document.addEventListener('DOMContentLoaded', fetchEcologyNews);
+    </script>
+</body>
+</html>

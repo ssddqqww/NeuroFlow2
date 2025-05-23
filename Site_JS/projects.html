@@ -1,0 +1,2974 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partners for Change</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Bootstrap CSS from first code -->
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <!-- Vendor CSS Files from first code -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css?ts=asdf" rel="stylesheet">
+  <!-- Login button styles from first code -->
+  <link href="Test/my_button_download.css" rel="stylesheet">
+  <!-- Fonts from first code -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+  <!-- Favicons from first code (update paths as needed) -->
+  <!--
+  <link href="/var/www/neuroflow.world/assets/img/Testic.png?ts=asdf" rel="icon">
+  <link href="/var/www/neuroflow.world/assets/img/apple-touch-icon.png?ts=asdf" rel="apple-touch-icon">
+  -->
+  <link href="index_style.css?ts=abсdef" rel="stylesheet" onload="this.onload=null;">
+  <link href="main.css?ts=asdf" rel="stylesheet">
+  <style>
+    /* Existing styles retained, only adding or modifying project card styles */
+    .no-underline-silk {
+      text-decoration: none;
+    }
+    .app-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90vw;
+  max-height: 80vh;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.app-close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.app-close-btn:hover {
+  background-color: #dc2626;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+
+    .hidden {
+  display: none !important; /* Ensure hidden class overrides other styles */
+}
+#contactModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+#contactModal > div {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  width: 90vw;
+  max-width: 1200px;
+  height: 90vh;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+#contactIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  flex-grow: 1;
+}
+
+    .fullscreen-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 1000;
+      background: white;
+    }
+    .close-fullscreen {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .close-fullscreen:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .close-app-creation {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+      z-index: 1001;
+    }
+    .close-app-creation:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .profile-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: url('https://via.placeholder.com/150') no-repeat center;
+      background-size: cover;
+      cursor: pointer;
+    }
+    .profile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    .profile-overlay.active {
+      display: block;
+    }
+    .profile-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1001;
+      width: 300px;
+      text-align: center;
+    }
+    .profile-modal.active {
+      display: block;
+    }
+    .profile-modal-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .profile-close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .profile-avatar-container {
+      margin: 20px 0;
+    }
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    .profile-nickname {
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .profile-nickname-input {
+      width: 80%;
+      padding: 5px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .profile-email {
+      margin: 10px 0;
+      color: #555;
+    }
+    .profile-info-item {
+      margin: 5px 0;
+      color: #555;
+    }
+    .mint_grean {
+      color: #00ff00;
+    }
+    .light-bg {
+      background-color: #F5F5F5;
+      color: #333333;
+    }
+    .filter-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    .filter-item:hover {
+      background-color: #E5E7EB;
+    }
+    .filter-item.selected {
+      background-color: #D1D5DB;
+      font-weight: 500;
+    }
+    .checkmark {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.5rem;
+      border-radius: 50%;
+    }
+    .project-card {
+      background-color: #FFFFFF;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .project-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      flex-shrink: 0;
+    }
+    .project-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+    }
+    .project-description {
+      font-size: 0.875rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+    .project-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .project-detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .project-detail-label {
+      font-weight: 500;
+      color: #374151;
+    }
+    .project-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .project-button {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+    }
+    .scrollable-filter {
+      max-height: 200px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #9CA3AF #E5E7EB;
+    }
+    .scrollable-filter::-webkit-scrollbar {
+      width: 8px;
+    }
+    .scrollable-filter::-webkit-scrollbar-track {
+      background: #E5E7EB;
+    }
+    .scrollable-filter::-webkit-scrollbar-thumb {
+      background: #9CA3AF;
+      border-radius: 4px;
+    }
+    .star-rating {
+      display: inline-flex;
+      cursor: pointer;
+    }
+    .star {
+      color: #D1D5DB;
+      font-size: 1.2rem;
+    }
+    .star.filled {
+      color: #FBBF24;
+    }
+    .pfc-no-underline-silk {
+      text-decoration: none;
+    }
+    .pfc-fullscreen-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 1000;
+      background: white;
+    }
+    .pfc-close-fullscreen {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .pfc-close-fullscreen:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .pfc-close-app-creation {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+      z-index: 1001;
+    }
+    .pfc-close-app-creation:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .pfc-profile-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: url('https://via.placeholder.com/150') no-repeat center;
+      background-size: cover;
+      cursor: pointer;
+    }
+    .pfc-profile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    .pfc-profile-overlay.pfc-active {
+      display: block;
+    }
+    .pfc-profile-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1001;
+      width: 300px;
+      text-align: center;
+    }
+    .pfc-profile-modal.pfc-active {
+      display: block;
+    }
+    .pfc-profile-modal-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .pfc-profile-close-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .pfc-profile-avatar-container {
+      margin: 20px 0;
+    }
+    .pfc-profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+    .pfc-profile-nickname {
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .pfc-profile-nickname-input {
+      width: 80%;
+      padding: 5px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    .pfc-profile-email {
+      margin: 10px 0;
+      color: #555;
+    }
+    .pfc-profile-info-item {
+      margin: 5px 0;
+      color: #555;
+    }
+    .pfc-mint-green {
+      color: #00ff00;
+    }
+    .pfc-light-bg {
+      background-color: #F5F5F5;
+      color: #333333;
+    }
+    .pfc-filter-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    .pfc-filter-item:hover {
+      background-color: #E5E7EB;
+    }
+    .pfc-filter-item.pfc-selected {
+      background-color: #D1D5DB;
+      font-weight: 500;
+    }
+    .pfc-checkmark {
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.5rem;
+      border-radius: 50%;
+    }
+    .pfc-project-card {
+      background-color: #FFFFFF;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pfc-project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    .pfc-project-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      flex-shrink: 0;
+    }
+    .pfc-project-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .pfc-project-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .pfc-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .pfc-project-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+    }
+    .pfc-project-description {
+      font-size: 0.875rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+    .pfc-project-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .pfc-project-detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .pfc-project-detail-label {
+      font-weight: 500;
+      color: #374151;
+    }
+    .pfc-project-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .pfc-project-button {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+    }
+    .pfc-scrollable-filter {
+      max-height: 200px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #9CA3AF #E5E7EB;
+    }
+    .pfc-scrollable-filter::-webkit-scrollbar {
+      width: 8px;
+    }
+    .pfc-scrollable-filter::-webkit-scrollbar-track {
+      background: #E5E7EB;
+    }
+    .pfc-scrollable-filter::-webkit-scrollbar-thumb {
+      background: #9CA3AF;
+      border-radius: 4px;
+    }
+    .pfc-star-rating {
+      display: inline-flex;
+      cursor: pointer;
+    }
+    .pfc-star {
+      color: #D1D5DB;
+      font-size: 1.2rem;
+    }
+    .pfc-star.pfc-filled {
+      color: #FBBF24;
+    }
+    .pfc-header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0.75rem 0;
+    }
+    .pfc-header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .pfc-logo {
+      display: flex;
+      align-items: center;
+    }
+    .pfc-sitename {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 0;
+      transition: color 0.2s ease;
+    }
+    .pfc-sitename:hover {
+      color: #3b82f6;
+    }
+    .pfc-navmenu {
+      display: flex;
+      align-items: center;
+    }
+    .pfc-nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .pfc-nav-link {
+      font-size: 1rem;
+      color: #1f2937;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .pfc-nav-link:hover,
+    .pfc-nav-link.pfc-active {
+      color: #3b82f6;
+    }
+    .pfc-mobile-nav-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: #1f2937;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+    }
+    .pfc-container-avatar-login {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .pfc-profile-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: url('https://via.placeholder.com/150') no-repeat center;
+      background-size: cover;
+      cursor: pointer;
+      border: 2px solid #e5e7eb;
+      transition: border-color 0.2s ease;
+    }
+    .pfc-profile-btn:hover {
+      border-color: #3b82f6;
+    }
+    .pfc-login-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+      background-color: #f3f4f6;
+      transition: background-color 0.2s ease;
+    }
+    .pfc-login-container:hover {
+      background-color: #e5e7eb;
+    }
+    .pfc-login-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1f2937;
+    }
+    .pfc-login-fingerprint {
+      width: 24px;
+      height: 24px;
+      transition: opacity 0.2s ease;
+    }
+    .pfc-login-fingerprint-out {
+      stroke: #1f2937;
+      transition: stroke 0.2s ease;
+    }
+    .pfc-login-container:hover .pfc-login-fingerprint-out {
+      stroke: #3b82f6;
+    }
+    .pfc-login-fingerprint-active {
+      opacity: 0;
+    }
+    .pfc-login-container:hover .pfc-login-fingerprint-active {
+      opacity: 1;
+    }
+    .pfc-login-container:hover .pfc-login-fingerprint-base {
+      opacity: 0;
+    }
+    @media (max-width: 1024px) {
+      .pfc-nav-list {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .pfc-navmenu.pfc-active .pfc-nav-list {
+        display: flex;
+      }
+      .pfc-nav-link {
+        padding: 0.75rem;
+        width: 100%;
+        text-align: left;
+      }
+      .pfc-mobile-nav-toggle {
+        display: block;
+      }
+      .pfc-project-card,
+      .project-card {
+        flex-direction: column;
+      }
+      .pfc-project-image,
+      .project-image {
+        width: 100%;
+        height: 200px;
+      }
+      .pfc-project-details-grid,
+      .project-details-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .pfc-sitename {
+        font-size: 1.5rem;
+      }
+      .pfc-login-text {
+        font-size: 0.75rem;
+      }
+      .pfc-project-card,
+      .project-card {
+        padding: 1rem;
+      }
+      .pfc-project-title,
+      .project-title {
+        font-size: 1.125rem;
+      }
+      .pfc-project-image,
+      .project-image {
+        height: 150px;
+      }
+    }
+/* Header Styles */
+.header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Header Container Styles */
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  width: 100%;
+}
+
+/* Logo Styles */
+.sitename {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  transition: color 0.2s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.sitename:hover {
+  color: #3b82f6;
+}
+
+.sitename::after,
+.sitename::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #000000, #000000);
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-out;
+}
+
+.sitename::before {
+  top: -5px;
+  transform-origin: left;
+}
+
+.sitename:hover::after,
+.sitename:hover::before {
+  transform: scaleX(1);
+}
+
+.no-underline-silk,
+.no-underline-silk:hover {
+  text-decoration: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+@media (min-width: 1200px) {
+  .logo {
+    margin-right: 0;
+  }
+}
+
+/* Navigation Styles */
+.navmenu {
+  display: flex;
+  align-items: center;
+}
+
+.navmenu ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navmenu a {
+  font-size: 1rem;
+  color: #1f2937;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.navmenu a:hover,
+.navmenu a.pfc-active {
+  color: #3b82f6;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 1024px) {
+  .navmenu ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .navmenu.pfc-active ul {
+    display: flex;
+  }
+
+  .navmenu a {
+    padding: 0.75rem;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Profile Button Styles */
+.profile-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: url('https://via.placeholder.com/150') no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+  border: 2px solid #e5e7eb;
+  transition: border-color 0.2s ease, transform 0.3s ease;
+  position: relative;
+}
+
+.profile-btn:hover {
+  border-color: #3b82f6;
+  transform: translateY(-3px);
+}
+
+/* Profile Overlay and Modal Styles */
+.profile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.profile-overlay.pfc-active {
+  display: block;
+}
+
+.profile-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1001;
+  width: 300px;
+  text-align: center;
+}
+
+.profile-modal.pfc-active {
+  display: block;
+}
+
+.profile-modal-header {
+  position: relative;
+  width: 100%;
+}
+
+.profile-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+}
+
+.profile-avatar-container {
+  width: 100px;
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 3px solid white;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+  animation: profile-float 6s ease-in-out infinite;
+  cursor: pointer;
+}
+
+@keyframes profile-float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    transform: translateY(0px);
+  }
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+    transform: translateY(-10px);
+  }
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    transform: translateY(0px);
+  }
+}
+
+.profile-nickname {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.profile-nickname-input {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  position: relative;
+  outline: none;
+  background-color: transparent;
+}
+
+.profile-nickname-input:focus {
+  animation: profile-borderAnimation 2s infinite linear;
+}
+
+@keyframes profile-borderAnimation {
+  0% { box-shadow: 0 0 0 2px black; }
+  25% { box-shadow: 2px 0 0 2px black; }
+  50% { box-shadow: 0 2px 0 2px black; }
+  75% { box-shadow: -2px 0 0 2px black; }
+  100% { box-shadow: 0 0 0 2px black; }
+}
+
+.profile-email {
+  color: #606770;
+  font-size: 14px;
+  word-break: break-all;
+  margin-bottom: 15px;
+}
+
+.profile-info-item {
+  font-size: 14px;
+  color: #606770;
+  margin-bottom: 10px;
+}
+
+.mint_grean {
+  color: #14dea8;
+}
+
+#profile-avatarInput {
+  display: none;
+}
+
+/* Login Container Styles */
+.login_container {
+  align-items: center;
+  background: #000;
+  border-radius: 16.67px;
+  box-shadow: 0 5.84px 11.66px rgba(0,0,0,0.25), 0 4.16px 4.16px rgba(0,0,0,0.22);
+  display: flex;
+  height: 33.34px;
+  justify-content: center;
+  position: relative;
+  width: 83.34px;
+  margin-left: 30px;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.login_container:hover {
+  transform: translateY(-3px);
+}
+
+.active.login_container {
+  animation: 6s LoginContainer;
+}
+
+@keyframes LoginContainer {
+  0% { width: 83.34px }
+  6% { width: 33.34px }
+  71% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+  77% { transform: scale(1); }
+  94% { width: 33.34px }
+  100% { width: 83.34px }
+}
+
+.login_text {
+  color: white;
+  position: absolute;
+  transition: opacity 300ms;
+  user-select: none;
+  -moz-user-select: none;
+  font-size: 11px;
+}
+
+.active .login_text {
+  opacity: 0;
+  animation: 6s LoginText forwards;
+}
+
+@keyframes LoginText {
+  0% { opacity: 1; transform: scale(1); }
+  6% { opacity: 0; transform: scale(0.5); }
+  94% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.login_fingerprint {
+  left: -3.34px;
+  opacity: 0;
+  position: absolute;
+  stroke: #777;
+  top: -3.75px;
+  transition: opacity 1ms;
+  width: 41.66px;
+  height: 41.66px;
+}
+
+.login_fingerprint-active {
+  stroke: #fff;
+}
+
+.login_fingerprint-out {
+  opacity: 1;
+}
+
+.login_odd {
+  stroke-dasharray: 0px 50px;
+  stroke-dashoffset: 1px;
+  transition: stroke-dasharray 1ms;
+}
+
+.active .login_fingerprint-base .login_odd {
+  stroke-dasharray: 50px 50px;
+  transition: stroke-dasharray 800ms 100ms;
+}
+
+.login_even {
+  stroke-dasharray: 50px 50px;
+  stroke-dashoffset: -41px;
+  transition: stroke-dashoffset 1ms;
+}
+
+.active .login_fingerprint-base .login_even {
+  stroke-dashoffset: 0px;
+  transition: stroke-dashoffset 800ms;
+}
+
+.active .login_fingerprint-active .login_odd {
+  stroke-dasharray: 50px 50px;
+  transition: stroke-dasharray 2000ms 1500ms;
+}
+
+.active .login_fingerprint-active .login_even {
+  stroke-dashoffset: 0px;
+  transition: stroke-dashoffset 2000ms 1300ms;
+}
+
+.active .login_fingerprint-out {
+  opacity: 0;
+  transition: opacity 300ms 4100ms;
+}
+
+.login_ok {
+  opacity: 0;
+  width: 41.66px;
+  height: 41.66px;
+}
+
+.active .login_ok {
+  opacity: 1;
+  animation: 6s LoginOk forwards;
+}
+
+@keyframes LoginOk {
+  0% { opacity: 0 }
+  70% { opacity: 0; transform: scale(0); }
+  75% { opacity: 1; transform: scale(1.1); }
+  77% { opacity: 1; transform: scale(1); }
+  92% { opacity: 1; transform: scale(1); }
+  96% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 0 }
+}
+
+/* Container Avatar Login Styles */
+.container_avatar_login {
+  display: flex;
+  align-items: center;
+}
+
+/* Utility Styles */
+.hidden_all_h {
+  display: none;
+}
+
+  </style>
+  <!-- Cloudflare email decode script from first code -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+</head>
+<body class="light-bg min-h-screen">
+  <!-- Header (unchanged) -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div id="main_slid_top" class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="https://neuroflow.world/" class="no-underline-silk logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename hover-underline">NeuroFlow</h1>
+        
+      </a>
+
+<nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a id="home_func" class="active block_up_little_lit home_type no-underline-silk">Projects</a></li>
+    <li><a id="about_func" class="block_up_little_lit about_type no-underline-silk" onclick="toggleBlocks(this.id)">About</a></li>
+    <li><a id="features_func" class="block_up_little_lit features_type no-underline-silk" href="hcation">Features</a></li>
+    <li><a id="top_func" class="block_up_little_lit top_type no-underline-silk" href="https:/html">Top</a></li>
+    <li><a id="topics_container_func" class="block_up_little_lit chat_type no-underline-silk" href="https://at"">Chat</a></li>
+    <li><a id="news_func" class="block_up_little_lit no-underline-silk" href="https:/news" >News</a></li>
+    <li><a id="download_func" class="block_up_little_lit download_type no-underline-silk" onclick="toggleBlocks(this.id)">Download</a></li>
+    <li><a href="https://neuroflow.world/p2p" class="block_up_little_lit pfc-nav-link no-underline-silk">P2P</a></li>
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+      <div class="container_avatar_login">
+        <div class="profile-btn block_up_little_lit" onclick="toggleProfile()"></div>
+      <div class="profile-overlay" id="profile-overlay"></div>
+    
+      <div class="profile-modal" id="profile-modal">
+        <div class="profile-modal-header">
+            <button class="profile-close-btn" onclick="toggleProfile()">✕</button>
+        </div>
+        <div class="profile-avatar-container">
+            <img src="https://neuroflow.world/assets/folder_js_css/assets/img/cart.jpg" alt="" class="profile-avatar" id="profile-avatar" onclick="document.getElementById('profile-avatarInput').click()">
+        </div>
+        <input type="file" id="profile-avatarInput" accept="image/*" onchange="changeAvatar(event)">
+        <div class="profile-nickname" id="profile-nickname" onclick="editNickname()">User123</div>
+        <div class="profile-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="176264726526252457726f767a677b723974787a">[email&#160;protected]</a></div>
+        <div class="profile-info-item">Status: <span class="mint_grean">online</span></div>
+        <div class="profile-info-item">Registration date: 15.03.2023</div>
+      </div>
+      <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function toggleProfile() {
+          const modal = document.getElementById('profile-modal');
+          const overlay = document.getElementById('profile-overlay');
+          
+          const nicknameInput = document.querySelector('.profile-nickname-input');
+          if (nicknameInput) {
+              const nicknameValue = nicknameInput.value.trim();
+              if (!nicknameValue) {
+                  return;
+              }
+              const newNicknameDiv = document.createElement('div');
+              newNicknameDiv.textContent = nicknameValue;
+              newNicknameDiv.className = 'profile-nickname';
+              newNicknameDiv.id = 'profile-nickname';
+              newNicknameDiv.onclick = editNickname;
+              nicknameInput.replaceWith(newNicknameDiv);
+          }
+  
+          modal.classList.toggle('active');
+          overlay.classList.toggle('active');
+      }
+  
+        function editNickname() {
+          const nicknameDiv = document.getElementById('profile-nickname');
+          const currentNickname = nicknameDiv.textContent;
+  
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.value = currentNickname;
+          input.className = 'profile-nickname-input';
+
+input.maxLength = 18;
+          
+          nicknameDiv.replaceWith(input);
+          input.focus();
+  
+          input.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter') {
+                  const newNickname = input.value.trim();
+                  if (newNickname) {
+                      const newNicknameDiv = document.createElement('div');
+                      newNicknameDiv.textContent = newNickname;
+                      newNicknameDiv.className = 'profile-nickname';
+                      newNicknameDiv.id = 'profile-nickname';
+                      newNicknameDiv.onclick = editNickname;
+                      input.replaceWith(newNicknameDiv);
+                  }
+              }
+          });
+          
+      }
+  
+        function changeAvatar(event) {
+          const file = event.target.files[0];
+          if (file) {
+              const reader = new FileReader();
+              const avatar = document.getElementById('profile-avatar');
+              
+              reader.onload = function(e) {
+                  avatar.src = e.target.result;
+                  const avatar_main = document.querySelector('.profile-btn');
+                  avatar_main.style.background = url(${e.target.result});
+                  avatar_main.style.backgroundSize = '40px 40px';
+              };
+              reader.readAsDataURL(file);
+          }
+      }
+  
+        document.getElementById('profile-overlay').addEventListener('click', function() {
+            toggleProfile();
+        });
+  
+        document.getElementById('profile-modal').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+      </script>
+
+      <link href="Test/my_button_download.css" rel="stylesheet">
+      <div class="login_container block_up_little_lit" onclick="handleClick(this)">
+        <span class="login_text">LOGIN</span>
+        <svg class="login_fingerprint login_fingerprint-base" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+
+<path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+            <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_fingerprint login_fingerprint-active" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+            <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+
+<path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_ok" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <path d="M34.912 50.75l10.89 10.125L67 36.75" fill="none" stroke="#fff" stroke-width="6"></path>
+        </svg>
+      </div>
+      
+      <script>
+        const container = document.querySelector('.login_container');
+        
+        function handleClick(element) {
+          element.classList.toggle('active');
+          setTimeout(() => {
+            window.location.href = 'https://neuroflow.world/login/login.html';
+          }, 5000);
+        }
+        
+        container.addEventListener('animationend', () => {
+          container.classList.remove('active');
+        });
+      </script>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-6 mt-16">
+<div class="w-full md:w-1/4 space-y-6">
+  <div>
+    <input type="text" id="searchBar" placeholder="Search by title/description" class="w-full p-2 rounded-md bg-white text-gray-800 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+  </div>
+  <div>
+    <button id="clearFilters" class="w-full bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+      Clear Filters
+    </button>
+  </div>
+  <div id="createProjectSection">
+    <button id="showCreateProject" class="hidden bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 w-full">
+      <i class="bi bi-plus-circle mr-2"></i>Create Project
+    </button>
+  </div>
+  <div>
+    <h3 class="text-lg font-semibold mb-2 text-gray-800">Countries</h3>
+    <div id="countryFilters" class="space-y-2 scrollable-filter"></div>
+  </div>
+  <div>
+    <h3 class="text-lg font-semibold mb-2 text-gray-800">Themes</h3>
+    <div id="themeFilters" class="space-y-2 scrollable-filter"></div>
+  </div>
+  <div>
+    <h3 class="text-lg font-semibold mb-2 text-gray-800">Event Type</h3>
+    <div id="eventTypeFilters" class="space-y-2"></div>
+  </div>
+</div>
+
+    <div class="w-full md:w-3/4 space-y-6">
+      <div id="status" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"></div>
+      <div id="createProjectForm" class="hidden bg-white p-6 rounded-lg shadow-md mb-6">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Create New Project</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="projectTitle" class="block text-sm font-medium text-gray-700">Project Title</label>
+            <input type="text" id="projectTitle" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" required>
+          </div>
+          <div>
+            <label for="projectTheme" class="block text-sm font-medium text-gray-700">Theme</label>
+            <select id="projectTheme" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" required></select>
+          </div>
+          <div>
+            <label for="projectEventType" class="block text-sm font-medium text-gray-700">Event Type</label>
+            <select id="projectEventType" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" required>
+              <option value="OFFLINE">Offline</option>
+              <option value="ONLINE">Online</option>
+              <option value="BOTH">Both</option>
+            </select>
+          </div>
+          <div>
+            <label for="projectStatus" class="block text-sm font-medium text-gray-700">Status</label>
+            <select id="projectStatus" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" required>
+              <option value="Active">Active</option>
+              <option value="Planned">Planned</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div>
+            <label for="projectGoal" class="block text-sm font-medium text-gray-700">Goal of Publication</label>
+            <select id="projectGoal" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" required>
+              <option value="Looking for participants">🧑‍🤝‍🧑 Looking for participants</option>
+              <option value="Looking for a team">👷 Looking for a team</option>
+              <option value="Looking for funding">💰 Looking for funding</option>
+              <option value="Looking for volunteers">🙋 Looking for volunteers</option>
+              <option value="Spreading awareness">📣 Spreading awareness</option>
+              <option value="Looking for partners">🤝 Looking for partners</option>
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label for="projectDescription" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea id="projectDescription" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" rows="4" required></textarea>
+          </div>
+          <div>
+            <label for="projectCountry" class="block text-sm font-medium text-gray-700">Country(if you have chosen online option, your addres won't be displayed)</label>
+            <input type="text" id="projectCountry" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" value="Ukraine" required>
+          </div>
+          <div>
+            <label for="projectCity" class="block text-sm font-medium text-gray-700">City</label>
+            <input type="text" id="projectCity" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" required>
+          </div>
+          <div class="md:col-span-2">
+            <label for="projectAddress" class="block text-sm font-medium text-gray-700">Address (Optional)</label>
+            <input type="text" id="projectAddress" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300">
+          </div>
+          <div class="md:col-span-2">
+            <button id="geocodeCreate" class="bg-gray-400 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-500">
+              Get Coordinates
+            </button>
+          </div>
+          <div>
+            <label for="projectLatitude" class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="number" id="projectLatitude" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" step="any" required readonly>
+          </div>
+          <div>
+            <label for="projectLongitude" class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="number" id="projectLongitude" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" step="any" required readonly>
+          </div>
+          <div>
+            <label for="projectContact" class="block text-sm font-medium text-gray-700">Contact (Email or URL)</label>
+            <input type="text" id="projectContact" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300" required>
+          </div>
+          <div>
+            <label for="projectImage" class="block text-sm font-medium text-gray-700">Image URL (Optional)</label>
+            <input type="text" id="projectImage" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300">
+          </div>
+          <div class="md:col-span-2">
+            <label for="projectFunctionName" class="block text-sm font-medium text-gray-700">Function Name (Optional)</label>
+            <input type="text" id="projectFunctionName" class="w-full p-2 border rounded-md bg-gray-100 text-gray-800 border-gray-300">
+          </div>
+        </div>
+        <div class="mt-4 flex gap-4">
+          <button id="submitProject" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            Create Project
+          </button>
+          <button id="cancelProject" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div id="map" class="w-full h-96 rounded-md shadow-md"></div>
+      <div id="projectList" class="space-y-4"></div>
+    </div>
+  </main>
+
+  <!-- Modals (unchanged) -->
+  <div id="joinProjectModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+      <h2 id="joinProjectTitle" class="text-xl font-semibold mb-4 text-gray-800"></h2>
+      <div id="joinProjectContent" class="text-gray-600 mb-4"></div>
+      <div class="flex justify-end">
+        <button id="closeJoinModal" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="deleteProjectModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Confirm Deletion</h2>
+      <p id="deleteProjectMessage" class="text-gray-600 mb-4"></p>
+      <div class="flex justify-end gap-4">
+        <button id="confirmDeleteProject" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">
+          Confirm
+        </button>
+        <button id="cancelDeleteProject" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+<div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 w-[90vw] max-w-[1200px] h-[90vh] max-h-[800px] flex flex-col">
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">Contact Project Creator</h2>
+    <iframe id="contactIframe" src="" class="w-full h-full border-0 flex-grow"></iframe>
+    <div class="flex justify-end mt-4">
+      <button id="closeContactModal" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+  <!-- Footer (unchanged) -->
+  <footer class="text-center py-4 light-bg">
+    <div class="flex justify-center space-x-4 mb-2">
+      <a href="#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-twitter"></i></a>
+    </div>
+    <button id="showMore" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Show more</button>
+  </footer>
+   <button class="chat-button" onclick="toggleChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        </svg>
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Chat</span>
+            <button class="close-button" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Здесь будут сообщения -->
+        </div>
+        <div class="chat-input">
+            <div class="chat-input-container">
+                <input type="text" id="messageInputUN" placeholder="Enter a message...">
+                <button class="test_rotate" onclick="sendMessage_nopobleminfuture()">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        
+  <!-- JavaScript from first code (profile and login) -->
+  <script>
+    function toggleProfile() {
+      const modal = document.getElementById('profile-modal');
+      const overlay = document.getElementById('profile-overlay');
+      const nicknameInput = document.querySelector('.profile-nickname-input');
+      if (nicknameInput) {
+        const nicknameValue = nicknameInput.value.trim();
+        if (!nicknameValue) {
+          return;
+        }
+        const newNicknameDiv = document.createElement('div');
+        newNicknameDiv.textContent = nicknameValue;
+        newNicknameDiv.className = 'profile-nickname';
+        newNicknameDiv.id = 'profile-nickname';
+        newNicknameDiv.onclick = editNickname;
+        nicknameInput.replaceWith(newNicknameDiv);
+      }
+      modal.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+    function editNickname() {
+      const nicknameDiv = document.getElementById('profile-nickname');
+      const currentNickname = nicknameDiv.textContent;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = currentNickname;
+      input.className = 'profile-nickname-input';
+      input.maxLength = 18;
+      nicknameDiv.replaceWith(input);
+      input.focus();
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const newNickname = input.value.trim();
+          if (newNickname) {
+            const newNicknameDiv = document.createElement('div');
+            newNicknameDiv.textContent = newNickname;
+            newNicknameDiv.className = 'profile-nickname';
+            newNicknameDiv.id = 'profile-nickname';
+            newNicknameDiv.onclick = editNickname;
+            input.replaceWith(newNicknameDiv);
+          }
+        }
+      });
+    }
+    function changeAvatar(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        const avatar = document.getElementById('profile-avatar');
+        reader.onload = function(e) {
+          avatar.src = e.target.result;
+          const avatar_main = document.querySelector('.profile-btn');
+          avatar_main.style.background = `url(${e.target.result})`;
+          avatar_main.style.backgroundSize = '40px 40px';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    document.getElementById('profile-overlay').addEventListener('click', function() {
+      toggleProfile();
+    });
+    document.getElementById('profile-modal').addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    const container = document.querySelector('.login_container');
+    function handleClick(element) {
+      element.classList.toggle('active');
+      setTimeout(() => {
+        // Update this redirect to match your authentication endpoint
+        window.location.href = '/auth/google';
+      }, 5000);
+    }
+    container.addEventListener('animationend', () => {
+      container.classList.remove('active');
+    });
+  </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://neuroflow.world';
+let projects = [];
+let filteredProjects = [];
+let activeUser = null;
+let map = null;
+let tempMarker = null;
+const markers = [];
+
+const cityCoordinates = {
+  'Kyiv': [50.4501, 30.5234],
+  'Lviv': [49.8397, 24.0297],
+  'Odesa': [46.4825, 30.7233],
+  'Kharkiv': [49.9935, 36.2304],
+  'Dnipro': [48.4647, 35.0462],
+  'Warsaw': [52.2297, 21.0122],
+  'Brasilia': [-15.7942, -47.8825],
+  'Washington': [38.9072, -77.0369],
+  'Panama City': [8.9824, -79.5199]
+};
+
+const countries = [
+  { name: 'Ukraine', flag: 'https://flagcdn.com/ua.svg' },
+  { name: 'Brazil', flag: 'https://flagcdn.com/br.svg' },
+  { name: 'United States', flag: 'https://flagcdn.com/us.svg' },
+  { name: 'Poland', flag: 'https://flagcdn.com/pl.svg' },
+  { name: 'Afghanistan', flag: 'https://flagcdn.com/af.svg' },
+  { name: 'Albania', flag: 'https://flagcdn.com/al.svg' },
+  { name: 'Algeria', flag: 'https://flagcdn.com/dz.svg' },
+  { name: 'Andorra', flag: 'https://flagcdn.com/ad.svg' },
+  { name: 'Angola', flag: 'https://flagcdn.com/ao.svg' },
+  { name: 'Argentina', flag: 'https://flagcdn.com/ar.svg' },
+  { name: 'Armenia', flag: 'https://flagcdn.com/am.svg' },
+  { name: 'Australia', flag: 'https://flagcdn.com/au.svg' },
+  { name: 'Austria', flag: 'https://flagcdn.com/at.svg' },
+  { name: 'Azerbaijan', flag: 'https://flagcdn.com/az.svg' },
+  { name: 'Bahamas', flag: 'https://flagcdn.com/bs.svg' },
+  { name: 'Bahrain', flag: 'https://flagcdn.com/bh.svg' },
+  { name: 'Bangladesh', flag: 'https://flagcdn.com/bd.svg' },
+  { name: 'Barbados', flag: 'https://flagcdn.com/bb.svg' },
+  { name: 'Belgium', flag: 'https://flagcdn.com/be.svg' },
+  { name: 'Belize', flag: 'https://flagcdn.com/bz.svg' },
+  { name: 'Benin', flag: 'https://flagcdn.com/bj.svg' },
+  { name: 'Bhutan', flag: 'https://flagcdn.com/bt.svg' },
+  { name: 'Bolivia', flag: 'https://flagcdn.com/bo.svg' },
+  { name: 'Bosnia and Herzegovina', flag: 'https://flagcdn.com/ba.svg' },
+  { name: 'Botswana', flag: 'https://flagcdn.com/bw.svg' },
+  { name: 'Brunei', flag: 'https://flagcdn.com/bn.svg' },
+  { name: 'Bulgaria', flag: 'https://flagcdn.com/bg.svg' },
+  { name: 'Burkina Faso', flag: 'https://flagcdn.com/bf.svg' },
+  { name: 'Burundi', flag: 'https://flagcdn.com/bi.svg' },
+  { name: 'Cambodia', flag: 'https://flagcdn.com/kh.svg' },
+  { name: 'Cameroon', flag: 'https://flagcdn.com/cm.svg' },
+  { name: 'Canada', flag: 'https://flagcdn.com/ca.svg' },
+  { name: 'Cape Verde', flag: 'https://flagcdn.com/cv.svg' },
+  { name: 'Central African Republic', flag: 'https://flagcdn.com/cf.svg' },
+  { name: 'Chad', flag: 'https://flagcdn.com/td.svg' },
+  { name: 'Chile', flag: 'https://flagcdn.com/cl.svg' },
+  { name: 'China', flag: 'https://flagcdn.com/cn.svg' },
+  { name: 'Colombia', flag: 'https://flagcdn.com/co.svg' },
+  { name: 'Comoros', flag: 'https://flagcdn.com/km.svg' },
+  { name: 'Costa Rica', flag: 'https://flagcdn.com/cr.svg' },
+  { name: 'Croatia', flag: 'https://flagcdn.com/hr.svg' },
+  { name: 'Cuba', flag: 'https://flagcdn.com/cu.svg' },
+  { name: 'Cyprus', flag: 'https://flagcdn.com/cy.svg' },
+  { name: 'Czech Republic', flag: 'https://flagcdn.com/cz.svg' },
+  { name: 'Denmark', flag: 'https://flagcdn.com/dk.svg' },
+  { name: 'Djibouti', flag: 'https://flagcdn.com/dj.svg' },
+  { name: 'Dominica', flag: 'https://flagcdn.com/dm.svg' },
+  { name: 'Dominican Republic', flag: 'https://flagcdn.com/do.svg' },
+  { name: 'DR Congo', flag: 'https://flagcdn.com/cd.svg' },
+  { name: 'Ecuador', flag: 'https://flagcdn.com/ec.svg' },
+  { name: 'Egypt', flag: 'https://flagcdn.com/eg.svg' },
+  { name: 'El Salvador', flag: 'https://flagcdn.com/sv.svg' },
+  { name: 'Equatorial Guinea', flag: 'https://flagcdn.com/gq.svg' },
+  { name: 'Eritrea', flag: 'https://flagcdn.com/er.svg' },
+  { name: 'Estonia', flag: 'https://flagcdn.com/ee.svg' },
+  { name: 'Eswatini', flag: 'https://flagcdn.com/sz.svg' },
+  { name: 'Ethiopia', flag: 'https://flagcdn.com/et.svg' },
+  { name: 'Fiji', flag: 'https://flagcdn.com/fj.svg' },
+  { name: 'Finland', flag: 'https://flagcdn.com/fi.svg' },
+  { name: 'France', flag: 'https://flagcdn.com/fr.svg' },
+  { name: 'Gabon', flag: 'https://flagcdn.com/ga.svg' },
+  { name: 'Gambia', flag: 'https://flagcdn.com/gm.svg' },
+  { name: 'Georgia', flag: 'https://flagcdn.com/ge.svg' },
+  { name: 'Germany', flag: 'https://flagcdn.com/de.svg' },
+  { name: 'Ghana', flag: 'https://flagcdn.com/gh.svg' },
+  { name: 'Greece', flag: 'https://flagcdn.com/gr.svg' },
+  { name: 'Grenada', flag: 'https://flagcdn.com/gd.svg' },
+  { name: 'Guatemala', flag: 'https://flagcdn.com/gt.svg' },
+  { name: 'Guinea', flag: 'https://flagcdn.com/gn.svg' },
+  { name: 'Guinea-Bissau', flag: 'https://flagcdn.com/gw.svg' },
+  { name: 'Guyana', flag: 'https://flagcdn.com/gy.svg' },
+  { name: 'Haiti', flag: 'https://flagcdn.com/ht.svg' },
+  { name: 'Honduras', flag: 'https://flagcdn.com/hn.svg' },
+  { name: 'Hungary', flag: 'https://flagcdn.com/hu.svg' },
+  { name: 'Iceland', flag: 'https://flagcdn.com/is.svg' },
+  { name: 'India', flag: 'https://flagcdn.com/in.svg' },
+  { name: 'Indonesia', flag: 'https://flagcdn.com/id.svg' },
+  { name: 'Iran', flag: 'https://flagcdn.com/ir.svg' },
+  { name: 'Iraq', flag: 'https://flagcdn.com/iq.svg' },
+  { name: 'Ireland', flag: 'https://flagcdn.com/ie.svg' },
+  { name: 'Israel', flag: 'https://flagcdn.com/il.svg' },
+  { name: 'Italy', flag: 'https://flagcdn.com/it.svg' },
+  { name: 'Jamaica', flag: 'https://flagcdn.com/jm.svg' },
+  { name: 'Japan', flag: 'https://flagcdn.com/jp.svg' },
+  { name: 'Jordan', flag: 'https://flagcdn.com/jo.svg' },
+  { name: 'Kazakhstan', flag: 'https://flagcdn.com/kz.svg' },
+  { name: 'Kenya', flag: 'https://flagcdn.com/ke.svg' },
+  { name: 'Kiribati', flag: 'https://flagcdn.com/ki.svg' },
+  { name: 'Kuwait', flag: 'https://flagcdn.com/kw.svg' },
+  { name: 'Kyrgyzstan', flag: 'https://flagcdn.com/kg.svg' },
+  { name: 'Laos', flag: 'https://flagcdn.com/la.svg' },
+  { name: 'Latvia', flag: 'https://flagcdn.com/lv.svg' },
+  { name: 'Lebanon', flag: 'https://flagcdn.com/lb.svg' },
+  { name: 'Lesotho', flag: 'https://flagcdn.com/ls.svg' },
+  { name: 'Liberia', flag: 'https://flagcdn.com/lr.svg' },
+  { name: 'Libya', flag: 'https://flagcdn.com/ly.svg' },
+  { name: 'Liechtenstein', flag: 'https://flagcdn.com/li.svg' },
+  { name: 'Lithuania', flag: 'https://flagcdn.com/lt.svg' },
+  { name: 'Luxembourg', flag: 'https://flagcdn.com/lu.svg' },
+  { name: 'Madagascar', flag: 'https://flagcdn.com/mg.svg' },
+  { name: 'Malawi', flag: 'https://flagcdn.com/mw.svg' },
+  { name: 'Malaysia', flag: 'https://flagcdn.com/my.svg' },
+  { name: 'Maldives', flag: 'https://flagcdn.com/mv.svg' },
+  { name: 'Mali', flag: 'https://flagcdn.com/ml.svg' },
+  { name: 'Malta', flag: 'https://flagcdn.com/mt.svg' },
+  { name: 'Marshall Islands', flag: 'https://flagcdn.com/mh.svg' },
+  { name: 'Mauritania', flag: 'https://flagcdn.com/mr.svg' },
+  { name: 'Mauritius', flag: 'https://flagcdn.com/mu.svg' },
+  { name: 'Mexico', flag: 'https://flagcdn.com/mx.svg' },
+  { name: 'Micronesia', flag: 'https://flagcdn.com/fm.svg' },
+  { name: 'Moldova', flag: 'https://flagcdn.com/md.svg' },
+  { name: 'Monaco', flag: 'https://flagcdn.com/mc.svg' },
+  { name: 'Mongolia', flag: 'https://flagcdn.com/mn.svg' },
+  { name: 'Montenegro', flag: 'https://flagcdn.com/me.svg' },
+  { name: 'Morocco', flag: 'https://flagcdn.com/ma.svg' },
+  { name: 'Mozambique', flag: 'https://flagcdn.com/mz.svg' },
+  { name: 'Myanmar', flag: 'https://flagcdn.com/mm.svg' },
+  { name: 'Namibia', flag: 'https://flagcdn.com/na.svg' },
+  { name: 'Nauru', flag: 'https://flagcdn.com/nr.svg' },
+  { name: 'Nepal', flag: 'https://flagcdn.com/np.svg' },
+  { name: 'Netherlands', flag: 'https://flagcdn.com/nl.svg' },
+  { name: 'New Zealand', flag: 'https://flagcdn.com/nz.svg' },
+  { name: 'Nicaragua', flag: 'https://flagcdn.com/ni.svg' },
+  { name: 'Niger', flag: 'https://flagcdn.com/ne.svg' },
+  { name: 'Nigeria', flag: 'https://flagcdn.com/ng.svg' },
+  { name: 'North Korea', flag: 'https://flagcdn.com/kp.svg' },
+  { name: 'North Macedonia', flag: 'https://flagcdn.com/mk.svg' },
+  { name: 'Norway', flag: 'https://flagcdn.com/no.svg' },
+  { name: 'Oman', flag: 'https://flagcdn.com/om.svg' },
+  { name: 'Pakistan', flag: 'https://flagcdn.com/pk.svg' },
+  { name: 'Palau', flag: 'https://flagcdn.com/pw.svg' },
+  { name: 'Panama', flag: 'https://flagcdn.com/pa.svg' },
+  { name: 'Papua New Guinea', flag: 'https://flagcdn.com/pg.svg' },
+  { name: 'Paraguay', flag: 'https://flagcdn.com/py.svg' },
+  { name: 'Peru', flag: 'https://flagcdn.com/pe.svg' },
+  { name: 'Philippines', flag: 'https://flagcdn.com/ph.svg' },
+  { name: 'Portugal', flag: 'https://flagcdn.com/pt.svg' },
+  { name: 'Qatar', flag: 'https://flagcdn.com/qa.svg' },
+  { name: 'Romania', flag: 'https://flagcdn.com/ro.svg' },
+  { name: 'Rwanda', flag: 'https://flagcdn.com/rw.svg' },
+  { name: 'Saint Kitts and Nevis', flag: 'https://flagcdn.com/kn.svg' },
+  { name: 'Saint Lucia', flag: 'https://flagcdn.com/lc.svg' },
+  { name: 'Saint Vincent and the Grenadines', flag: 'https://flagcdn.com/vc.svg' },
+  { name: 'Samoa', flag: 'https://flagcdn.com/ws.svg' },
+  { name: 'San Marino', flag: 'https://flagcdn.com/sm.svg' },
+  { name: 'Sao Tome and Principe', flag: 'https://flagcdn.com/st.svg' },
+  { name: 'Saudi Arabia', flag: 'https://flagcdn.com/sa.svg' },
+  { name: 'Senegal', flag: 'https://flagcdn.com/sn.svg' },
+  { name: 'Serbia', flag: 'https://flagcdn.com/rs.svg' },
+  { name: 'Seychelles', flag: 'https://flagcdn.com/sc.svg' },
+  { name: 'Sierra Leone', flag: 'https://flagcdn.com/sl.svg' },
+  { name: 'Singapore', flag: 'https://flagcdn.com/sg.svg' },
+  { name: 'Slovakia', flag: 'https://flagcdn.com/sk.svg' },
+  { name: 'Slovenia', flag: 'https://flagcdn.com/si.svg' },
+  { name: 'Solomon Islands', flag: 'https://flagcdn.com/sb.svg' },
+  { name: 'Somalia', flag: 'https://flagcdn.com/so.svg' },
+  { name: 'South Africa', flag: 'https://flagcdn.com/za.svg' },
+  { name: 'South Korea', flag: 'https://flagcdn.com/kr.svg' },
+  { name: 'South Sudan', flag: 'https://flagcdn.com/ss.svg' },
+  { name: 'Spain', flag: 'https://flagcdn.com/es.svg' },
+  { name: 'Sri Lanka', flag: 'https://flagcdn.com/lk.svg' },
+  { name: 'Sudan', flag: 'https://flagcdn.com/sd.svg' },
+  { name: 'Suriname', flag: 'https://flagcdn.com/sr.svg' },
+  { name: 'Sweden', flag: 'https://flagcdn.com/se.svg' },
+  { name: 'Switzerland', flag: 'https://flagcdn.com/ch.svg' },
+  { name: 'Syria', flag: 'https://flagcdn.com/sy.svg' },
+  { name: 'Tajikistan', flag: 'https://flagcdn.com/tj.svg' },
+  { name: 'Tanzania', flag: 'https://flagcdn.com/tz.svg' },
+  { name: 'Thailand', flag: 'https://flagcdn.com/th.svg' },
+  { name: 'Timor-Leste', flag: 'https://flagcdn.com/tl.svg' },
+  { name: 'Togo', flag: 'https://flagcdn.com/tg.svg' },
+  { name: 'Tonga', flag: 'https://flagcdn.com/to.svg' },
+  { name: 'Trinidad and Tobago', flag: 'https://flagcdn.com/tt.svg' },
+  { name: 'Tunisia', flag: 'https://flagcdn.com/tn.svg' },
+  { name: 'Turkey', flag: 'https://flagcdn.com/tr.svg' },
+  { name: 'Turkmenistan', flag: 'https://flagcdn.com/tm.svg' },
+  { name: 'Tuvalu', flag: 'https://flagcdn.com/tv.svg' },
+  { name: 'Uganda', flag: 'https://flagcdn.com/ug.svg' },
+  { name: 'United Arab Emirates', flag: 'https://flagcdn.com/ae.svg' },
+  { name: 'United Kingdom', flag: 'https://flagcdn.com/gb.svg' },
+  { name: 'Uruguay', flag: 'https://flagcdn.com/uy.svg' },
+  { name: 'Uzbekistan', flag: 'https://flagcdn.com/uz.svg' },
+  { name: 'Vanuatu', flag: 'https://flagcdn.com/vu.svg' },
+  { name: 'Venezuela', flag: 'https://flagcdn.com/ve.svg' },
+  { name: 'Vietnam', flag: 'https://flagcdn.com/vn.svg' },
+  { name: 'Yemen', flag: 'https://flagcdn.com/ye.svg' },
+  { name: 'Zambia', flag: 'https://flagcdn.com/zm.svg' },
+  { name: 'Zimbabwe', flag: 'https://flagcdn.com/zw.svg' }
+];
+
+const themes = [
+  'Medicine', 'Biology', 'Ecology', 'Energy', 'Education', 'Industry', 'Transport',
+  'Agrotechnology', 'Artificial Intelligence', 'Cybersecurity', 'Urban Studies',
+  'Astronomy', 'Economics', 'Law', 'Psychology', 'Architecture', 'Sociology',
+  'Climatology', 'Geology', 'Physics', 'Chemistry', 'Biotechnology', 'Cosmonautics',
+  'Robotics', 'Environmental Protection', 'Tourism', 'Food Technology', 'Logistics',
+  'Journalism', 'Art', 'History', 'Anthropology', 'Marketing', 'Finance', 'Management',
+  'Aviation', 'Maritime Technology', 'Engineering', 'Information Technology',
+  'Civil Sector', 'Volunteering', 'Community Development', 'Humanitarian Aid',
+  'Public Health', 'Cultural Heritage', 'Other'
+];
+
+const goalOptions = [
+  'Looking for participants',
+  'Looking for a team',
+  'Looking for funding',
+  'Looking for volunteers',
+  'Spreading awareness',
+  'Looking for partners'
+];
+
+const themeColors = {
+  'Medicine': 'red',
+  'Biology': 'limegreen',
+  'Ecology': 'green',
+  'Energy': 'orange',
+  'Education': 'blue',
+  'Industry': 'gray',
+  'Transport': 'darkblue',
+  'Agrotechnology': 'olive',
+  'Artificial Intelligence': 'purple',
+  'Cybersecurity': 'teal',
+  'Urban Studies': 'brown',
+  'Astronomy': 'navy',
+  'Economics': 'gold',
+  'Law': 'crimson',
+  'Psychology': 'magenta',
+  'Architecture': 'coral',
+  'Sociology': 'lightblue',
+  'Climatology': 'cyan',
+  'Geology': 'sienna',
+  'Physics': 'violet',
+  'Chemistry': 'lime',
+  'Biotechnology': 'forestgreen',
+  'Cosmonautics': 'darkviolet',
+  'Robotics': 'steelblue',
+  'Environmental Protection': 'darkgreen',
+  'Tourism': 'pink',
+  'Food Technology': 'chocolate',
+  'Logistics': 'darkgray',
+  'Journalism': 'salmon',
+  'Art': 'hotpink',
+  'History': 'tan',
+  'Anthropology': 'lightcoral',
+  'Marketing': 'turquoise',
+  'Finance': 'goldenrod',
+  'Management': 'slateblue',
+  'Aviation': 'skyblue',
+  'Maritime Technology': 'deepskyblue',
+  'Engineering': 'darkorange',
+  'Information Technology': 'indigo',
+  'Civil Sector': 'lightgreen',
+  'Volunteering': 'lightpink',
+  'Community Development': 'plum',
+  'Humanitarian Aid': 'maroon',
+  'Public Health': 'tomato',
+  'Cultural Heritage': 'khaki',
+  'Other': 'gray'
+};
+const eventTypes = ['OFFLINE', 'ONLINE', 'BOTH'];
+map = L.map('map').setView([20, 0], 2);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function setStatus(message, isError = true) {
+  const statusDiv = document.getElementById('status');
+  statusDiv.textContent = message;
+  statusDiv.className = `bg-${isError ? 'red' : 'green'}-100 border border-${isError ? 'red' : 'green'}-400 text-${isError ? 'red' : 'green'}-700 px-4 py-3 rounded mb-4`;
+  statusDiv.classList.remove('hidden');
+  setTimeout(() => statusDiv.classList.add('hidden'), 3000);
+}
+
+function sanitizeInput(str) {
+  if (!str) return '';
+  const safeStr = String(str);
+  return safeStr
+    .replace(/&/g, '&')
+    .replace(/</g, '<')
+    .replace(/>/g, '>')
+    .replace(/"/g, '\"')
+    .replace(/'/g, '\'')
+    .replace(/`/g, '`')
+    .replace(/\(/g, '(')
+    .replace(/\)/g, ')');
+}
+
+async function checkAuth() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/check-auth`, {
+      credentials: 'include'
+    });
+    const data = await response.json();
+    if (data.authenticated) {
+      activeUser = data.user;
+      document.getElementById('showCreateProject').classList.remove('hidden');
+    } else {
+      activeUser = null;
+      document.getElementById('showCreateProject').classList.add('hidden');
+    }
+    await loadProjects();
+  } catch (error) {
+    console.error('Error checking auth:', error);
+    setStatus('Authentication check failed');
+  }
+}
+
+async function loadProjects() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/projects`, {
+      credentials: 'include'
+    });
+    if (!response.ok) throw new Error(`Failed to load projects: ${response.status}`);
+    projects = await response.json();
+
+    for (let project of projects) {
+      try {
+        const ratingsResponse = await fetch(`${API_BASE_URL}/api/projects/${project.id}/ratings`, {
+          credentials: 'include'
+        });
+        if (ratingsResponse.ok) {
+          const ratingsData = await ratingsResponse.json();
+          project.ratings = Array.isArray(ratingsData.ratings) ? ratingsData.ratings : project.ratings || [];
+          project.averageRating = ratingsData.average != null && !isNaN(ratingsData.average)
+            ? parseFloat(ratingsData.average).toFixed(1)
+            : project.ratings.length
+              ? (project.ratings.reduce((sum, r) => sum + r.rating, 0) / project.ratings.length).toFixed(1)
+              : 0;
+          project.ratingCount = ratingsData.count != null && !isNaN(ratingsData.count)
+            ? parseInt(ratingsData.count)
+            : project.ratings.length;
+        } else {
+          project.ratings = Array.isArray(project.ratings) ? project.ratings : [];
+          project.averageRating = project.ratings.length
+            ? (project.ratings.reduce((sum, r) => sum + r.rating, 0) / project.ratings.length).toFixed(1)
+            : 0;
+          project.ratingCount = project.ratings.length;
+        }
+      } catch (error) {
+        console.error(`Error fetching ratings for project ${project.id}:`, error);
+        project.ratings = Array.isArray(project.ratings) ? project.ratings : [];
+        project.averageRating = project.ratings.length
+          ? (project.ratings.reduce((sum, r) => sum + r.rating, 0) / project.ratings.length).toFixed(1)
+          : 0;
+        project.ratingCount = project.ratings.length;
+      }
+
+      if (!project.coordinates) {
+        const coords = await geocodeLocation(project.location, project.country);
+        if (coords) {
+          project.coordinates = [coords.lat, coords.lng];
+          await fetch(`${API_BASE_URL}/api/projects/${project.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+              title: project.title,
+              description: project.description,
+              theme: project.theme,
+              eventType: project.eventType,
+              status: project.status,
+              functionName: project.functionName,
+              country: project.country,
+              location: project.location,
+              contact: project.contact,
+              image: project.image,
+              userEmail: project.authorEmail,
+              coordinates: project.coordinates,
+              ratings: project.ratings,
+              goal: project.goal // Ensure goal is included in coordinate update
+            })
+          });
+        } else {
+          project.coordinates = cityCoordinates[project.location] || cityCoordinates['Kyiv'] || [0, 0];
+        }
+      }
+    }
+
+    projects = projects.map(project => {
+      const themeMap = {
+        'ecology': 'Ecology',
+        'education': 'Education',
+        'medicine': 'Medicine',
+        'community': 'Community Development',
+        'technology': 'Information Technology',
+        'culture': 'Cultural Heritage',
+        'humanitarian': 'Humanitarian Aid'
+      };
+      const newTheme = themeMap[project.theme?.toLowerCase()] || project.theme || 'Other';
+      return {
+        ...project,
+        category: newTheme,
+        lat: project.coordinates ? project.coordinates[0] : (cityCoordinates[project.location] || [0, 0])[0],
+        lng: project.coordinates ? project.coordinates[1] : (cityCoordinates[project.location] || [0, 0])[1],
+        coordinates: project.coordinates || cityCoordinates[project.location] || [0, 0],
+        name: project.title,
+        description: project.description || 'No description',
+        technologies: 'Unknown',
+        contact: project.contact || 'Unknown',
+        news: 'No news',
+        image: project.image || 'https://via.placeholder.com/150',
+        source: 'server',
+        averageRating: project.averageRating || 0,
+        ratingCount: project.ratingCount || 0,
+        status: project.status || 'Active',
+        functionName: project.functionName || '',
+        goal: project.goal || 'Not specified' // Explicitly include goal
+      };
+    });
+    filterProjects();
+  } catch (error) {
+    console.error('Error loading projects:', error);
+    setStatus('Failed to load projects');
+  }
+}
+
+async function geocodeLocation(city, country, address = '') {
+  let query = address ? address : `${city}, ${country}`;
+  const url = `${API_BASE_URL}/api/geocode?address=${encodeURIComponent(query)}`;
+  setStatus('Fetching coordinates...');
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data.status === 'OK' && data.results.length > 0) {
+      const { lat, lng } = data.results[0].geometry.location;
+      setStatus(`Coordinates found: ${lat}, ${lng}`, false);
+      return { lat, lng };
+    } else {
+      setStatus('Failed to find coordinates, using fallback', true);
+      return cityCoordinates[city] || cityCoordinates['Kyiv'] || null;
+    }
+  } catch (error) {
+    console.error('Geocoding error:', error);
+    setStatus('Geocoding error, using fallback', true);
+    return cityCoordinates[city] || cityCoordinates['Kyiv'] || null;
+  }
+}
+
+function updateMarkers(projectsToDisplay = filteredProjects) {
+  markers.forEach(({ marker }) => map.removeLayer(marker));
+  markers.length = 0;
+
+  projectsToDisplay.forEach(project => {
+    const markerColor = themeColors[project.category] || 'gray';
+    if (!project.category || !themeColors[project.category]) {
+      console.warn(`Invalid or missing category for project "${project.name}": ${project.category}. Using default color: gray`);
+    }
+
+    const marker = L.circleMarker([project.lat, project.lng], {
+      color: markerColor,
+      fillColor: markerColor,
+      fillOpacity: 0.8,
+      radius: 8
+    }).addTo(map);
+
+    const popupContent = `
+      <div style="background-color: #FFFFFF; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <h3 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin: 0 0 0.5rem;">${sanitizeInput(project.name)}</h3>
+        <p style="font-size: 0.875rem; color: #4b5563; line-height: 1.5; margin: 0 0 0.5rem;">${sanitizeInput(project.description)}</p>
+        <p style="font-size: 0.875rem; color: #6b7280; margin: 0 0 0.5rem;">${sanitizeInput(project.location)}, ${sanitizeInput(project.country)}</p>
+        <p style="font-size: 0.875rem; color: #6b7280; margin: 0 0 0.5rem;">Rating: ${project.averageRating} (${project.ratingCount} votes)</p>
+        <button class="details-btn" data-project-id="${project.id}" style="padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background-color: #3b82f6; color: #ffffff; border: none; cursor: pointer; transition: background-color 0.2s ease;">Details</button>
+      </div>
+    `;
+    marker.bindPopup(popupContent);
+    markers.push({ marker, enterprise: project });
+  });
+
+  document.querySelectorAll('.details-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      showJoinProjectModal(projectId);
+    });
+  });
+}
+
+function showJoinProjectModal(projectId) {
+  const project = projects.find(p => p.id === projectId);
+  if (!project) return;
+
+  const modal = document.getElementById('joinProjectModal');
+  const title = document.getElementById('joinProjectTitle');
+  const content = document.getElementById('joinProjectContent');
+
+  const userRating = activeUser ? project.ratings.find(r => r.userEmail === activeUser.email)?.rating || 0 : 0;
+
+  title.textContent = `Join "${sanitizeInput(project.name)}"`;
+  content.innerHTML = `
+    <p><strong>Description:</strong> ${sanitizeInput(project.description)}</p>
+    <p><strong>Theme:</strong> ${sanitizeInput(project.category)}</p>
+    <p><strong>Event Type:</strong> ${sanitizeInput(project.eventType)}</p>
+    <p><strong>Status:</strong> ${sanitizeInput(project.status)}</p>
+    <p><strong>Goal:</strong> ${sanitizeInput(project.goal) || 'Not specified'}</p>
+    <p><strong>Function Name:</strong> ${sanitizeInput(project.functionName) || 'None'}</p>
+    <p><strong>Location:</strong> ${sanitizeInput(project.location)}, ${sanitizeInput(project.country)}</p>
+    <p><strong>Contact:</strong> <a href="mailto:${sanitizeInput(project.contact)}" class="text-blue-500 hover:underline">${sanitizeInput(project.contact)}</a></p>
+    <p><strong>Rating:</strong> ${project.averageRating} (${project.ratingCount} votes)</p>
+    ${activeUser ? `
+      <div class="mt-2">
+        <label for="projectRating${projectId}" class="block text-sm font-medium text-gray-700">Your Rating:</label>
+        <div class="star-rating" data-project-id="${projectId}" style="display: inline-flex; cursor: pointer;">
+          ${[1, 2, 3, 4, 5].map(star => `
+            <span class="star ${star <= userRating ? 'filled' : ''}" data-value="${star}" style="color: ${star <= userRating ? '#FBBF24' : '#D1D5DB'}; font-size: 1.2rem;">★</span>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+    <p class="mt-4"><strong>How to Join:</strong> Please email the provided contact for more information about participating in this project.</p>
+  `;
+
+  modal.classList.remove('hidden');
+
+  if (activeUser) {
+    document.querySelectorAll(`.star-rating[data-project-id="${projectId}"] .star`).forEach(star => {
+      star.addEventListener('click', () => rateProject(projectId, parseInt(star.dataset.value)));
+    });
+  }
+}
+
+async function rateProject(projectId, rating) {
+  try {
+    const userEmailEncoded = getCookie('userEmail');
+    if (!userEmailEncoded) {
+      setStatus('Please log in to rate a project.');
+      window.location.href = `/auth/google?redirect=${encodeURIComponent(window.location.pathname)}`;
+      return;
+    }
+
+    const userEmail = decodeURIComponent(userEmailEncoded);
+    const response = await fetch(`${API_BASE_URL}/api/projects/${projectId}/rate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({ rating, userEmail })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      if (errorData.error.includes('Unauthorized')) {
+        setStatus('Session expired or invalid. Please log in again.');
+        window.location.href = `/auth/google?redirect=${encodeURIComponent(window.location.pathname)}`;
+      }
+      throw new Error(errorData.error || `Failed to rate project: ${response.status}`);
+    }
+
+    setStatus('Rating submitted successfully!', false);
+    await loadProjects();
+    showJoinProjectModal(projectId);
+  } catch (error) {
+    console.error('Error rating project:', error.message);
+    setStatus(`Failed to rate project: ${error.message}`);
+  }
+}
+
+function showDeleteProjectModal(projectId) {
+  const project = projects.find(p => p.id === projectId);
+  if (!project) return;
+
+  const modal = document.getElementById('deleteProjectModal');
+  const message = document.getElementById('deleteProjectMessage');
+  const confirmButton = document.getElementById('confirmDeleteProject');
+
+  message.textContent = `Are you sure you want to delete the project "${sanitizeInput(project.name)}"? This action cannot be undone.`;
+  confirmButton.onclick = () => {
+    deleteProject(projectId);
+    closeDeleteProjectModal();
+  };
+
+  modal.classList.remove('hidden');
+}
+
+function closeDeleteProjectModal() {
+  const modal = document.getElementById('deleteProjectModal');
+  modal.classList.add('hidden');
+}
+
+function closeJoinProjectModal() {
+  const modal = document.getElementById('joinProjectModal');
+  modal.classList.add('hidden');
+}
+
+function closeContactModal() {
+  const modal = document.getElementById('contactModal');
+  modal.classList.add('hidden');
+  document.getElementById('contactIframe').src = '';
+}
+
+function filterProjects() {
+  let tempProjects = [...projects];
+  const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+  const selectedCountries = Array.from(document.querySelectorAll('#countryFilters .filter-item.selected'))
+    .map(item => item.dataset.country);
+  const selectedThemes = Array.from(document.querySelectorAll('#themeFilters .filter-item.selected'))
+    .map(item => item.dataset.theme);
+  const selectedEventTypes = Array.from(document.querySelectorAll('#eventTypeFilters .filter-item.selected'))
+    .map(item => item.dataset.eventType);
+
+  if (searchTerm) {
+    tempProjects = tempProjects.filter(p => 
+      p.name.toLowerCase().includes(searchTerm) || 
+      p.description.toLowerCase().includes(searchTerm)
+    );
+  }
+  if (selectedCountries.length) {
+    tempProjects = tempProjects.filter(p => selectedCountries.includes(p.country));
+  }
+  if (selectedThemes.length) {
+    tempProjects = tempProjects.filter(p => selectedThemes.includes(p.category));
+  }
+  if (selectedEventTypes.length) {
+    tempProjects = tempProjects.filter(p => selectedEventTypes.includes(p.eventType));
+  }
+
+  filteredProjects = tempProjects;
+  updateProjectList();
+  updateMarkers();
+}
+function clearFilters() {
+  document.getElementById('searchBar').value = '';
+  document.querySelectorAll('#countryFilters .filter-item').forEach(item => {
+    item.classList.remove('selected');
+  });
+  document.querySelectorAll('#themeFilters .filter-item').forEach(item => {
+    item.classList.remove('selected');
+  });
+  filterProjects();
+}
+
+async function createProject() {
+  if (!activeUser) {
+    setStatus('Please log in');
+    return;
+  }
+
+  const title = document.getElementById('projectTitle').value.trim();
+  const description = document.getElementById('projectDescription').value.trim();
+  const theme = document.getElementById('projectTheme').value;
+  const eventType = document.getElementById('projectEventType').value;
+  const country = document.getElementById('projectCountry').value.trim();
+  const location = document.getElementById('projectCity').value.trim();
+  const contact = document.getElementById('projectContact').value.trim();
+  const image = document.getElementById('projectImage').value.trim();
+  const latitude = parseFloat(document.getElementById('projectLatitude').value);
+  const longitude = parseFloat(document.getElementById('projectLongitude').value);
+  const goal = document.getElementById('projectGoal').value;
+
+  if (!title || !description || !country || !location || !contact || isNaN(latitude) || isNaN(longitude) || !goal) {
+    setStatus('Please fill in all required fields, including coordinates and goal');
+    return;
+  }
+
+  if (!goalOptions.includes(goal)) {
+    setStatus('Please select a valid project goal');
+    return;
+  }
+
+  const projectData = {
+    title,
+    description,
+    theme,
+    eventType,
+    status: 'Active',
+    functionName: '',
+    country,
+    location,
+    contact,
+    image: image || 'https://via.placeholder.com/150',
+    author: activeUser.name,
+    authorEmail: activeUser.email,
+    coordinates: [latitude, longitude],
+    ratings: [],
+    goal
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/projects`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(projectData)
+    });
+    if (!response.ok) throw new Error(`Failed to create project: ${response.status}`);
+    setStatus('Project created successfully!', false);
+    document.getElementById('createProjectForm').classList.add('hidden');
+    resetCreateForm();
+    await loadProjects();
+  } catch (error) {
+    console.error('Error creating project:', error);
+    setStatus('Failed to create project');
+  }
+}
+
+async function saveEditProject(projectId) {
+  if (!activeUser) {
+    setStatus('Please log in');
+    return;
+  }
+
+  const title = document.getElementById(`editProjectTitle${projectId}`).value.trim();
+  const description = document.getElementById(`editProjectDescription${projectId}`).value.trim();
+  const theme = document.getElementById(`editProjectTheme${projectId}`).value;
+  const eventType = document.getElementById(`editProjectEventType${projectId}`).value;
+  const status = document.getElementById(`editProjectStatus${projectId}`).value;
+  const functionName = document.getElementById(`editProjectFunctionName${projectId}`).value.trim();
+  const country = document.getElementById(`editProjectCountry${projectId}`).value.trim();
+  const location = document.getElementById(`editProjectCity${projectId}`).value.trim();
+  const contact = document.getElementById(`editProjectContact${projectId}`).value.trim();
+  const image = document.getElementById(`editProjectImage${projectId}`).value.trim();
+  const latitude = parseFloat(document.getElementById(`editProjectLatitude${projectId}`).value);
+  const longitude = parseFloat(document.getElementById(`editProjectLongitude${projectId}`).value);
+  const goal = document.getElementById(`editProjectGoal${projectId}`).value;
+
+  if (!title || !description || !country || !location || !contact || isNaN(latitude) || isNaN(longitude) || !goal) {
+    setStatus('Please fill in all required fields, including coordinates and goal');
+    return;
+  }
+
+  if (!goalOptions.includes(goal)) {
+    setStatus('Please select a valid project goal');
+    return;
+  }
+
+  const project = projects.find(p => p.id === projectId);
+  const projectData = {
+    title,
+    description,
+    theme,
+    eventType,
+    status,
+    functionName,
+    country,
+    location,
+    contact,
+    image: image || 'https://via.placeholder.com/150',
+    userEmail: activeUser.email,
+    coordinates: [latitude, longitude],
+    ratings: project.ratings,
+    goal
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/projects/${projectId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(projectData)
+    });
+    if (!response.ok) throw new Error(`Failed to update project: ${response.status}`);
+    setStatus('Project updated successfully!', false);
+    await loadProjects();
+  } catch (error) {
+    console.error('Error updating project:', error);
+    setStatus('Failed to update project');
+  }
+}
+
+function updateProjectList() {
+  const projectList = document.getElementById('projectList');
+  projectList.innerHTML = '';
+  filteredProjects.forEach(project => {
+    const isAuthor = activeUser && project.authorEmail === activeUser.email;
+    const dotColor = themeColors[project.category] || 'gray';
+    const card = document.createElement('div');
+    card.innerHTML = `
+      <div style="background-color: #FFFFFF; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); display: flex; gap: 1.5rem; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.15)'" onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.1)'">
+        <img src="${sanitizeInput(project.image)}" alt="${sanitizeInput(project.name)}" style="width: 120px; height: 120px; object-fit: cover; border-radius: 0.5rem; flex-shrink: 0;">
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="width: 0.75rem; height: 0.75rem; border-radius: 50%; display: inline-block; background-color: ${dotColor};"></span>
+            <h4 style="font-size: 1.25rem; font-weight: 600; color: #1f2937; margin: 0;">${sanitizeInput(project.name)}</h4>
+          </div>
+          <p style="font-size: 0.875rem; color: #4b5563; line-height: 1.5;">${sanitizeInput(project.description)}</p>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; font-size: 0.875rem; color: #6b7280;">
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Theme:</span>
+              ${sanitizeInput(project.category)}
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Event Type:</span>
+              ${sanitizeInput(project.eventType)}
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Status:</span>
+              ${sanitizeInput(project.status)}
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Function Name:</span>
+              ${sanitizeInput(project.functionName) || 'None'}
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Location:</span>
+              ${sanitizeInput(project.location)}, ${sanitizeInput(project.country)}
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Author:</span>
+              ${sanitizeInput(project.author)}
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Rating:</span>
+              ${project.averageRating} (${project.ratingCount} votes)
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-weight: 500; color: #374151;">Goal:</span>
+              ${sanitizeInput(project.goal) || 'Not specified'}
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <button class="details-btn" data-project-id="${project.id}" style="padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background-color: #3b82f6; color: #ffffff; border: none; cursor: pointer; transition: background-color 0.2s ease;" onmouseover="this.style.backgroundColor='#2563eb'" onmouseout="this.style.backgroundColor='#3b82f6'">Details</button>
+            <button class="check-btn" data-project-id="${project.id}" style="padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background-color: #8b5cf6; color: #ffffff; border: none; cursor: pointer; transition: background-color 0.2s ease;" onmouseover="this.style.backgroundColor='#7c3aed'" onmouseout="this.style.backgroundColor='#8b5cf6'">Check</button>
+            ${!isAuthor ? `<button class="contact-btn" data-author-email="${sanitizeInput(project.authorEmail)}" style="padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background-color: #22c55e; color: #ffffff; border: none; cursor: pointer; transition: background-color 0.2s ease;" onmouseover="this.style.backgroundColor='#16a34a'" onmouseout="this.style.backgroundColor='#22c55e'">Contact</button>` : ''}
+            ${isAuthor ? `
+              <button class="edit-btn" data-project-id="${project.id}" style="padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background-color: #eab308; color: #ffffff; border: none; cursor: pointer; transition: background-color 0.2s ease;" onmouseover="this.style.backgroundColor='#ca8a04'" onmouseout="this.style.backgroundColor='#eab308'"><i class="bi bi-pencil mr-1"></i>Edit</button>
+              <button class="delete-btn" data-project-id="${project.id}" style="padding: 0.5rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; background-color: #ef4444; color: #ffffff; border: none; cursor: pointer; transition: background-color 0.2s ease;" onmouseover="this.style.backgroundColor='#dc2626'" onmouseout="this.style.backgroundColor='#ef4444'"><i class="bi bi-trash mr-1"></i>Delete</button>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+      <div id="editProjectForm${project.id}" class="hidden bg-gray-100 p-4 mt-4 rounded-md">
+        <h3 class="text-lg font-semibold mb-2 text-gray-800">Edit Project</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="editProjectTitle${project.id}" class="block text-sm font-medium text-gray-700">Project Title</label>
+            <input type="text" id="editProjectTitle${project.id}" value="${sanitizeInput(project.title)}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+          </div>
+          <div>
+            <label for="editProjectTheme${project.id}" class="block text-sm font-medium text-gray-700">Theme</label>
+            <select id="editProjectTheme${project.id}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+              ${themes.map(theme => `<option value="${theme}" ${project.category === theme ? 'selected' : ''}>${theme}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label for="editProjectEventType${project.id}" class="block text-sm font-medium text-gray-700">Event Type</label>
+            <select id="editProjectEventType${project.id}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+              <option value="OFFLINE" ${project.eventType === 'OFFLINE' ? 'selected' : ''}>Offline</option>
+              <option value="ONLINE" ${project.eventType === 'ONLINE' ? 'selected' : ''}>Online</option>
+              <option value="BOTH" ${project.eventType === 'BOTH' ? 'selected' : ''}>Both</option>
+            </select>
+          </div>
+          <div>
+            <label for="editProjectStatus${project.id}" class="block text-sm font-medium text-gray-700">Status</label>
+            <select id="editProjectStatus${project.id}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+              <option value="Active" ${project.status === 'Active' ? 'selected' : ''}>Active</option>
+              <option value="Planned" ${project.status === 'Planned' ? 'selected' : ''}>Planned</option>
+              <option value="Completed" ${project.status === 'Completed' ? 'selected' : ''}>Completed</option>
+            </select>
+          </div>
+          <div>
+            <label for="editProjectGoal${project.id}" class="block text-sm font-medium text-gray-700">Goal</label>
+            <select id="editProjectGoal${project.id}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+              ${goalOptions.map(goal => `<option value="${goal}" ${project.goal === goal ? 'selected' : ''}>${goal}</option>`).join('')}
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label for="editProjectDescription${project.id}" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea id="editProjectDescription${project.id}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" rows="4" required>${sanitizeInput(project.description)}</textarea>
+          </div>
+          <div>
+            <label for="editProjectCountry${project.id}" class="block text-sm font-medium text-gray-700">Country</label>
+            <input type="text" id="editProjectCountry${project.id}" value="${sanitizeInput(project.country)}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+          </div>
+          <div>
+            <label for="editProjectCity${project.id}" class="block text-sm font-medium text-gray-700">City</label>
+            <input type="text" id="editProjectCity${project.id}" value="${sanitizeInput(project.location)}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+          </div>
+          <div class="md:col-span-2">
+            <label for="editProjectAddress${project.id}" class="block text-sm font-medium text-gray-700">Address (Optional)</label>
+            <input type="text" id="editProjectAddress${project.id}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300">
+          </div>
+          <div class="md:col-span-2">
+            <button class="geocode-btn bg-gray-400 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-500" data-project-id="${project.id}">
+              Get Coordinates
+            </button>
+          </div>
+          <div>
+            <label for="editProjectLatitude${project.id}" class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="number" id="editProjectLatitude${project.id}" value="${project.lat || ''}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" step="any" required readonly>
+          </div>
+          <div>
+            <label for="editProjectLongitude${project.id}" class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="number" id="editProjectLongitude${project.id}" value="${project.lng || ''}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" step="any" required readonly>
+          </div>
+          <div>
+            <label for="editProjectContact${project.id}" class="block text-sm font-medium text-gray-700">Contact</label>
+            <input type="text" id="editProjectContact${project.id}" value="${sanitizeInput(project.contact)}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300" required>
+          </div>
+          <div>
+            <label for="editProjectImage${project.id}" class="block text-sm font-medium text-gray-700">Image URL</label>
+            <input type="text" id="editProjectImage${project.id}" value="${sanitizeInput(project.image)}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300">
+          </div>
+          <div class="md:col-span-2">
+            <label for="editProjectFunctionName${project.id}" class="block text-sm font-medium text-gray-700">Function Name (Optional)</label>
+            <input type="text" id="editProjectFunctionName${project.id}" value="${sanitizeInput(project.functionName)}" class="w-full p-2 border rounded-md bg-white text-gray-800 border-gray-300">
+          </div>
+        </div>
+        <div class="mt-4 flex gap-4">
+          <button class="save-edit-btn bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" data-project-id="${project.id}">
+            Save
+          </button>
+          <button class="cancel-edit-btn bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300" data-project-id="${project.id}">
+            Cancel
+          </button>
+        </div>
+      </div>
+    `;
+    projectList.appendChild(card);
+  });
+
+  document.querySelectorAll('.details-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      showJoinProjectModal(projectId);
+    });
+  });
+// Event listeners
+document.querySelectorAll('.contact-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    if (!activeUser) {
+      setStatus('Please log in to contact the project creator.');
+      window.location.href = `/auth/google?redirect=${encodeURIComponent(window.location.pathname)}`;
+      return;
+    }
+    const authorEmail = button.dataset.authorEmail;
+    const iframe = document.getElementById('contactIframe');
+    iframe.src = `https://neuroflow.world/p2p?searchEmail=${encodeURIComponent(authorEmail)}`;
+    iframe.onload = () => {
+      try {
+        // Attempt to access iframe's DOM
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const homeButton = iframeDoc.getElementById('home_func');
+        if (homeButton) {
+          homeButton.style.display = 'none';
+        } else {
+          console.warn('Home button not found in iframe');
+        }
+      } catch (e) {
+        console.error('Cannot access iframe content:', e);
+        setStatus('Unable to modify P2P content due to security restrictions');
+      }
+    };
+    document.getElementById('contactModal').classList.remove('hidden');
+  });
+});
+
+  document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      showEditProjectForm(projectId);
+    });
+  });
+  document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      showDeleteProjectModal(projectId);
+    });
+  });
+document.querySelectorAll('.check-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      const project = projects.find(p => p.id === projectId);
+      const functionName = project ? project.functionName : '';
+      if (functionName && functionName.trim() !== '') {
+        try {
+          launchApp(functionName);
+        } catch (error) {
+          setStatus('Не вдалося запустити додаток');
+        }
+      } else {
+        setStatus('Для цього проєкту немає додатку');
+      }
+    });
+  });
+  document.querySelectorAll('.geocode-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      geocodeEdit(projectId);
+    });
+  });
+  document.querySelectorAll('.save-edit-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      saveEditProject(projectId);
+    });
+  });
+  document.querySelectorAll('.cancel-edit-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const projectId = parseInt(button.dataset.projectId);
+      cancelEditProject(projectId);
+    });
+  });
+}
+function launchApp(name) {
+  // Create overlay to dim background
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+
+  // Create modal container
+  const modal = document.createElement('div');
+  modal.className = 'app-modal';
+
+  // Create iframe
+  const iframe = document.createElement('iframe');
+  iframe.className = 'app-iframe';
+  iframe.src = `../aplication/projects/${name}/index.html`;
+
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.className = 'app-close-btn';
+  closeButton.innerHTML = '✕';
+  closeButton.onclick = () => {
+    modal.remove();
+    overlay.remove();
+    // No need to restore .container, as it was never hidden
+  };
+
+  // Append elements
+  modal.appendChild(iframe);
+  modal.appendChild(closeButton);
+  document.body.appendChild(overlay);
+  document.body.appendChild(modal);
+
+  // Handle iframe load errors
+  iframe.onerror = () => {
+    setStatus('Failed to load the project application.');
+    modal.remove();
+    overlay.remove();
+  };
+}
+
+function showEditProjectForm(projectId) {
+  if (!activeUser) {
+    setStatus('Please log in');
+    return;
+  }
+  const editForm = document.getElementById(`editProjectForm${projectId}`);
+  if (editForm) editForm.classList.remove('hidden');
+}
+
+function cancelEditProject(projectId) {
+  const editForm = document.getElementById(`editProjectForm${projectId}`);
+  if (editForm) editForm.classList.add('hidden');
+}
+
+async function deleteProject(projectId) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/projects/${projectId}?userEmail=${encodeURIComponent(activeUser.email)}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    });
+    if (!response.ok) throw new Error(`Failed to delete project: ${response.status}`);
+    setStatus('Project deleted successfully!', false);
+    await loadProjects();
+  } catch (error) {
+    console.error('Error deleting project:', error);
+    setStatus('Failed to delete project');
+  }
+}
+
+function resetCreateForm() {
+  document.getElementById('projectTitle').value = '';
+  document.getElementById('projectDescription').value = '';
+  document.getElementById('projectTheme').value = 'Medicine';
+  document.getElementById('projectEventType').value = 'OFFLINE';
+  document.getElementById('projectCountry').value = 'Ukraine';
+  document.getElementById('projectCity').value = '';
+  document.getElementById('projectAddress').value = '';
+  document.getElementById('projectContact').value = '';
+  document.getElementById('projectImage').value = '';
+  document.getElementById('projectLatitude').value = '';
+  document.getElementById('projectLongitude').value = '';
+  document.getElementById('projectGoal').value = '';
+  if (tempMarker) {
+    map.removeLayer(tempMarker);
+    tempMarker = null;
+  }
+}
+
+async function geocodeCreate() {
+  const city = document.getElementById('projectCity').value.trim();
+  const country = document.getElementById('projectCountry').value.trim();
+  const address = document.getElementById('projectAddress').value.trim();
+
+  if (!city || !country) {
+    setStatus('Please enter city and country', true);
+    return;
+  }
+
+  const coords = await geocodeLocation(city, country, address);
+  if (coords) {
+    document.getElementById('projectLatitude').value = coords.lat;
+    document.getElementById('projectLongitude').value = coords.lng;
+    if (tempMarker) map.removeLayer(tempMarker);
+    tempMarker = L.circleMarker([coords.lat, coords.lng], { color: 'blue', radius: 8 }).addTo(map);
+    map.setView([coords.lat, coords.lng], 12);
+  } else {
+    setStatus('Failed to retrieve coordinates for this location', true);
+  }
+}
+
+async function geocodeEdit(projectId) {
+  const city = document.getElementById(`editProjectCity${projectId}`).value.trim();
+  const country = document.getElementById(`editProjectCountry${projectId}`).value.trim();
+  const address = document.getElementById(`editProjectAddress${projectId}`).value.trim();
+
+  if (!city || !country) {
+    setStatus('Please enter city and country', true);
+    return;
+  }
+
+  const coords = await geocodeLocation(city, country, address);
+  if (coords) {
+    document.getElementById(`editProjectLatitude${projectId}`).value = coords.lat;
+    document.getElementById(`editProjectLongitude${projectId}`).value = coords.lng;
+    if (tempMarker) map.removeLayer(tempMarker);
+    tempMarker = L.circleMarker([coords.lat, coords.lng], { color: 'blue', radius: 8 }).addTo(map);
+    map.setView([coords.lat, coords.lng], 12);
+  } else {
+    setStatus('Failed to retrieve coordinates for this location', true);
+  }
+}
+
+function populateFilters() {
+  const countryFilters = document.getElementById('countryFilters');
+  countryFilters.innerHTML = countries.map(country => `
+    <div class="filter-item" data-country="${sanitizeInput(country.name)}">
+      <img src="${sanitizeInput(country.flag)}" width="20" height="15" alt="${sanitizeInput(country.name)}">
+      ${sanitizeInput(country.name)}
+    </div>
+  `).join('');
+
+  const themeFilters = document.getElementById('themeFilters');
+  themeFilters.innerHTML = themes.map(theme => `
+    <div class="filter-item" data-theme="${sanitizeInput(theme)}">
+      <span class="checkmark" style="background-color: ${themeColors[theme] || 'gray'};"></span>
+      ${sanitizeInput(theme)}
+    </div>
+  `).join('');
+
+  const eventTypeFilters = document.getElementById('eventTypeFilters');
+  eventTypeFilters.innerHTML = eventTypes.map(eventType => `
+    <div class="filter-item" data-event-type="${sanitizeInput(eventType)}">
+      ${sanitizeInput(eventType)}
+    </div>
+  `).join('');
+
+  const projectTheme = document.getElementById('projectTheme');
+  projectTheme.innerHTML = themes.map(theme => `
+    <option value="${sanitizeInput(theme)}">${sanitizeInput(theme)}</option>
+  `).join('');
+
+  document.querySelectorAll('#countryFilters .filter-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('selected');
+      filterProjects();
+    });
+  });
+
+  document.querySelectorAll('#themeFilters .filter-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('selected');
+      filterProjects();
+    });
+  });
+
+  document.querySelectorAll('#eventTypeFilters .filter-item').forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('selected');
+      filterProjects();
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth();
+  populateFilters();
+
+  document.getElementById('searchBar').addEventListener('input', filterProjects);
+
+  document.getElementById('clearFilters').addEventListener('click', clearFilters);
+
+  document.getElementById('showCreateProject').addEventListener('click', () => {
+    document.getElementById('createProjectForm').classList.remove('hidden');
+  });
+
+  document.getElementById('submitProject').addEventListener('click', createProject);
+
+  document.getElementById('cancelProject').addEventListener('click', () => {
+    document.getElementById('createProjectForm').classList.add('hidden');
+    resetCreateForm();
+  });
+
+  document.getElementById('geocodeCreate').addEventListener('click', geocodeCreate);
+
+  document.getElementById('closeJoinModal').addEventListener('click', closeJoinProjectModal);
+  document.getElementById('cancelDeleteProject').addEventListener('click', closeDeleteProjectModal);
+  document.getElementById('closeContactModal').addEventListener('click', closeContactModal);
+
+  document.getElementById('showMore').addEventListener('click', () => {
+    setStatus('Loading more projects...', false);
+    setTimeout(() => setStatus('More projects loaded!', false), 1000);
+  });
+});
+</script>
+    <script src="script.js?ts=abсde"></script>
+    <script src="my.js?ts=abсd"></script>  
+
+
+</body>
+</html>
+
