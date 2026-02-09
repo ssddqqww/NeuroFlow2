@@ -3,8 +3,8 @@ Welcome! 👋
 This repository contains the code for our project submitted to the INFOMATRIX World Hackathon 2025.
 Team
 Ivan – Team Lead
-Lupenko Kryl – Backend
 Kseniia – Frontend
+Lupenko Kyril – Backend
 Repository Structure
 main branch – contains only the LICENSE file.
 Ivan branch – identical to main (LICENSE only).
