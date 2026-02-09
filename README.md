@@ -4,7 +4,7 @@ This repository contains the code for our project submitted to the INFOMATRIX Wo
 Team
 Ivan – Team Lead
 Kseniia – Frontend
-Lupenko Kyril – Backend
+Kyril – Backend
 Repository Structure
 main branch – contains only the LICENSE file.
 Ivan branch – identical to main (LICENSE only).
