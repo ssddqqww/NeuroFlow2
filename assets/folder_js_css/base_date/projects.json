@@ -1,0 +1,260 @@
+[
+  {
+    "id": 1748077338803,
+    "title": "Green Cities Initiative",
+    "description": "This project focuses on promoting urban sustainability by creating a campaign to raise awareness about green spaces in cities. We’re developing a series of offline and online webinars and a digital toolkit for city planners. We’re seeking sponsors to fund promotional materials and partnerships with environmental NGOs to amplify our reach. Let’s make cities greener together!",
+    "theme": "Ecology",
+    "eventType": "BOTH",
+    "status": "Active",
+    "functionName": "",
+    "country": "Sweden",
+    "location": "Stockholm",
+    "contact": "gubenko.ksenichka@gmail.com",
+    "image": "https://www.fao.org/images/faoeventslibraries/aprc36/banner9b324df3-235d-4257-8170-b400cc959a8c.png?sfvrsn=162974e3_1",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      59.3327036,
+      18.0656255
+    ],
+    "createdAt": "2025-05-24T09:02:18.803Z",
+    "ratings": [],
+    "goal": "Looking for funding"
+  },
+  {
+    "id": 1748077238997,
+    "title": "Coding for Kids",
+    "description": "A grassroots initiative to teach coding to children aged 8-12 in local communities. We aim to host weekly workshops where kids can learn basic programming skills using Scratch and Python. We need volunteers to assist with teaching, venues to host sessions, and sponsors for laptops and materials. Join us to empower the next generation of tech innovators!",
+    "theme": "Education",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "Germany",
+    "location": "Berlin",
+    "contact": "kirillypenko20@gmail.com",
+    "image": "https://th.bing.com/th/id/OIP.3diP2ECa3Ne3IBOdCkSDkAHaE7?cb=thvnextc1&rs=1&pid=ImgDetMain",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      52.52000659999999,
+      13.404954
+    ],
+    "createdAt": "2025-05-24T09:00:38.997Z",
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-24T09:02:52.731Z"
+      }
+    ],
+    "goal": "Looking for participants"
+  },
+  {
+    "id": 1747996512172,
+    "title": "Sustainable Architecture for Flood-Resilient Homes in Queensland",
+    "description": "This project focuses on designing and building sustainable, flood-resilient homes in Queensland, Australia, an area frequently affected by floods. We aim to develop innovative architectural solutions using eco-friendly materials and elevated structures to minimize flood damage. The project includes community workshops and collaboration with local architects and engineers. We are looking for a dedicated team to help research, design, and implement these resilient housing models. Together, we can create safer homes and stronger communities.",
+    "theme": "Architecture",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "Flood-Resilient_Homes",
+    "country": "Australia",
+    "location": "Brisbane",
+    "contact": "australia@gmail.com",
+    "image": "https://uploads.prod01.sydney.platformos.com/instances/320/assets/images/flood-resilient-house-tips.jpg",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      -22.575197,
+      144.0847926
+    ],
+    "createdAt": "2025-05-23T10:35:12.172Z",
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-23T12:45:06.625Z"
+      }
+    ],
+    "goal": "Looking for a team",
+    "edited": true,
+    "editedAt": "2025-05-23T19:08:13.561Z"
+  },
+  {
+    "id": 1747995985350,
+    "title": "Preserving Native American Heritage in Oklahoma",
+    "description": "This project aims to preserve and promote Native American cultural heritage in Oklahoma. We organize workshops, museum tours, and oral history recordings with tribal elders to document traditions and stories. The initiative seeks to educate the public about indigenous history and support cultural preservation efforts. Volunteers are welcome to help with event organization, research, and community outreach. Together, we can keep this vital history alive for future generations.",
+    "theme": "History",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "United States",
+    "location": "Oklahoma City",
+    "contact": "oklahoma_history@gmail.com",
+    "image": "http://ozarkscivilwar.org/wp-content/uploads/2011/02/Oklahoma-History-Center.jpg",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      35.4940917,
+      -97.4997465
+    ],
+    "createdAt": "2025-05-23T10:26:25.350Z",
+    "ratings": [],
+    "goal": "Looking for volunteers"
+  },
+  {
+    "id": 1747995834581,
+    "title": "Urban Heat Island Mitigation in Los Angeles",
+    "description": "This project addresses the growing issue of urban heat islands in Los Angeles, where high temperatures affect health and energy use. We plan to plant trees, install green roofs, and promote reflective building materials to cool neighborhoods. The initiative includes community workshops to raise awareness about climate adaptation strategies. We are seeking funding to expand these efforts and reduce heat-related risks in vulnerable areas. Join us to make LA a cooler, healthier city for all.",
+    "theme": "Environmental Protection",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "USA",
+    "location": "Los Angeles",
+    "contact": "losangeles_USA@gmail.com",
+    "image": "https://th.bing.com/th/id/R.b94000abde3fd6168de8757f4554a1a0?rik=6hrs0XQvcooyzQ&pid=ImgRaw&r=0",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      34.0549076,
+      -118.242643
+    ],
+    "createdAt": "2025-05-23T10:23:54.581Z",
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-23T12:45:02.115Z"
+      }
+    ],
+    "goal": "Looking for funding"
+  },
+  {
+    "id": 1747994644340,
+    "title": "Combating Plastic Pollution in the Philippines",
+    "description": "This project tackles the severe plastic pollution problem affecting coastal communities in the Philippines. We organize beach cleanups, plastic waste collection drives, and community workshops to promote recycling and sustainable alternatives. Our goal is to reduce marine pollution, protect local wildlife, and improve public health. We invite volunteers, environmentalists, and local residents to join our efforts. Together, we can create cleaner beaches and healthier oceans for future generations.",
+    "theme": "Environmental Protection",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "Philippines",
+    "location": "Cebu",
+    "contact": "pollution@gmail.com",
+    "image": "https://rozumni-ideyi.com/wp-content/uploads/2024/07/1718579505528-DALLA%C2%B7E-2024-06-17-01.11.38-A-picturesque-scene-of-the-Philippines-showcasing-its-natural-beauty-and-tourist-attractions.-The-image-includes-a-stunning-white-sandy-beach-with-cle.webp",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      10.960102,
+      123.9415518
+    ],
+    "createdAt": "2025-05-23T10:04:04.341Z",
+    "ratings": [],
+    "goal": "Looking for volunteers"
+  },
+  {
+    "id": 1747994472849,
+    "title": "Solar-Powered Water Purification System",
+    "description": "We are developing a low-cost, solar-powered water purification system designed for use in rural areas of Southeast Asia. The system uses solar thermal energy to disinfect and filter contaminated water without the need for electricity. Currently, we have a working prototype and are conducting virtual demonstrations for potential partners. Our team includes environmental engineers, local health advocates, and technical advisors. We are seeking funding to begin field testing and to scale production. This solution supports both clean water access and sustainable energy use.",
+    "theme": "Engineering",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "China",
+    "location": "Shangai",
+    "contact": "kirillypenko20@gmail.com",
+    "image": "https://th.bing.com/th/id/R.37ebd570308abee764c213e15a0ced1e?rik=FFzS7BnwjhqfOw&riu=http%3a%2f%2fwww.kaahsolar.com%2fwp-content%2fuploads%2f2019%2f10%2fSolar-Powered-Water-Purfication.jpg&ehk=v7lg765i5Fl320J1wq0W9zFga0qO43j%2fFJGnfsZeONE%3d&risl=&pid=ImgRaw&r=0",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      31.23575,
+      121.47972
+    ],
+    "createdAt": "2025-05-23T10:01:12.849Z",
+    "ratings": [],
+    "goal": "Looking for funding"
+  },
+  {
+    "id": 1747993808330,
+    "title": "Earthquake Risk Assessment in Nepal",
+    "description": "This project focuses on assessing earthquake risks in the Kathmandu Valley, Nepal, a region prone to seismic activity. We aim to collect geological data, map fault lines, and analyze soil stability to improve disaster preparedness. The project involves field surveys, data analysis, and community education about earthquake safety. We invite geologists, students, and local volunteers to join us in this important effort. By working together, we hope to reduce the impact of future earthquakes and save lives in vulnerable communities.",
+    "theme": "Geology",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "Nepal",
+    "location": "Kathmandu Valley",
+    "contact": "kirillypenko20@gmail.com",
+    "image": "https://th.bing.com/th/id/R.68e1b3d62b51b1cf1faabbefedac08bf?rik=icJTS%2fIipjTOFA&riu=http%3a%2f%2fimages.huffingtonpost.com%2f2015-04-28-1430238899-3429155-UNI183561.jpg&ehk=c6J8U3eEjb7Axw3d8QYcPJepVx0Mxt8oI8kpQzJXBX8%3d&risl=&pid=ImgRaw&r=0",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      27.6666667,
+      85.35
+    ],
+    "createdAt": "2025-05-23T09:50:08.330Z",
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 4,
+        "timestamp": "2025-05-23T09:50:25.552Z"
+      }
+    ],
+    "goal": "Looking for participants"
+  },
+  {
+    "id": 1747992048033,
+    "title": "Humanitarian Medical Aid in Rural India",
+    "description": "This project aims to provide essential medical aid to underserved rural communities in India. We will organize mobile clinics offering basic health checkups, vaccinations, and treatment for common illnesses. Our team includes volunteer doctors, nurses, and healthcare workers dedicated to improving health outcomes in remote areas. We also plan to distribute medicines and health education materials to raise awareness about hygiene and disease prevention. Currently, we are looking for medical volunteers and donors to support our mission. Together, we can bring much-needed healthcare services to those who need them most.",
+    "theme": "Medicine",
+    "eventType": "OFFLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "India",
+    "location": "Varanasi District",
+    "contact": "india@cool.medicine",
+    "image": "https://blogmedia.testbook.com/blog/wp-content/uploads/2023/09/health-care-delivery-system-in-india-1ff8bd44.webp",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      25.3520828,
+      82.95015579999999
+    ],
+    "createdAt": "2025-05-23T09:20:48.033Z",
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-23T09:21:08.648Z"
+      }
+    ],
+    "goal": "Looking for volunteers"
+  },
+  {
+    "id": 1747991904106,
+    "title": "AI for Mental Health Support",
+    "description": "This project aims to develop an AI-based chatbot that offers initial emotional support and mental health resources for teenagers and young adults. The tool will use natural language processing to recognize emotional cues and provide safe, science-based responses. We are currently looking for partner organizations — such as mental health NGOs, tech companies, and educational institutions — to collaborate on research, development, and distribution. Our project is fully remote and welcomes international cooperation. Together, we can build ethical, accessible AI tools that support emotional well-being worldwide.",
+    "theme": "Artificial Intelligence",
+    "eventType": "ONLINE",
+    "status": "Active",
+    "functionName": "",
+    "country": "",
+    "location": "",
+    "contact": "gubenko.ksenichka@gmail.com",
+    "image": "https://zhl.org.in/blog/wp-content/uploads/2023/06/ROLE-OF-AI-IN-MENTAL-HEALTH-CARE.jpg",
+    "author": "robot venomchik",
+    "authorEmail": "kirillypenko20@gmail.com",
+    "coordinates": [
+      0,
+      0
+    ],
+    "createdAt": "2025-05-23T09:18:24.106Z",
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 4,
+        "timestamp": "2025-05-23T12:44:57.273Z"
+      }
+    ],
+    "goal": "Looking for a team"
+  }
+]

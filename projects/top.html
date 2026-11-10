@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Projects - Partners for Change</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Bootstrap CSS -->
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css?ts=asdf" rel="stylesheet">
+  <!-- Login button styles -->
+  <link href="Test/my_button_download.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+  <!-- Main styles -->
+  <link href="index_style.css?ts=abсdef" rel="stylesheet" onload="this.onload=null;">
+  <link href="main.css?ts=asdf" rel="stylesheet">
+  <!-- Cloudflare email decode script -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <style>
+    .light-bg {
+      background-color: #F5F5F5;
+      color: #333333;
+    }
+    .project-card {
+      background-color: #FFFFFF;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+    .star {
+      color: #FBBF24;
+      font-size: 1.2rem;
+    }
+    /* Header styles */
+    .pfc-header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0.75rem 0;
+    }
+
+    .pfc-header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .pfc-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .pfc-sitename {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 0;
+      transition: color 0.2s ease;
+    }
+
+    .pfc-sitename:hover {
+      color: #3b82f6;
+    }
+
+    .pfc-nav-list {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pfc-nav-link {
+      font-size: 1rem;
+      color: #1f2937;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .pfc-nav-link:hover,
+    .pfc-nav-link.pfc-active {
+      color: #3b82f6;
+    }
+
+    /* Manager styles */
+    .scrollable-filter {
+      max-height: 200px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #9CA3AF #E5E7EB;
+    }
+
+    .scrollable-filter::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .scrollable-filter::-webkit-scrollbar-track {
+      background: #E5E7EB;
+    }
+
+    .scrollable-filter::-webkit-scrollbar-thumb {
+      background: #9CA3AF;
+      border-radius: 4px;
+    }
+
+    .filter-item {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    .filter-item:hover {
+      background-color: #E5E7EB;
+    }
+
+    .filter-item.selected {
+      background-color: #D1D5DB;
+      font-weight: 500;
+    }
+
+    /* Profile styles */
+    .pfc-profile-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: url('https://via.placeholder.com/150') no-repeat center;
+      background-size: cover;
+      cursor: pointer;
+      border: 2px solid #e5e7eb;
+      transition: border-color 0.2s ease;
+    }
+
+    .pfc-profile-btn:hover {
+      border-color: #3b82f6;
+    }
+
+    .pfc-profile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .pfc-profile-overlay.pfc-active {
+      display: block;
+    }
+
+    .pfc-profile-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 1001;
+      width: 300px;
+      text-align: center;
+    }
+
+    .pfc-profile-modal.pfc-active {
+      display: block;
+    }
+
+    /* Login styles */
+    .pfc-login-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+      background-color: #f3f4f6;
+      transition: background-color 0.2s ease;
+    }
+
+    .pfc-login-container:hover {
+      background-color: #e5e7eb;
+    }
+
+    .pfc-login-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    /* Chat styles */
+    .chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .chat-button svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .chat-window {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .chat-window.active {
+      display: flex;
+    }
+
+    .chat-header {
+      background-color: #3b82f6;
+      color: white;
+      padding: 10px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-header span {
+      font-weight: 600;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #f9fafb;
+    }
+
+    .chat-input {
+      padding: 10px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .chat-input-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-input-container input {
+      flex-grow: 1;
+      padding: 8px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .chat-input-container button {
+      background-color: #3b82f6;
+      border: none;
+      border-radius: 4px;
+      padding: 8px;
+      margin-left: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-input-container button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .test_rotate:hover {
+      transform: rotate(360deg);
+      transition: transform 0.3s ease;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1024px) {
+      .pfc-nav-list {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .pfc-navmenu.pfc-active .pfc-nav-list {
+        display: flex;
+      }
+
+      .pfc-nav-link {
+        padding: 0.75rem;
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .pfc-sitename {
+        font-size: 1.5rem;
+      }
+
+      .pfc-login-text {
+        font-size: 0.75rem;
+      }
+
+      .chat-window {
+        width: 90%;
+        bottom: 70px;
+        right: 5%;
+      }
+    
+}/* Modal overlay and app modal for Check button */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.app-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 4xl;
+  height: 75vh;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.app-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.app-close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+.app-close-btn:hover {
+  background-color: #dc2626;
+}
+/* Ensure sidebar stays in place */
+.container {
+  position: relative;
+  z-index: 1;
+}
+.md\:w-1\/4 {
+  position: sticky;
+  top: 0;
+  height: fit-content;
+}
+
+  </style>
+</head>
+<body class="light-bg min-h-screen">
+  <!-- Header -->
+  <header id="header" class="pfc-header">
+    <div class="pfc-header-container">
+      <a href="../index.html" class="pfc-logo pfc-no-underline-silk">
+        <h1 class="pfc-sitename">NeuroFlow</h1>
+      </a>
+      <ul class="pfc-nav-list">
+        <li><a id="home_func" class="active block_up_little_lit home_type pfc-nav-link" onclick="toggleBlocks(this.id)">Home</a></li>
+        <li><a id="about_func" class="block_up_little_lit about_type pfc-nav-link" onclick="toggleBlocks(this.id)">About</a></li>
+        <li><a id="features_func" class="block_up_little_lit features_type pfc-nav-link" onclick="toggleBlocks(this.id)" href="../aplication/">Features</a></li>
+        <li><a id="top_func" class="block_up_little_lit top_type pfc-nav-link" style="color:#0d6efd ">Top</a></li>
+        <li><a id="topics_container_func" class="block_up_little_lit chat_type pfc-nav-link" onclick="toggleBlocks(this.id)">Chat</a></li>
+        <li><a id="news_func" class="block_up_little_lit pfc-nav-link" onclick="toggleBlocks(this.id)">News</a></li>
+        <li><a id="download_func" class="block_up_little_lit download_type pfc-nav-link" onclick="toggleBlocks(this.id)">Download</a></li>
+        <li><a href="../p2p" class="pfc-nav-link">P2P</a></li>
+      </ul>
+      <div class="pfc-container-avatar-login">
+        <div class="pfc-profile-btn" onclick="toggleProfile()"></div>
+        <div class="pfc-profile-overlay" id="profile-overlay"></div>
+        <div class="pfc-profile-modal" id="profile-modal">
+          <div class="pfc-profile-modal-header">
+            <button class="pfc-profile-close-btn" onclick="toggleProfile()">✕</button>
+          </div>
+          <div class="pfc-profile-avatar-container">
+            <img src="https://via.placeholder.com/150" alt="Profile" class="pfc-profile-avatar" id="profile-avatar" onclick="document.getElementById('profile-avatarInput').click()">
+          </div>
+          <input type="file" id="profile-avatarInput" accept="image/*" onchange="changeAvatar(event)" style="display: none;">
+          <div class="pfc-profile-nickname" id="profile-nickname" onclick="editNickname()">User123</div>
+          <div class="pfc-profile-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ac999f899edddedfac89948d819c8089c28f8381">[email protected]</a></div>
+          <div class="pfc-profile-info-item">Status: <span class="pfc-mint-green">online</span></div>
+          <div class="pfc-profile-info-item">Registration date: 15.03.2023</div>
+        </div>
+        <div class="pfc-login-container" onclick="handleClick(this)">
+          <span class="pfc-login-text">LOGIN</span>
+          <svg class="pfc-login-fingerprint pfc-login-fingerprint-base" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
+            <!-- SVG path data (unchanged from original) -->
+            <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+              <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+              <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+              <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+              <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+              <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+              <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+              <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+              <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+              <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+              <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+              <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+              <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+              <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+              <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+              <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+              <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+              <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+              <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+            </g>
+          </svg>
+          <svg class="pfc-login-fingerprint pfc-login-fingerprint-active" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
+            <!-- SVG path data (unchanged from original) -->
+            <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+              <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+              <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+              <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+              <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+              <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+              <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+              <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+              <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+              <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+              <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+              <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+              <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+              <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+              <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+              <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+              <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+              <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+              <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+            </g>
+          </svg>
+          <svg class="pfc-login-ok" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 100">
+            <path d="M34.912 50.75l10.89 10.125L67 36.75" fill="none" stroke="#fff" stroke-width="6"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-6 mt-16">
+    <div class="w-full md:w-1/4 space-y-6">
+      <div>
+        <input type="text" id="searchBar" placeholder="Search by title/description" class="w-full p-2 rounded-md bg-white text-gray-800 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div>
+        <button id="clearFilters" class="w-full bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+          Clear Filters
+        </button>
+      </div>
+      <div id="createProjectSection">
+        <button id="showCreateProject" class="hidden bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 w-full">
+          <i class="bi bi-plus-circle mr-2"></i>Create Project
+        </button>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-gray-800">Countries</h3>
+        <div id="countryFilters" class="space-y-2 scrollable-filter"></div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-gray-800">Themes</h3>
+        <div id="themeFilters" class="space-y-2 scrollable-filter"></div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-gray-800">Event Type</h3>
+        <div id="eventTypeFilters" class="space-y-2"></div>
+      </div>
+    </div>
+    <div class="w-full md:w-3/4 space-y-6">
+      <div id="status" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"></div>
+      <div id="projectList" class="space-y-4"></div>
+    </div>
+  </main>
+
+  <footer class="text-center py-4 light-bg">
+    <div class="flex justify-center space-x-4 mb-2">
+      <a href="#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-twitter"></i></a>
+    </div>
+    <a href="index.html" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Back to Main Page</a>
+  </footer>
+
+  <!-- Modal windows for Details and Contact -->
+  <div id="joinProjectModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+      <h2 id="joinProjectTitle" class="text-xl font-semibold mb-4 text-gray-800"></h2>
+      <div id="joinProjectContent" class="text-gray-600 mb-4"></div>
+      <div class="flex justify-end">
+        <button id="closeJoinModal" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-4xl h-3/4">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Contact Project Creator</h2>
+      <iframe id="contactIframe" src="" class="w-full h-full border-0"></iframe>
+      <div class="flex justify-end mt-4">
+        <button id="closeContactModal" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+   <button class="chat-button" onclick="toggleChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        </svg>
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Chat</span>
+            <button class="close-button" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Здесь будут сообщения -->
+        </div>
+        <div class="chat-input">
+            <div class="chat-input-container">
+                <input type="text" id="messageInputUN" placeholder="Enter a message...">
+                <button class="test_rotate" onclick="sendMessage_nopobleminfuture()">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+  <script>
+  const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '../index.html';
+  let projects = [];
+  const MIN_VOTES = 1;
+  const countries = [
+    { name: 'Ukraine', flag: 'https://flagcdn.com/ua.svg' },
+    { name: 'Brazil', flag: 'https://flagcdn.com/br.svg' },
+    { name: 'United States', flag: 'https://flagcdn.com/us.svg' },
+    { name: 'Poland', flag: 'https://flagcdn.com/pl.svg' },
+    { name: 'Afghanistan', flag: 'https://flagcdn.com/af.svg' },
+    { name: 'Albania', flag: 'https://flagcdn.com/al.svg' },
+    { name: 'Algeria', flag: 'https://flagcdn.com/dz.svg' },
+    { name: 'Andorra', flag: 'https://flagcdn.com/ad.svg' },
+    { name: 'Angola', flag: 'https://flagcdn.com/ao.svg' },
+    { name: 'Argentina', flag: 'https://flagcdn.com/ar.svg' },
+    { name: 'Armenia', flag: 'https://flagcdn.com/am.svg' },
+    { name: 'Australia', flag: 'https://flagcdn.com/au.svg' },
+    { name: 'Austria', flag: 'https://flagcdn.com/at.svg' },
+    { name: 'Azerbaijan', flag: 'https://flagcdn.com/az.svg' },
+    { name: 'Bahamas', flag: 'https://flagcdn.com/bs.svg' },
+    { name: 'Bahrain', flag: 'https://flagcdn.com/bh.svg' },
+    { name: 'Bangladesh', flag: 'https://flagcdn.com/bd.svg' },
+    { name: 'Barbados', flag: 'https://flagcdn.com/bb.svg' },
+    { name: 'Belgium', flag: 'https://flagcdn.com/be.svg' },
+    { name: 'Belize', flag: 'https://flagcdn.com/bz.svg' },
+    { name: 'Benin', flag: 'https://flagcdn.com/bj.svg' },
+    { name: 'Bhutan', flag: 'https://flagcdn.com/bt.svg' },
+    { name: 'Bolivia', flag: 'https://flagcdn.com/bo.svg' },
+    { name: 'Bosnia and Herzegovina', flag: 'https://flagcdn.com/ba.svg' },
+    { name: 'Botswana', flag: 'https://flagcdn.com/bw.svg' },
+    { name: 'Brunei', flag: 'https://flagcdn.com/bn.svg' },
+    { name: 'Bulgaria', flag: 'https://flagcdn.com/bg.svg' },
+    { name: 'Burkina Faso', flag: 'https://flagcdn.com/bf.svg' },
+    { name: 'Burundi', flag: 'https://flagcdn.com/bi.svg' },
+    { name: 'Cambodia', flag: 'https://flagcdn.com/kh.svg' },
+    { name: 'Cameroon', flag: 'https://flagcdn.com/cm.svg' },
+    { name: 'Canada', flag: 'https://flagcdn.com/ca.svg' },
+    { name: 'Cape Verde', flag: 'https://flagcdn.com/cv.svg' },
+    { name: 'Central African Republic', flag: 'https://flagcdn.com/cf.svg' },
+    { name: 'Chad', flag: 'https://flagcdn.com/td.svg' },
+    { name: 'Chile', flag: 'https://flagcdn.com/cl.svg' },
+    { name: 'China', flag: 'https://flagcdn.com/cn.svg' },
+    { name: 'Colombia', flag: 'https://flagcdn.com/co.svg' },
+    { name: 'Comoros', flag: 'https://flagcdn.com/km.svg' },
+    { name: 'Costa Rica', flag: 'https://flagcdn.com/cr.svg' },
+    { name: 'Croatia', flag: 'https://flagcdn.com/hr.svg' },
+    { name: 'Cuba', flag: 'https://flagcdn.com/cu.svg' },
+    { name: 'Cyprus', flag: 'https://flagcdn.com/cy.svg' },
+    { name: 'Czech Republic', flag: 'https://flagcdn.com/cz.svg' },
+    { name: 'Denmark', flag: 'https://flagcdn.com/dk.svg' },
+    { name: 'Djibouti', flag: 'https://flagcdn.com/dj.svg' },
+    { name: 'Dominica', flag: 'https://flagcdn.com/dm.svg' },
+    { name: 'Dominican Republic', flag: 'https://flagcdn.com/do.svg' },
+    { name: 'DR Congo', flag: 'https://flagcdn.com/cd.svg' },
+    { name: 'Ecuador', flag: 'https://flagcdn.com/ec.svg' },
+    { name: 'Egypt', flag: 'https://flagcdn.com/eg.svg' },
+    { name: 'El Salvador', flag: 'https://flagcdn.com/sv.svg' },
+    { name: 'Equatorial Guinea', flag: 'https://flagcdn.com/gq.svg' },
+    { name: 'Eritrea', flag: 'https://flagcdn.com/er.svg' },
+    { name: 'Estonia', flag: 'https://flagcdn.com/ee.svg' },
+    { name: 'Eswatini', flag: 'https://flagcdn.com/sz.svg' },
+    { name: 'Ethiopia', flag: 'https://flagcdn.com/et.svg' },
+    { name: 'Fiji', flag: 'https://flagcdn.com/fj.svg' },
+    { name: 'Finland', flag: 'https://flagcdn.com/fi.svg' },
+    { name: 'France', flag: 'https://flagcdn.com/fr.svg' },
+    { name: 'Gabon', flag: 'https://flagcdn.com/ga.svg' },
+    { name: 'Gambia', flag: 'https://flagcdn.com/gm.svg' },
+    { name: 'Georgia', flag: 'https://flagcdn.com/ge.svg' },
+    { name: 'Germany', flag: 'https://flagcdn.com/de.svg' },
+    { name: 'Ghana', flag: 'https://flagcdn.com/gh.svg' },
+    { name: 'Greece', flag: 'https://flagcdn.com/gr.svg' },
+    { name: 'Grenada', flag: 'https://flagcdn.com/gd.svg' },
+    { name: 'Guatemala', flag: 'https://flagcdn.com/gt.svg' },
+    { name: 'Guinea', flag: 'https://flagcdn.com/gn.svg' },
+    { name: 'Guinea-Bissau', flag: 'https://flagcdn.com/gw.svg' },
+    { name: 'Guyana', flag: 'https://flagcdn.com/gy.svg' },
+    { name: 'Haiti', flag: 'https://flagcdn.com/ht.svg' },
+    { name: 'Honduras', flag: 'https://flagcdn.com/hn.svg' },
+    { name: 'Hungary', flag: 'https://flagcdn.com/hu.svg' },
+    { name: 'Iceland', flag: 'https://flagcdn.com/is.svg' },
+    { name: 'India', flag: 'https://flagcdn.com/in.svg' },
+    { name: 'Indonesia', flag: 'https://flagcdn.com/id.svg' },
+    { name: 'Iran', flag: 'https://flagcdn.com/ir.svg' },
+    { name: 'Iraq', flag: 'https://flagcdn.com/iq.svg' },
+    { name: 'Ireland', flag: 'https://flagcdn.com/ie.svg' },
+    { name: 'Israel', flag: 'https://flagcdn.com/il.svg' },
+    { name: 'Italy', flag: 'https://flagcdn.com/it.svg' },
+    { name: 'Jamaica', flag: 'https://flagcdn.com/jm.svg' },
+    { name: 'Japan', flag: 'https://flagcdn.com/jp.svg' },
+    { name: 'Jordan', flag: 'https://flagcdn.com/jo.svg' },
+    { name: 'Kazakhstan', flag: 'https://flagcdn.com/kz.svg' },
+    { name: 'Kenya', flag: 'https://flagcdn.com/ke.svg' },
+    { name: 'Kiribati', flag: 'https://flagcdn.com/ki.svg' },
+    { name: 'Kuwait', flag: 'https://flagcdn.com/kw.svg' },
+    { name: 'Kyrgyzstan', flag: 'https://flagcdn.com/kg.svg' },
+    { name: 'Laos', flag: 'https://flagcdn.com/la.svg' },
+    { name: 'Latvia', flag: 'https://flagcdn.com/lv.svg' },
+    { name: 'Lebanon', flag: 'https://flagcdn.com/lb.svg' },
+    { name: 'Lesotho', flag: 'https://flagcdn.com/ls.svg' },
+    { name: 'Liberia', flag: 'https://flagcdn.com/lr.svg' },
+    { name: 'Libya', flag: 'https://flagcdn.com/ly.svg' },
+    { name: 'Liechtenstein', flag: 'https://flagcdn.com/li.svg' },
+    { name: 'Lithuania', flag: 'https://flagcdn.com/lt.svg' },
+    { name: 'Luxembourg', flag: 'https://flagcdn.com/lu.svg' },
+    { name: 'Madagascar', flag: 'https://flagcdn.com/mg.svg' },
+    { name: 'Malawi', flag: 'https://flagcdn.com/mw.svg' },
+    { name: 'Malaysia', flag: 'https://flagcdn.com/my.svg' },
+    { name: 'Maldives', flag: 'https://flagcdn.com/mv.svg' },
+    { name: 'Mali', flag: 'https://flagcdn.com/ml.svg' },
+    { name: 'Malta', flag: 'https://flagcdn.com/mt.svg' },
+    { name: 'Marshall Islands', flag: 'https://flagcdn.com/mh.svg' },
+    { name: 'Mauritania', flag: 'https://flagcdn.com/mr.svg' },
+    { name: 'Mauritius', flag: 'https://flagcdn.com/mu.svg' },
+    { name: 'Mexico', flag: 'https://flagcdn.com/mx.svg' },
+    { name: 'Micronesia', flag: 'https://flagcdn.com/fm.svg' },
+    { name: 'Moldova', flag: 'https://flagcdn.com/md.svg' },
+    { name: 'Monaco', flag: 'https://flagcdn.com/mc.svg' },
+    { name: 'Mongolia', flag: 'https://flagcdn.com/mn.svg' },
+    { name: 'Montenegro', flag: 'https://flagcdn.com/me.svg' },
+    { name: 'Morocco', flag: 'https://flagcdn.com/ma.svg' },
+    { name: 'Mozambique', flag: 'https://flagcdn.com/mz.svg' },
+    { name: 'Myanmar', flag: 'https://flagcdn.com/mm.svg' },
+    { name: 'Namibia', flag: 'https://flagcdn.com/na.svg' },
+    { name: 'Nauru', flag: 'https://flagcdn.com/nr.svg' },
+    { name: 'Nepal', flag: 'https://flagcdn.com/np.svg' },
+    { name: 'Netherlands', flag: 'https://flagcdn.com/nl.svg' },
+    { name: 'New Zealand', flag: 'https://flagcdn.com/nz.svg' },
+    { name: 'Nicaragua', flag: 'https://flagcdn.com/ni.svg' },
+    { name: 'Niger', flag: 'https://flagcdn.com/ne.svg' },
+    { name: 'Nigeria', flag: 'https://flagcdn.com/ng.svg' },
+    { name: 'North Korea', flag: 'https://flagcdn.com/kp.svg' },
+    { name: 'North Macedonia', flag: 'https://flagcdn.com/mk.svg' },
+    { name: 'Norway', flag: 'https://flagcdn.com/no.svg' },
+    { name: 'Oman', flag: 'https://flagcdn.com/om.svg' },
+    { name: 'Pakistan', flag: 'https://flagcdn.com/pk.svg' },
+    { name: 'Palau', flag: 'https://flagcdn.com/pw.svg' },
+    { name: 'Panama', flag: 'https://flagcdn.com/pa.svg' },
+    { name: 'Papua New Guinea', flag: 'https://flagcdn.com/pg.svg' },
+    { name: 'Paraguay', flag: 'https://flagcdn.com/py.svg' },
+    { name: 'Peru', flag: 'https://flagcdn.com/pe.svg' },
+    { name: 'Philippines', flag: 'https://flagcdn.com/ph.svg' },
+    { name: 'Portugal', flag: 'https://flagcdn.com/pt.svg' },
+    { name: 'Qatar', flag: 'https://flagcdn.com/qa.svg' },
+    { name: 'Romania', flag: 'https://flagcdn.com/ro.svg' },
+    { name: 'Rwanda', flag: 'https://flagcdn.com/rw.svg' },
+    { name: 'Saint Kitts and Nevis', flag: 'https://flagcdn.com/kn.svg' },
+    { name: 'Saint Lucia', flag: 'https://flagcdn.com/lc.svg' },
+    { name: 'Saint Vincent and the Grenadines', flag: 'https://flagcdn.com/vc.svg' },
+    { name: 'Samoa', flag: 'https://flagcdn.com/ws.svg' },
+    { name: 'San Marino', flag: 'https://flagcdn.com/sm.svg' },
+    { name: 'Sao Tome and Principe', flag: 'https://flagcdn.com/st.svg' },
+    { name: 'Saudi Arabia', flag: 'https://flagcdn.com/sa.svg' },
+    { name: 'Senegal', flag: 'https://flagcdn.com/sn.svg' },
+    { name: 'Serbia', flag: 'https://flagcdn.com/rs.svg' },
+    { name: 'Seychelles', flag: 'https://flagcdn.com/sc.svg' },
+    { name: 'Sierra Leone', flag: 'https://flagcdn.com/sl.svg' },
+    { name: 'Singapore', flag: 'https://flagcdn.com/sg.svg' },
+    { name: 'Slovakia', flag: 'https://flagcdn.com/sk.svg' },
+    { name: 'Slovenia', flag: 'https://flagcdn.com/si.svg' },
+    { name: 'Solomon Islands', flag: 'https://flagcdn.com/sb.svg' },
+    { name: 'Somalia', flag: 'https://flagcdn.com/so.svg' },
+    { name: 'South Africa', flag: 'https://flagcdn.com/za.svg' },
+    { name: 'South Korea', flag: 'https://flagcdn.com/kr.svg' },
+    { name: 'South Sudan', flag: 'https://flagcdn.com/ss.svg' },
+    { name: 'Spain', flag: 'https://flagcdn.com/es.svg' },
+    { name: 'Sri Lanka', flag: 'https://flagcdn.com/lk.svg' },
+    { name: 'Sudan', flag: 'https://flagcdn.com/sd.svg' },
+    { name: 'Suriname', flag: 'https://flagcdn.com/sr.svg' },
+    { name: 'Sweden', flag: 'https://flagcdn.com/se.svg' },
+    { name: 'Switzerland', flag: 'https://flagcdn.com/ch.svg' },
+    { name: 'Syria', flag: 'https://flagcdn.com/sy.svg' },
+    { name: 'Tajikistan', flag: 'https://flagcdn.com/tj.svg' },
+    { name: 'Tanzania', flag: 'https://flagcdn.com/tz.svg' },
+    { name: 'Thailand', flag: 'https://flagcdn.com/th.svg' },
+    { name: 'Timor-Leste', flag: 'https://flagcdn.com/tl.svg' },
+    { name: 'Togo', flag: 'https://flagcdn.com/tg.svg' },
+    { name: 'Tonga', flag: 'https://flagcdn.com/to.svg' },
+    { name: 'Trinidad and Tobago', flag: 'https://flagcdn.com/tt.svg' },
+    { name: 'Tunisia', flag: 'https://flagcdn.com/tn.svg' },
+    { name: 'Turkey', flag: 'https://flagcdn.com/tr.svg' },
+    { name: 'Turkmenistan', flag: 'https://flagcdn.com/tm.svg' },
+    { name: 'Tuvalu', flag: 'https://flagcdn.com/tv.svg' },
+    { name: 'Uganda', flag: 'https://flagcdn.com/ug.svg' },
+    { name: 'United Arab Emirates', flag: 'https://flagcdn.com/ae.svg' },
+    { name: 'United Kingdom', flag: 'https://flagcdn.com/gb.svg' },
+    { name: 'Uruguay', flag: 'https://flagcdn.com/uy.svg' },
+    { name: 'Uzbekistan', flag: 'https://flagcdn.com/uz.svg' },
+    { name: 'Vanuatu', flag: 'https://flagcdn.com/vu.svg' },
+    { name: 'Venezuela', flag: 'https://flagcdn.com/ve.svg' },
+    { name: 'Vietnam', flag: 'https://flagcdn.com/vn.svg' },
+    { name: 'Yemen', flag: 'https://flagcdn.com/ye.svg' },
+    { name: 'Zambia', flag: 'https://flagcdn.com/zm.svg' },
+    { name: 'Zimbabwe', flag: 'https://flagcdn.com/zw.svg' }
+  ];
+  const themes = [
+    'Medicine', 'Biology', 'Ecology', 'Energy', 'Education', 'Industry', 'Transport',
+    'Agrotechnology', 'Artificial Intelligence', 'Cybersecurity', 'Urban Studies',
+    'Astronomy', 'Economics', 'Law', 'Psychology', 'Architecture', 'Sociology',
+    'Climatology', 'Geology', 'Physics', 'Chemistry', 'Biotechnology', 'Cosmonautics',
+    'Robotics', 'Environmental Protection', 'Tourism', 'Food Technology', 'Logistics',
+    'Journalism', 'Art', 'History', 'Anthropology', 'Marketing', 'Finance', 'Management',
+    'Aviation', 'Maritime Technology', 'Engineering', 'Information Technology',
+    'Civil Sector', 'Volunteering', 'Community Development', 'Humanitarian Aid',
+    'Public Health', 'Cultural Heritage', 'Other'
+  ];
+  const eventTypes = ['OFFLINE', 'ONLINE', 'BOTH'];
+  const themeColors = {
+    'Medicine': 'red',
+    'Biology': 'limegreen',
+    'Ecology': 'green',
+    'Energy': 'orange',
+    'Education': 'blue',
+    'Industry': 'gray',
+    'Transport': 'darkblue',
+    'Agrotechnology': 'olive',
+    'Artificial Intelligence': 'purple',
+    'Cybersecurity': 'teal',
+    'Urban Studies': 'brown',
+    'Astronomy': 'navy',
+    'Economics': 'gold',
+    'Law': 'crimson',
+    'Psychology': 'magenta',
+    'Architecture': 'coral',
+    'Sociology': 'lightblue',
+    'Climatology': 'cyan',
+    'Geology': 'sienna',
+    'Physics': 'violet',
+    'Chemistry': 'lime',
+    'Biotechnology': 'forestgreen',
+    'Cosmonautics': 'darkviolet',
+    'Robotics': 'steelblue',
+    'Environmental Protection': 'darkgreen',
+    'Tourism': 'pink',
+    'Food Technology': 'chocolate',
+    'Logistics': 'darkgray',
+    'Journalism': 'salmon',
+    'Art': 'hotpink',
+    'History': 'tan',
+    'Anthropology': 'lightcoral',
+    'Marketing': 'turquoise',
+    'Finance': 'goldenrod',
+    'Management': 'slateblue',
+    'Aviation': 'skyblue',
+    'Maritime Technology': 'deepskyblue',
+    'Engineering': 'darkorange',
+    'Information Technology': 'indigo',
+    'Civil Sector': 'lightgreen',
+    'Volunteering': 'lightpink',
+    'Community Development': 'plum',
+    'Humanitarian Aid': 'maroon',
+    'Public Health': 'tomato',
+    'Cultural Heritage': 'khaki',
+    'Other': 'gray'
+  };
+
+  function setStatus(message, isError = true) {
+    const statusDiv = document.getElementById('status');
+    statusDiv.textContent = message;
+    statusDiv.className = `bg-${isError ? 'red' : 'green'}-100 border border-${isError ? 'red' : 'green'}-400 text-${isError ? 'red' : 'green'}-700 px-4 py-3 rounded mb-4`;
+    statusDiv.classList.remove('hidden');
+    setTimeout(() => statusDiv.classList.add('hidden'), 3000);
+  }
+
+  function sanitizeInput(str) {
+    if (!str) return '';
+    const safeStr = String(str);
+    return safeStr
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/`/g, '&#96;')
+      .replace(/\(/g, '&#40;')
+      .replace(/\)/g, '&#41;');
+  }
+
+  async function loadProjects() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/projects`, {
+        credentials: 'include'
+      });
+      if (!response.ok) throw new Error(`Failed to load projects: ${response.status}`);
+      projects = await response.json();
+
+      for (let project of projects) {
+        try {
+          const ratingsResponse = await fetch(`${API_BASE_URL}/api/projects/${project.id}/ratings`, {
+            credentials: 'include'
+          });
+          if (ratingsResponse.ok) {
+            const ratingsData = await ratingsResponse.json();
+            project.ratings = Array.isArray(ratingsData.ratings) ? ratingsData.ratings : [];
+            project.averageRating = ratingsData.average != null && !isNaN(ratingsData.average)
+              ? parseFloat(ratingsData.average)
+              : project.ratings.length
+                ? project.ratings.reduce((sum, r) => sum + r.rating, 0) / project.ratings.length
+                : 0;
+            project.ratingCount = ratingsData.count != null && !isNaN(ratingsData.count)
+              ? parseInt(ratingsData.count)
+              : project.ratings.length;
+          } else {
+            project.ratings = Array.isArray(project.ratings) ? project.ratings : [];
+            project.averageRating = project.ratings.length
+              ? project.ratings.reduce((sum, r) => sum + r.rating, 0) / project.ratings.length
+              : 0;
+            project.ratingCount = project.ratings.length;
+          }
+        } catch (error) {
+          console.error(`Error fetching ratings for project ${project.id}:`, error);
+          project.ratings = Array.isArray(project.ratings) ? project.ratings : [];
+          project.averageRating = project.ratings.length
+            ? project.ratings.reduce((sum, r) => sum + r.rating, 0) / project.ratings.length
+            : 0;
+          project.ratingCount = project.ratings.length;
+        }
+      }
+
+      const validProjects = projects.filter(p => p.ratingCount >= MIN_VOTES);
+      const meanRating = validProjects.length
+        ? validProjects.reduce((sum, p) => sum + parseFloat(p.averageRating), 0) / validProjects.length
+        : 5.0;
+
+      projects = projects.map(project => {
+        const themeMap = {
+          'ecology': 'Ecology',
+          'education': 'Education',
+          'medicine': 'Medicine',
+          'community': 'Community Development',
+          'technology': 'Information Technology',
+          'culture': 'Cultural Heritage',
+          'humanitarian': 'Humanitarian Aid'
+        };
+        const category = themeMap[project.theme.toLowerCase()] || project.theme || 'Other';
+        let weightedRating = project.averageRating;
+        if (project.ratingCount >= MIN_VOTES) {
+          const v = project.ratingCount;
+          const R = parseFloat(project.averageRating);
+          const C = meanRating;
+          const m = MIN_VOTES;
+          weightedRating = (v / (v + m)) * R + (m / (v + m)) * C;
+        } else {
+          weightedRating = 0;
+        }
+        return {
+          ...project,
+          category,
+          weightedRating: weightedRating.toFixed(2),
+          image: project.image || 'https://via.placeholder.com/150'
+        };
+      });
+
+      projects.sort((a, b) => parseFloat(b.weightedRating) - parseFloat(a.weightedRating));
+      populateFilters();
+      filterProjects();
+    } catch (error) {
+      console.error('Error loading projects:', error);
+      setStatus('Failed to load projects');
+    }
+  }
+
+  function populateFilters() {
+    const countryFilters = document.getElementById('countryFilters');
+    countryFilters.innerHTML = countries.map(country => `
+      <div class="filter-item" data-country="${sanitizeInput(country.name)}">
+        <img src="${sanitizeInput(country.flag)}" width="20" height="15" alt="${sanitizeInput(country.name)}">
+        ${sanitizeInput(country.name)}
+      </div>
+    `).join('');
+
+    const themeFilters = document.getElementById('themeFilters');
+    themeFilters.innerHTML = themes.map(theme => `
+      <div class="filter-item" data-theme="${sanitizeInput(theme)}">
+        <span class="dot" style="background-color: ${themeColors[theme] || 'gray'};"></span>
+        ${sanitizeInput(theme)}
+      </div>
+    `).join('');
+
+    const eventTypeFilters = document.getElementById('eventTypeFilters');
+    eventTypeFilters.innerHTML = eventTypes.map(eventType => `
+      <div class="filter-item" data-event-type="${sanitizeInput(eventType)}">
+        ${sanitizeInput(eventType)}
+      </div>
+    `).join('');
+
+    document.querySelectorAll('#countryFilters .filter-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('selected');
+        filterProjects();
+      });
+    });
+
+    document.querySelectorAll('#themeFilters .filter-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('selected');
+        filterProjects();
+      });
+    });
+
+    document.querySelectorAll('#eventTypeFilters .filter-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('selected');
+        filterProjects();
+      });
+    });
+  }
+
+  function filterProjects() {
+    const selectedCountries = Array.from(document.querySelectorAll('#countryFilters .filter-item.selected'))
+      .map(item => item.dataset.country);
+    const selectedThemes = Array.from(document.querySelectorAll('#themeFilters .filter-item.selected'))
+      .map(item => item.dataset.theme);
+    const selectedEventTypes = Array.from(document.querySelectorAll('#eventTypeFilters .filter-item.selected'))
+      .map(item => item.dataset.eventType);
+    const searchQuery = document.getElementById('searchBar').value.trim().toLowerCase();
+
+    let filteredProjects = projects.filter(project => {
+      const matchesCountry = selectedCountries.length === 0 || selectedCountries.includes(project.country);
+      const matchesTheme = selectedThemes.length === 0 || selectedThemes.includes(project.category);
+      const matchesEventType = selectedEventTypes.length === 0 || selectedEventTypes.includes(project.eventType);
+      const matchesSearch = searchQuery === '' ||
+        project.title.toLowerCase().includes(searchQuery) ||
+        project.description.toLowerCase().includes(searchQuery);
+      return matchesCountry && matchesTheme && matchesEventType && matchesSearch && parseFloat(project.weightedRating) > 0;
+    });
+
+    updateProjectList(filteredProjects);
+  }
+
+  function updateProjectList(filteredProjects = projects) {
+    const projectList = document.getElementById('projectList');
+    projectList.innerHTML = '';
+    const topProjects = filteredProjects.filter(p => parseFloat(p.weightedRating) > 0);
+    if (topProjects.length === 0) {
+      projectList.innerHTML = '<p class="text-gray-600 text-center">No projects match the selected filters.</p>';
+      return;
+    }
+    topProjects.forEach((project, index) => {
+      const dotColor = themeColors[project.category] || 'gray';
+      const card = document.createElement('div');
+      card.className = 'project-card flex items-start';
+      card.innerHTML = `
+        <div class="w-12 text-center text-xl font-bold text-gray-800 mr-4">${index + 1}</div>
+        <img src="${sanitizeInput(project.image)}" alt="${sanitizeInput(project.title)}" class="w-24 h-24 object-cover rounded-md mr-4">
+        <div class="flex-1">
+          <div class="flex items-center">
+            <span class="dot" style="background-color: ${dotColor};"></span>
+            <h4 class="text-md font-medium text-gray-800">${sanitizeInput(project.title)}</h4>
+          </div>
+          <p class="text-gray-600">${sanitizeInput(project.description)}</p>
+          <p class="text-gray-500 text-sm"><span class="font-medium">Theme:</span> ${sanitizeInput(project.category)}</p>
+          <p class="text-gray-500 text-sm"><span class="font-medium">Event Type:</span> ${sanitizeInput(project.eventType)}</p>
+          <p class="text-gray-500 text-sm"><span class="font-medium">Location:</span> ${sanitizeInput(project.location)}, ${sanitizeInput(project.country)}</p>
+          <p class="text-gray-500 text-sm"><span class="font-medium">Weighted Rating:</span> ${project.weightedRating}</p>
+          <p class="text-gray-500 text-sm"><span class="font-medium">Average Rating:</span> ${project.averageRating} (${project.ratingCount} votes)</p>
+          <div class="flex items-center mt-2">
+            ${Array.from({ length: Math.round(project.averageRating) }, () => '<span class="star">★</span>').join('')}
+          </div>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <button class="details-btn bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600" data-project-id="${project.id}">Details</button>
+            <button class="check-btn bg-purple-500 text-white py-1 px-3 rounded hover:bg-purple-600" data-project-id="${project.id}">Check</button>
+            <button class="contact-btn bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600" data-author-email="${sanitizeInput(project.authorEmail)}">Contact</button>
+          </div>
+        </div>
+      `;
+      projectList.appendChild(card);
+    });
+    document.querySelectorAll('.details-btn').forEach(btn => btn.onclick = () => {
+      const projectId = parseInt(btn.dataset.projectId);
+      showJoinProjectModal(projectId);
+    });
+    document.querySelectorAll('.check-btn').forEach(btn => btn.onclick = () => {
+      const projectId = parseInt(btn.dataset.projectId);
+      const project = projects.find(p => p.id === projectId);
+      const functionName = project ? project.functionName : '';
+      if (functionName && functionName.trim() !== '') {
+        try {
+          launchApp(functionName);
+        } catch (error) {
+          setStatus('Не вдалося запустити додаток');
+        }
+      } else {
+        setStatus('Для цього проєкту немає додатку');
+      }
+    });
+    document.querySelectorAll('.contact-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    if (!activeUser) {
+      setStatus('Please log in to contact the project creator.');
+      window.location.href = `/auth/google?redirect=${encodeURIComponent(window.location.pathname)}`;
+      return;
+    }
+    const authorEmail = button.dataset.authorEmail;
+    const iframe = document.getElementById('contactIframe');
+    iframe.src = `../p2p?searchEmail=${encodeURIComponent(authorEmail)}`;
+    iframe.onload = () => {
+      try {
+        // Attempt to access iframe's DOM
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const homeButton = iframeDoc.getElementById('home_func');
+        if (homeButton) {
+          homeButton.style.display = 'none';
+        } else {
+          console.warn('Home button not found in iframe');
+        }
+      } catch (e) {
+        console.error('Cannot access iframe content:', e);
+        setStatus('Unable to modify P2P content due to security restrictions');
+      }
+    };
+    document.getElementById('contactModal').classList.remove('hidden');
+  });
+});
+  }
+
+  function showJoinProjectModal(projectId) {
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+    const modal = document.getElementById('joinProjectModal');
+    const title = document.getElementById('joinProjectTitle');
+    const content = document.getElementById('joinProjectContent');
+    title.textContent = `Проєкт: "${sanitizeInput(project.title)}"`;
+    content.innerHTML = `
+      <p><strong>Опис:</strong> ${sanitizeInput(project.description)}</p>
+      <p><strong>Тема:</strong> ${sanitizeInput(project.category)}</p>
+      <p><strong>Тип події:</strong> ${sanitizeInput(project.eventType)}</p>
+      <p><strong>Статус:</strong> ${sanitizeInput(project.status)}</p>
+      <p><strong>Мета:</strong> ${sanitizeInput(project.goal) || 'Не вказано'}</p>
+      <p><strong>Function Name:</strong> ${sanitizeInput(project.functionName) || 'None'}</p>
+      <p><strong>Локація:</strong> ${sanitizeInput(project.location)}, ${sanitizeInput(project.country)}</p>
+      <p><strong>Контакт:</strong> <a href="mailto:${sanitizeInput(project.contact)}" class="text-blue-500 hover:underline">${sanitizeInput(project.contact)}</a></p>
+      <p><strong>Рейтинг:</strong> ${project.averageRating} (${project.ratingCount} голосів)</p>
+      <p class="mt-4"><strong>Як приєднатися:</strong> Напишіть на контактну пошту для деталей участі.</p>
+    `;
+    modal.classList.remove('hidden');
+  }
+
+  function closeJoinProjectModal() {
+    document.getElementById('joinProjectModal').classList.add('hidden');
+  }
+
+function launchApp(name) {
+  // Create overlay to dim background
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+
+  // Create modal container
+  const modal = document.createElement('div');
+  modal.className = 'app-modal';
+
+  // Create iframe
+  const iframe = document.createElement('iframe');
+  iframe.className = 'app-iframe';
+  iframe.src = `../aplication/projects/${name}/index.html`;
+
+  // Create close button
+  const closeButton = document.createElement('button');
+  closeButton.className = 'app-close-btn';
+  closeButton.innerHTML = '✕';
+  closeButton.onclick = () => {
+    modal.remove();
+    overlay.remove();
+    // No need to restore .container, as it was never hidden
+  };
+
+  // Append elements
+  modal.appendChild(iframe);
+  modal.appendChild(closeButton);
+  document.body.appendChild(overlay);
+  document.body.appendChild(modal);
+
+  // Handle iframe load errors
+  iframe.onerror = () => {
+    setStatus('Failed to load the project application.');
+    modal.remove();
+    overlay.remove();
+  };
+}
+  function closeContactModal() {
+    document.getElementById('contactModal').classList.add('hidden');
+    document.getElementById('contactIframe').src = '';
+  }
+
+  function toggleChat() {
+    const chatWindow = document.getElementById('chatWindow');
+    chatWindow.classList.toggle('active');
+  }
+
+  function sendMessage_nopobleminfuture() {
+    const messageInput = document.getElementById('messageInputUN');
+    const messageText = messageInput.value.trim();
+    if (messageText) {
+      const chatMessages = document.getElementById('chatMessages');
+      const messageElement = document.createElement('div');
+      messageElement.textContent = messageText;
+      messageElement.style.marginBottom = '10px';
+      messageElement.style.padding = '8px';
+      messageElement.style.backgroundColor = '#e5e7eb';
+      messageElement.style.borderRadius = '4px';
+      chatMessages.appendChild(messageElement);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      messageInput.value = '';
+    }
+  }
+
+  function toggleProfile() {
+    const modal = document.getElementById('profile-modal');
+    const overlay = document.getElementById('profile-overlay');
+    
+    const nicknameInput = document.querySelector('.profile-nickname-input');
+    if (nicknameInput) {
+      const nicknameValue = nicknameInput.value.trim();
+      if (!nicknameValue) {
+        return;
+      }
+      const newNicknameDiv = document.createElement('div');
+      newNicknameDiv.textContent = nicknameValue;
+      newNicknameDiv.className = 'pfc-profile-nickname';
+      newNicknameDiv.id = 'profile-nickname';
+      newNicknameDiv.onclick = editNickname;
+      nicknameInput.replaceWith(newNicknameDiv);
+    }
+
+    modal.classList.toggle('pfc-active');
+    overlay.classList.toggle('pfc-active');
+  }
+
+  function editNickname() {
+    const nicknameDiv = document.getElementById('profile-nickname');
+    const currentNickname = nicknameDiv.textContent;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = currentNickname;
+    input.className = 'profile-nickname-input';
+    input.maxLength = 18;
+    
+    nicknameDiv.replaceWith(input);
+    input.focus();
+
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const newNickname = input.value.trim();
+        if (newNickname) {
+          const newNicknameDiv = document.createElement('div');
+          newNicknameDiv.textContent = newNickname;
+          newNicknameDiv.className = 'pfc-profile-nickname';
+          newNicknameDiv.id = 'profile-nickname';
+          newNicknameDiv.onclick = editNickname;
+          input.replaceWith(newNicknameDiv);
+        }
+      }
+    });
+  }
+
+  function changeAvatar(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      const avatar = document.getElementById('profile-avatar');
+      
+      reader.onload = function(e) {
+        avatar.src = e.target.result;
+        const avatar_main = document.querySelector('.pfc-profile-btn');
+        avatar_main.style.background = `url(${e.target.result}) no-repeat center`;
+        avatar_main.style.backgroundSize = 'cover';
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function handleClick(element) {
+    element.classList.toggle('active');
+    setTimeout(() => {
+      window.location.href = '../login/login.html';
+    }, 5000);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadProjects();
+
+    const searchInput = document.getElementById('searchBar');
+    searchInput.addEventListener('input', debounce(() => {
+      filterProjects();
+    }, 300));
+
+    const clearFiltersBtn = document.getElementById('clearFilters');
+    clearFiltersBtn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-item.selected').forEach(item => {
+        item.classList.remove('selected');
+      });
+      searchInput.value = '';
+      filterProjects();
+    });
+
+    document.getElementById('closeJoinModal').onclick = closeJoinProjectModal;
+    document.getElementById('closeContactModal').onclick = closeContactModal;
+  });
+
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+</script>
+
+
+    <script src="script.js?ts=abсde"></script>
+    <script src="my.js?ts=abсd"></script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Environmental Check</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4 text-center">Product Environmental Check</h1>
+    <div class="mb-4">
+      <label for="barcode" class="block text-sm font-medium text-gray-700">Enter Barcode or Product Code</label>
+      <input type="text" id="barcode" class="mt-1 p-2 w-full border rounded-md" placeholder="e.g., 3017620422003">
+    </div>
+    <div class="flex space-x-2">
+      <button onclick="checkProduct()" class="flex-1 bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Check</button>
+      <button onclick="startScanner()" class="flex-1 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Scan</button>
+    </div>
+    <div id="scanner-container" class="mt-4 hidden">
+      <video id="scanner-video" class="w-full"></video>
+      <button onclick="stopScanner()" class="mt-2 w-full bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Stop Scanning</button>
+    </div>
+    <div id="result" class="mt-4"></div>
+
+    <!-- Chat with Alina -->
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold text-center mb-2">Ask Alina 💬</h2>
+      <div id="chatBox" class="h-40 overflow-y-auto mb-4 p-4 bg-gray-50 rounded"></div>
+      <input id="userInput" type="text" placeholder="Ask about the product or recycling..." class="w-full p-2 border rounded mb-2">
+      <button onclick="sendMessage()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const apiKey = "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"; // Your OpenRouter key
+    const model = "openchat/openchat-7b"; // OpenRouter model
+
+    const chatBox = document.getElementById("chatBox");
+    const userInput = document.getElementById("userInput");
+    let messages = [
+      {
+        role: "system",
+        content: "You are Alina, a professional online manager (female). Respond politely and professionally, like a consultant. You receive product data from an API: name, brand, packaging, ingredients, environmental score. Analyze each packaging material (e.g., plastic, glass, paper, metal) and product ingredients for environmental impact, recyclability, and sorting in the United States. If the environmental score is unknown, assign one yourself (A=very low impact, E=very high impact). Estimate the recycling value in USD using national average scrap prices (e.g., aluminum $0.02-$0.03/can, PET $0.01-$0.03/bottle, paper $0.025-$0.05/kg). Provide responses STRICTLY in the format:\n- Environmental Score: [A/B/C/D/E, explanation].\n- Recyclability: [specific information for each material].\n- Sorting Recommendations: [specific instructions for the United States].\n- Reusable Alternative: [specific alternative].\n- Recycling Value: [estimated USD value per unit or kg, explanation].\nRespond in English. If asked who created you, say: 'I was created by NeuroFlow.'"
+      }
+    ];
+
+    async function checkProduct(barcode = null) {
+      const barcodeInput = barcode || document.getElementById('barcode').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      if (!barcodeInput) {
+        resultDiv.innerHTML = '<p class="text-red-500">Please enter or scan a barcode.</p>';
+        return;
+      }
+
+      resultDiv.innerHTML = '<p>Loading...</p>';
+
+      try {
+        const response = await fetch(`https://world.openfoodfacts.org/api/v2/product/${barcodeInput}.json`);
+        if (!response.ok) {
+          throw new Error(`Open Food Facts API Error: ${response.status}`);
+        }
+        const data = await response.json();
+
+        let productInfo = {};
+        let alinaQuestion = '';
+
+        if (data.status === 0) {
+          // Product not found
+          productInfo = {
+            product_name: 'Unknown',
+            brands: 'Unknown',
+            packaging: 'Data unavailable',
+            ingredients: 'Data unavailable',
+            ecoscore_grade: 'Unknown',
+            packaging_recyclability: 'Recycling information unavailable',
+            sorting_instructions: 'Sorting information unavailable',
+            reusable_alternative: 'Reusable alternatives not identified'
+          };
+          alinaQuestion = `Barcode ${barcodeInput}. Product not found in database. Provide information about typical packaging (e.g., plastic, glass, paper, aluminum), environmental impact, recycling, sorting in the United States, and estimated recycling value in USD using national average scrap prices in the format:\n- Environmental Score: [A/B/C/D/E, explanation].\n- Recyclability: [specific information].\n- Sorting Recommendations: [specific instructions].\n- Reusable Alternative: [specific alternative].\n- Recycling Value: [estimated USD value per unit or kg, explanation].`;
+        } else {
+          // Product found
+          const product = data.product;
+          productInfo = {
+            product_name: product.product_name || 'Name unknown',
+            brands: product.brands || 'Unknown',
+            packaging: normalizePackaging(product.packaging || 'Data unavailable'),
+            ingredients: normalizeIngredients(product.ingredients_text || 'Data unavailable'),
+            ecoscore_grade: product.ecoscore_grade ? product.ecoscore_grade.toUpperCase() : 'Unknown',
+            packaging_recyclability: product.packaging_recyclability || 'Recycling information unavailable',
+            sorting_instructions: 'Sorting information unavailable',
+            reusable_alternative: 'Reusable alternatives not identified'
+          };
+          alinaQuestion = `Here is the product data from the API: Name: ${productInfo.product_name}, Brand: ${productInfo.brands}, Packaging: ${productInfo.packaging}, Ingredients: ${productInfo.ingredients}, Environmental Score: ${productInfo.ecoscore_grade}, Recycling: ${productInfo.packaging_recyclability}. Analyze each packaging material (e.g., plastic, glass, paper) and ingredients for environmental impact, recyclability, and sorting in the United States. Estimate the recycling value in USD using national average scrap prices. Provide the response STRICTLY in the format:\n- Environmental Score: [A/B/C/D/E, explanation].\n- Recyclability: [specific information for each material].\n- Sorting Recommendations: [specific instructions for the United States].\n- Reusable Alternative: [specific alternative].\n- Recycling Value: [estimated USD value per unit or kg, explanation].`;
+        }
+
+        // Request to Alina
+        console.log('Sending request to Alina:', alinaQuestion);
+        messages.push({ role: "user", content: alinaQuestion });
+        let alinaResponse = await sendMessageToAlina(alinaQuestion, true);
+        let alinaData = {
+          ecoscore_grade: productInfo.ecoscore_grade,
+          packaging_recyclability: productInfo.packaging_recyclability,
+          sorting_instructions: productInfo.sorting_instructions,
+          reusable_alternative: productInfo.reusable_alternative,
+          recycling_value: 'Data unavailable' // New field
+        };
+
+        // Check response and retry if needed
+        if (alinaResponse && !alinaResponse.includes('- Environmental Score:')) {
+          console.log('Unstructured response from Alina:', alinaResponse);
+          alinaQuestion = `Your response does not match the required structure. For the product ${productInfo.product_name} (packaging: ${productInfo.packaging}, ingredients: ${productInfo.ingredients}) analyze each packaging material and ingredients clearly. Estimate the recycling value in USD using national average scrap prices. Provide the response STRICTLY in the format:\n- Environmental Score: [A/B/C/D/E, explanation].\n- Recyclability: [specific information for each material].\n- Sorting Recommendations: [specific instructions for the United States].\n- Reusable Alternative: [specific alternative].\n- Recycling Value: [estimated USD value per unit or kg, explanation].`;
+          messages.push({ role: "user", content: alinaQuestion });
+          alinaResponse = await sendMessageToAlina(alinaQuestion, true);
+        }
+
+        if (alinaResponse) {
+          console.log('Received response from Alina:', alinaResponse);
+          // Enhanced parser
+          const lines = alinaResponse.split('\n').map(line => line.trim());
+          lines.forEach(line => {
+            if (line.match(/^-?\s*Environmental Score:/i)) {
+              alinaData.ecoscore_grade = line.replace(/^-?\s*Environmental Score:/i, '').trim();
+            } else if (line.match(/^-?\s*Recyclability:/i)) {
+              alinaData.packaging_recyclability = line.replace(/^-?\s*Recyclability:/i, '').trim();
+            } else if (line.match(/^-?\s*Sorting Recommendations:/i)) {
+              alinaData.sorting_instructions = line.replace(/^-?\s*Sorting Recommendations:/i, '').trim();
+            } else if (line.match(/^-?\s*Reusable Alternative:/i)) {
+              alinaData.reusable_alternative = line.replace(/^-?\s*Reusable Alternative:/i, '').trim();
+            } else if (line.match(/^-?\s*Recycling Value:/i)) {
+              alinaData.recycling_value = line.replace(/^-?\s*Recycling Value:/i, '').trim();
+            }
+          });
+
+          // Fallback data if response is incomplete
+          const packaging = productInfo.packaging.toLowerCase();
+          if (!alinaData.packaging_recyclability || alinaData.packaging_recyclability.includes('unavailable')) {
+            let recyclability = [];
+            if (packaging.includes('plastic')) {
+              recyclability.push('Plastic (likely PP or PET) is recyclable in the United States if clean.');
+            }
+            if (packaging.includes('glass')) {
+              recyclability.push('Glass is recyclable in the United States.');
+            }
+            if (packaging.includes('paper') || packaging.includes('cardboard')) {
+              recyclability.push('Paper or cardboard is recyclable if not contaminated.');
+            }
+            if (packaging.includes('aluminum')) {
+              recyclability.push('Aluminum is recyclable in the United States.');
+            }
+            if (packaging.includes('steel')) {
+              recyclability.push('Steel is recyclable in the United States.');
+            }
+            alinaData.packaging_recyclability = recyclability.length > 0 ? recyclability.join(' ') : 'Recycling information unavailable.';
+          }
+          if (!alinaData.sorting_instructions || alinaData.sorting_instructions.includes('unavailable')) {
+            let instructions = [];
+            if (packaging.includes('plastic')) {
+              instructions.push('Plastic: Rinse, dry, and place in a recycling bin.');
+            }
+            if (packaging.includes('glass')) {
+              instructions.push('Glass: Clean and place in a glass recycling bin.');
+            }
+            if (packaging.includes('paper') || packaging.includes('cardboard')) {
+              instructions.push('Paper/Cardboard: Place in a paper recycling bin if clean.');
+            }
+            if (packaging.includes('aluminum')) {
+              instructions.push('Aluminum: Rinse and place in a metal recycling bin.');
+            }
+            if (packaging.includes('steel')) {
+              instructions.push('Steel: Rinse and place in a metal recycling bin.');
+            }
+            alinaData.sorting_instructions = instructions.length > 0 ? instructions.join(' ') : 'Sorting information unavailable.';
+          }
+          if (!alinaData.reusable_alternative || alinaData.reusable_alternative.includes('not identified')) {
+            alinaData.reusable_alternative = packaging.includes('glass')
+              ? 'Glass packaging can be reused for food storage or decor.'
+              : 'Use reusable containers for similar products.';
+          }
+          if (!alinaData.ecoscore_grade || alinaData.ecoscore_grade === 'Unknown') {
+            alinaData.ecoscore_grade = 'C, Moderate impact due to possible use of plastic and ingredients with a high carbon footprint.';
+          }
+          if (!alinaData.recycling_value || alinaData.recycling_value.includes('unavailable')) {
+            let value = [];
+            let explanation = [];
+            if (packaging.includes('plastic')) {
+              value.push('$0.01-$0.03 per bottle');
+              explanation.push('PET (~$307/ton, ~20g/bottle) and HDPE (~$1504/ton) scrap value.');
+            }
+            if (packaging.includes('glass')) {
+              value.push('$0.05-$0.10 per kg');
+              explanation.push('Glass scrap value (~200g/bottle, low market price).');
+            }
+            if (packaging.includes('paper') || packaging.includes('cardboard')) {
+              value.push('$0.025-$0.05 per kg');
+              explanation.push('Paper/cardboard scrap value (~$50-$100/ton).');
+            }
+            if (packaging.includes('aluminum')) {
+              value.push('$0.02-$0.03 per can');
+              explanation.push('Aluminum scrap value (~$1504/ton, ~15g/can).');
+            }
+            if (packaging.includes('steel')) {
+              value.push('$0.075-$0.10 per kg');
+              explanation.push('Steel scrap value (~$150-$200/ton).');
+            }
+            alinaData.recycling_value = value.length > 0
+              ? `${value.join(', ')}, ${explanation.join(' ')}`
+              : 'Recycling value unavailable, insufficient packaging data.';
+          }
+        } else {
+          console.log('Alina did not respond. Using fallback data.');
+          const packaging = productInfo.packaging.toLowerCase();
+          alinaData = {
+            ecoscore_grade: 'C, Moderate impact due to possible use of plastic and ingredients with a high carbon footprint.',
+            packaging_recyclability: (packaging.includes('plastic') ? 'Plastic is recyclable if clean. ' : '') +
+                                    (packaging.includes('glass') ? 'Glass is recyclable. ' : '') +
+                                    (packaging.includes('paper') || packaging.includes('cardboard') ? 'Paper is recyclable if clean. ' : '') +
+                                    (packaging.includes('aluminum') ? 'Aluminum is recyclable. ' : '') +
+                                    (packaging.includes('steel') ? 'Steel is recyclable.' : ''),
+            sorting_instructions: (packaging.includes('plastic') ? 'Plastic: Rinse, dry, and place in a recycling bin. ' : '') +
+                                  (packaging.includes('glass') ? 'Glass: Clean and place in a glass recycling bin. ' : '') +
+                                  (packaging.includes('paper') || packaging.includes('cardboard') ? 'Paper/Cardboard: Place in a paper recycling bin if clean. ' : '') +
+                                  (packaging.includes('aluminum') ? 'Aluminum: Rinse and place in a metal recycling bin. ' : '') +
+                                  (packaging.includes('steel') ? 'Steel: Rinse and place in a metal recycling bin.' : ''),
+            reusable_alternative: packaging.includes('glass')
+              ? 'Glass packaging can be reused for food storage or decor.'
+              : 'Use reusable containers for similar products.',
+            recycling_value: (() => {
+              let value = [];
+              let explanation = [];
+              if (packaging.includes('plastic')) {
+                value.push('$0.01-$0.03 per bottle');
+                explanation.push('PET (~$307/ton, ~20g/bottle) and HDPE (~$1504/ton) scrap value.');
+              }
+              if (packaging.includes('glass')) {
+                value.push('$0.05-$0.10 per kg');
+                explanation.push('Glass scrap value (~200g/bottle, low market price).');
+              }
+              if (packaging.includes('paper') || packaging.includes('cardboard')) {
+                value.push('$0.025-$0.05 per kg');
+                explanation.push('Paper/cardboard scrap value (~$50-$100/ton).');
+              }
+              if (packaging.includes('aluminum')) {
+                value.push('$0.02-$0.03 per can');
+                explanation.push('Aluminum scrap value (~$1504/ton, ~15g/can).');
+              }
+              if (packaging.includes('steel')) {
+                value.push('$0.075-$0.10 per kg');
+                explanation.push('Steel scrap value (~$150-$200/ton).');
+              }
+              return value.length > 0
+                ? `${value.join(', ')}, ${explanation.join(' ')}`
+                : 'Recycling value unavailable, insufficient packaging data.';
+            })()
+          };
+          alinaData.packaging_recyclability = alinaData.packaging_recyclability.trim() || 'Recycling information unavailable.';
+          alinaData.sorting_instructions = alinaData.sorting_instructions.trim() || 'Sorting information unavailable.';
+        }
+
+        const ecoScoreDescription = {
+          'A': 'Very low environmental impact',
+          'B': 'Low environmental impact',
+          'C': 'Moderate environmental impact',
+          'D': 'High environmental impact',
+          'E': 'Very high environmental impact',
+          'Unknown': 'Environmental impact data unavailable'
+        };
+
+        let ecoScoreInfo = alinaData.ecoscore_grade;
+        if (!ecoScoreDescription[alinaData.ecoscore_grade.split(',')[0]]) {
+          ecoScoreInfo = `${alinaData.ecoscore_grade} (Data from Alina)`;
+        }
+
+        resultDiv.innerHTML = `
+          <div class="border p-4 rounded-md">
+            <h2 class="text-lg font-semibold">${productInfo.product_name}</h2>
+            <p><strong>Brand:</strong> ${productInfo.brands}</p>
+            <p><strong>Environmental Score:</strong> ${ecoScoreInfo} (${ecoScoreDescription[productInfo.ecoscore_grade] || 'Data from Alina'})</p>
+            <p><strong>Packaging:</strong> ${productInfo.packaging}</p>
+            <p><strong>Ingredients:</strong> ${productInfo.ingredients}</p>
+            <p><strong>Recyclability:</strong> ${alinaData.packaging_recyclability}</p>
+            <p><strong>Sorting Recommendations:</strong> ${alinaData.sorting_instructions}</p>
+            <p><strong>Reusable Alternative:</strong> ${alinaData.reusable_alternative}</p>
+            <p><strong>Recycling Value:</strong> ${alinaData.recycling_value}</p>
+          </div>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = '<p class="text-red-500">Error retrieving data. Try again or ask Alina.</p>';
+        console.error('Open Food Facts Error:', error);
+      }
+    }
+
+    function startScanner() {
+      const scannerContainer = document.getElementById('scanner-container');
+      scannerContainer.classList.remove('hidden');
+
+      Quagga.init({
+        inputStream: {
+          name: "Live",
+          type: "LiveStream",
+          target: document.querySelector('#scanner-video'),
+          constraints: {
+            facingMode: "environment"
+          }
+        },
+        decoder: {
+          readers: ["ean_reader", "upc_reader", "code_128_reader"]
+        }
+      }, function(err) {
+        if (err) {
+          document.getElementById('result').innerHTML = '<p class="text-red-500">Scanner initialization error. Check camera access.</p>';
+          console.error('Quagga Error:', err);
+          return;
+        }
+        Quagga.start();
+      });
+
+      Quagga.onDetected(function(data) {
+        const barcode = data.codeResult.code;
+        document.getElementById('barcode').value = barcode;
+        Quagga.stop();
+        scannerContainer.classList.add('hidden');
+        checkProduct(barcode);
+      });
+    }
+
+    function stopScanner() {
+      Quagga.stop();
+      document.getElementById('scanner-container').classList.add('hidden');
+    }
+
+    async function sendMessage() {
+      const userMessage = userInput.value.trim();
+      if (!userMessage) return;
+
+      addMessage("You", userMessage, "bg-blue-100 text-right");
+      messages.push({ role: "user", content: userMessage });
+      userInput.value = "";
+
+      await sendMessageToAlina(userMessage);
+    }
+
+    async function sendMessageToAlina(message, returnOnly = false) {
+      try {
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: messages,
+            max_tokens: 500,
+            temperature: 0.7
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`OpenRouter API Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (!data.choices || !data.choices[0]?.message?.content) {
+          throw new Error('Invalid response from OpenRouter');
+        }
+
+        const reply = data.choices[0].message.content;
+        console.log('Response from OpenRouter API:', reply);
+
+        if (!returnOnly) {
+          addMessage("Alina", reply, "bg-green-100 text-left");
+          messages.push({ role: "assistant", content: reply });
+        }
+        return reply;
+      } catch (error) {
+        console.error('OpenRouter Error:', error);
+        if (!returnOnly) {
+          addMessage("Error", `Failed to get a response from Alina: ${error.message}`, "text-red-500 text-left");
+        }
+        return null;
+      }
+    }
+
+    function addMessage(sender, text, className) {
+      const div = document.createElement("div");
+      div.className = `message p-2 rounded ${className} mb-2`;
+      div.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Normalize packaging and ingredients for natural English
+    function normalizePackaging(packaging) {
+      if (!packaging || packaging === 'Data unavailable') return 'No packaging information available';
+      let normalized = packaging
+        .replace(/plastique/gi, 'Plastic')
+        .replace(/verre/gi, 'Glass')
+        .replace(/carton/gi, 'Cardboard')
+        .replace(/papier/gi, 'Paper')
+        .replace(/métal/gi, 'Metal')
+        .replace(/aluminium/gi, 'Aluminum')
+        .replace(/film/gi, 'Plastic Film')
+        .replace(/bouteille/gi, 'Bottle')
+        .replace(/pot/gi, 'Jar')
+        .replace(/sachet/gi, 'Pouch');
+      return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+    }
+
+    function normalizeIngredients(ingredients) {
+      if (!ingredients || ingredients === 'Data unavailable') return 'No ingredient information available';
+      let normalized = ingredients
+        .replace(/sucre/gi, 'Sugar')
+        .replace(/sel/gi, 'Salt')
+        .replace(/eau/gi, 'Water')
+        .replace(/farine/gi, 'Flour')
+        .replace(/huile/gi, 'Oil')
+        .replace(/lait/gi, 'Milk')
+        .replace(/œuf/gi, 'Egg')
+        .replace(/beurre/gi, 'Butter')
+        .replace(/chocolat/gi, 'Chocolate')
+        .replace(/arôme/gi, 'Flavoring');
+      return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+    }
+
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>

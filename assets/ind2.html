@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>NeuroFlow</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/Testic.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/my.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/tyle_forum.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/style_topics.css?ts=abcdsd">
+  <link rel="stylesheet" href="assets/folder_js_css/css/tyle_top_topics.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/news.css">
+  <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="assets/folder_js_css/css/test.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/style_manager_chat.css">
+  <!-- <link href="test/test.css" rel="stylesheet"> -->
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/folder_js_css/css/partners-for-change.css">
+  <!-- =======================================================
+  * Template Name: iLanding
+  * Template URL: https://bootstrapmade.com/ilanding-bootstrap-landing-page-template/
+  * Updated: Nov 12 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename hover-underline">NeuroFlow</h1>
+        
+      </a>
+
+<nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a id="home_func" class="active block_up_little_lit home_type" onclick="toggleBlocks(this.id)">Home</a></li>
+    <li><a id="about_func" class="block_up_little_lit about_type" onclick="toggleBlocks(this.id)">About</a></li>
+    <li><a id="features_func" class="block_up_little_lit features_type" onclick="toggleBlocks(this.id)">Features</a></li>
+    <li><a id="top_func" class="block_up_little_lit top_type" onclick="toggleBlocks(this.id)">Top</a></li>
+    <li><a id="topics_container_func" class="block_up_little_lit chat_type" onclick="toggleBlocks(this.id)">Chat</a></li>
+    <li><a id="news_func" class="block_up_little_lit" onclick="toggleBlocks(this.id)">News</a></li>
+    <li><a id="download_func" class="block_up_little_lit download_type" onclick="toggleBlocks(this.id)">Download</a></li>
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+      <div class="container_avatar_login">
+        <div class="profile-btn block_up_little_lit" onclick="toggleProfile()"></div>
+      <div class="profile-overlay" id="profile-overlay"></div>
+    
+      <div class="profile-modal" id="profile-modal">
+        <div class="profile-modal-header">
+            <button class="profile-close-btn" onclick="toggleProfile()">✕</button>
+        </div>
+        <div class="profile-avatar-container">
+            <img src="../assets/folder_js_css/assets/img/cart.jpg" alt="" class="profile-avatar" id="profile-avatar" onclick="document.getElementById('profile-avatarInput').click()">
+        </div>
+        <input type="file" id="profile-avatarInput" accept="image/*" onchange="changeAvatar(event)">
+        <div class="profile-nickname" id="profile-nickname" onclick="editNickname()">User123</div>
+        <div class="profile-email">user123@example.com</div>
+        <div class="profile-info-item">Status: <span class="mint_grean">online</span></div>
+        <div class="profile-info-item">Registration date: 15.03.2023</div>
+      </div>
+      <script>
+        function toggleProfile() {
+          const modal = document.getElementById('profile-modal');
+          const overlay = document.getElementById('profile-overlay');
+          
+          const nicknameInput = document.querySelector('.profile-nickname-input');
+          if (nicknameInput) {
+              const nicknameValue = nicknameInput.value.trim();
+              if (!nicknameValue) {
+                  return;
+              }
+              const newNicknameDiv = document.createElement('div');
+              newNicknameDiv.textContent = nicknameValue;
+              newNicknameDiv.className = 'profile-nickname';
+              newNicknameDiv.id = 'profile-nickname';
+              newNicknameDiv.onclick = editNickname;
+              nicknameInput.replaceWith(newNicknameDiv);
+          }
+  
+          modal.classList.toggle('active');
+          overlay.classList.toggle('active');
+      }
+  
+        function editNickname() {
+          const nicknameDiv = document.getElementById('profile-nickname');
+          const currentNickname = nicknameDiv.textContent;
+  
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.value = currentNickname;
+          input.className = 'profile-nickname-input';
+          input.maxLength = 18;
+          
+          nicknameDiv.replaceWith(input);
+          input.focus();
+  
+          input.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter') {
+                  const newNickname = input.value.trim();
+                  if (newNickname) {
+                      const newNicknameDiv = document.createElement('div');
+                      newNicknameDiv.textContent = newNickname;
+                      newNicknameDiv.className = 'profile-nickname';
+                      newNicknameDiv.id = 'profile-nickname';
+                      newNicknameDiv.onclick = editNickname;
+                      input.replaceWith(newNicknameDiv);
+                  }
+              }
+          });
+          
+      }
+  
+        function changeAvatar(event) {
+          const file = event.target.files[0];
+          if (file) {
+              const reader = new FileReader();
+              const avatar = document.getElementById('profile-avatar');
+              
+              reader.onload = function(e) {
+                  avatar.src = e.target.result;
+                  const avatar_main = document.querySelector('.profile-btn');
+                  avatar_main.style.background = `url(${e.target.result})`;
+                  avatar_main.style.backgroundSize = '40px 40px';
+              };
+              reader.readAsDataURL(file);
+          }
+      }
+  
+        document.getElementById('profile-overlay').addEventListener('click', function() {
+            toggleProfile();
+        });
+  
+        document.getElementById('profile-modal').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+      </script>
+
+      <link href="Test/my_button_download.css" rel="stylesheet">
+      <div class="login_container block_up_little_lit" onclick="handleClick(this)">
+        <span class="login_text">LOGIN</span>
+        <svg class="login_fingerprint login_fingerprint-base" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+            <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+            <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_fingerprint login_fingerprint-active" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+            <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+            <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_ok" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <path d="M34.912 50.75l10.89 10.125L67 36.75" fill="none" stroke="#fff" stroke-width="6"></path>
+        </svg>
+      </div>
+      
+      <script>
+        const container = document.querySelector('.login_container');
+        
+        function handleClick(element) {
+          element.classList.toggle('active');
+          setTimeout(() => {
+            window.location.href = '../login/login.html';
+          }, 5000);
+        }
+        
+        container.addEventListener('animationend', () => {
+          container.classList.remove('active');
+        });
+      </script>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section block_all_h">
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+  
+          <div class="row align-items-center">
+            <div class="col-lg-6"> 
+              <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+                <!-- <div class="company-badge mb-4">
+                  <i class="bi bi-gear-fill me-2"></i>
+                  Working for your success
+                </div> -->
+  
+                <h1 class="mb-4">
+                  Название которое <br>
+                  передает суть проєкта <br>
+                  <span class="accent-text">крутая фраза</span>
+                </h1>
+  
+                <p class="mb-4 mb-md-5">
+                  Каждый день технологии меняют мир, и мы хотим, чтобы они работали на благо общества.
+                  Наши решения помогают людям, делают процессы эффективнее и открывают новые возможности.
+                </p>
+  
+                <div class="hero-buttons">
+                  <a href="#about" class="btn btn-primary me-0 me-sm-2 mx-1 block_up_little">Get Started</a>
+                  <!-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-link mt-2 mt-sm-0 glightbox">
+                    <i class="bi bi-play-circle me-1"></i>
+                    Play Video
+                  </a> -->
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-6">
+              <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
+                <img src="assets/img/illustration-1.webp" alt="Hero Image" class="img-fluid">
+  
+                <!-- <div class="customers-badge">
+                  <div class="customer-avatars">
+                    <img src="assets/img/avatar-1.webp" alt="Customer 1" class="avatar">
+                    <img src="assets/img/avatar-2.webp" alt="Customer 2" class="avatar">
+                    <img src="assets/img/avatar-3.webp" alt="Customer 3" class="avatar">
+                    <img src="assets/img/avatar-4.webp" alt="Customer 4" class="avatar">
+                    <img src="assets/img/avatar-5.webp" alt="Customer 5" class="avatar">
+                    <span class="avatar more">12+</span>
+                  </div>
+                  <p class="mb-0 mt-2">12,000+ lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+                </div> -->
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </section><!-- /Hero Section -->
+    <!-- Features Section -->
+    <section id="features" class="features section block_all_h">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Features</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="d-flex justify-content-center">
+
+          <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
+
+            <li class="nav-item">
+              <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                <h4>Modisit</h4>
+              </a>
+            </li><!-- End tab nav item -->
+
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+                <h4>Praesenti</h4>
+              </a><!-- End tab nav item -->
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+                <h4>Explica</h4>
+              </a>
+            </li><!-- End tab nav item -->
+
+          </ul>
+
+        </div>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="tab-pane fade active show" id="features-tab-1">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Voluptatem dignissimos provident</h3>
+                <p class="fst-italic text_hov text_hov">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua.
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span class="text_hov">Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span class="text_hov">Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span class="text_hov">Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-illustration-1.webp" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End tab content item -->
+
+          <div class="tab-pane fade" id="features-tab-2">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Neque exercitationem debitis</h3>
+                <p class="fst-italic">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua.
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-illustration-2.webp" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End tab content item -->
+
+          <div class="tab-pane fade" id="features-tab-3">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Voluptatibus commodi accusamu</h3>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</span></li>
+                </ul>
+                <p class="fst-italic">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua.
+                </p>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-illustration-3.webp" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End tab content item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Features Section -->
+
+    <!-- Features Cards Section -->
+    <section id="features-cards" class="features-cards section block_all_h">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="feature-box orange block_lub">
+              <i class="bi bi-award"></i>
+              <h4>Corporis voluptates</h4>
+              <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="feature-box blue block_lub">
+              <i class="bi bi-patch-check"></i>
+              <h4>Explicabo consectetur</h4>
+              <p>Est autem dicta beatae suscipit. Sint veritatis et sit quasi ab aut inventore</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="feature-box green block_lub">
+              <i class="bi bi-sunrise"></i>
+              <h4>Ullamco laboris</h4>
+              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="feature-box red block_lub">
+              <i class="bi bi-shield-check"></i>
+              <h4>Labore consequatur</h4>
+              <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Features Cards Section -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section light-background block_all_h">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Services</h2>
+          <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        </div><!-- End Section Title -->
+  
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+  
+          <div class="row g-4">
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="service-card d-flex block_lub">
+                <div class="icon flex-shrink-0">
+                  <i class="bi bi-activity"></i>
+                </div>
+                <div>
+                  <h3>Nesciunt Mete</h3>
+                  <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+                  <!-- <a href="service-details.html" class="read-more">Read More <i class="bi bi-arrow-right"></i></a> -->
+                </div>
+              </div>
+            </div><!-- End Service Card -->
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="service-card d-flex block_lub">
+                <div class="icon flex-shrink-0">
+                  <i class="bi bi-diagram-3"></i>
+                </div>
+                <div>
+                  <h3>Eosle Commodi</h3>
+                  <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+                  <!-- <a href="service-details.html" class="read-more">Read More <i class="bi bi-arrow-right"></i></a> -->
+                </div>
+              </div>
+            </div><!-- End Service Card -->
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="service-card d-flex block_lub">
+                <div class="icon flex-shrink-0">
+                  <i class="bi bi-easel"></i>
+                </div>
+                <div>
+                  <h3>Ledo Markt</h3>
+                  <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+                  <!-- <a href="service-details.html" class="read-more">Read More <i class="bi bi-arrow-right"></i></a> -->
+                </div>
+              </div>
+            </div><!-- End Service Card -->
+  
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="service-card d-flex block_lub">
+                <div class="icon flex-shrink-0">
+                  <i class="bi bi-clipboard-data"></i>
+                </div>
+                <div>
+                  <h3>Asperiores Commodit</h3>
+                  <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
+                  <!-- <a href="service-details.html" class="read-more">Read More <i class="bi bi-arrow-right"></i></a> -->
+                </div>
+              </div>
+            </div><!-- End Service Card -->
+  
+          </div>
+  
+        </div>
+  
+    </section><!-- /Services Section -->
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients section block_all_h">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 40
+                },
+                "480": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 60
+                },
+                "640": {
+                  "slidesPerView": 4,
+                  "spaceBetween": 80
+                },
+                "992": {
+                  "slidesPerView": 6,
+                  "spaceBetween": 120
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Clients Section -->
+
+    <!-- Faq Section -->
+    <section class="faq-section section light-background block_all_h" id="faq">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5" data-aos="fade-up">
+        <h2 class="faq-heading">Got Questions? Find Answers Here</h2>
+        <p class="faq-text">Explore our frequently asked questions to get quick answers about our services and features.</p>
+        <div class="faq-decor d-none d-lg-block" data-aos="fade-up" data-aos-delay="200">
+          <svg width="180" height="100" viewBox="0 0 180 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 90 C40 60, 80 20, 130 40 C150 50, 170 70, 170 90" stroke="var(--accent-color)" stroke-width="4" fill="none"/>
+            <circle cx="170" cy="90" r="6" fill="var(--accent-color)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="col-lg-7" data-aos="fade-up" data-aos-delay="300">
+        <div class="faq-accordion">
+          <div class="faq-card faq-active block_lub">
+            <div class="faq-header">
+              <h3>What makes your service unique?</h3>
+              <span class="faq-icon bi bi-plus"></span>
+            </div>
+            <div class="faq-body">
+              <p>We offer personalized solutions tailored to your needs, combining innovative technology with exceptional customer support.</p>
+            </div>
+          </div>
+
+          <div class="faq-card block_lub">
+            <div class="faq-header">
+              <h3>How can I get started?</h3>
+              <span class="faq-icon bi bi-plus"></span>
+            </div>
+            <div class="faq-body">
+              <p>Simply sign up on our website, choose your plan, and our team will guide you through the onboarding process.</p>
+            </div>
+          </div>
+
+          <div class="faq-card block_lub">
+            <div class="faq-header">
+              <h3>What support options are available?</h3>
+              <span class="faq-icon bi bi-plus"></span>
+            </div>
+            <div class="faq-body">
+              <p>We provide 24/7 support through chat, email, and phone, plus a comprehensive knowledge base.</p>
+            </div>
+          </div>
+
+          <div class="faq-card block_lub">
+            <div class="faq-header">
+              <h3>Can I customize my plan?</h3>
+              <span class="faq-icon bi bi-plus"></span>
+            </div>
+            <div class="faq-body">
+              <p>Yes! Our plans are flexible and can be customized to meet your specific requirements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </section><!-- /Faq Section -->
+
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section block_all_h">
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+  
+          <div class="row gy-4">
+  
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Clients</p>
+              </div>
+            </div><!-- End Stats Item -->
+  
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="7" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Projects</p>
+              </div>
+            </div><!-- End Stats Item -->
+  
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="53" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Hours Of Support</p>
+              </div>
+            </div><!-- End Stats Item -->
+  
+            <div class="col-lg-3 col-md-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end="3" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Workers</p>
+              </div>
+            </div><!-- End Stats Item -->
+  
+          </div>
+  
+        </div>
+  
+    </section><!-- /Stats Section -->
+
+
+
+
+    <!-- About Section -->
+    <section id="about" class="about section block_all_h hidden_all_h">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 align-items-center justify-content-between">
+
+          <div class="col-xl-5" data-aos="fade-up" data-aos-delay="200">
+            <span class="about-meta">MORE ABOUT US</span>
+            <h2 class="about-title">Building the Future of Technology</h2>
+            <p class="about-description">We are a team of passionate developers driven by innovation and the power of technology. Our mission is to create cutting-edge solutions that solve real-world problems and enhance the digital experience.</p>
+
+            <div class="row feature-list-wrapper">
+              <div class="col-md-6">
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle-fill"></i> Smart & impactful solutions</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Breaking boundaries & innovating</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Creativity & precision</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle-fill"></i> User-focused technology</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Cutting-edge development</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Future-driven mindset</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="info-wrapper">
+              <!-- <div class="row gy-4">
+                <div class="col-lg-5">
+                  <div class="profile d-flex align-items-center gap-3">
+                    <img src="assets/img/avatar-1.webp" alt="CEO Profile" class="profile-image">
+                    <div>
+                      <h4 class="profile-name">Mario Smith</h4>
+                      <p class="profile-position">CEO &amp; Founder</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-7">
+                  <div class="contact-info d-flex align-items-center gap-2">
+                    <i class="bi bi-telephone-fill"></i>
+                    <div>
+                      <p class="contact-label">Call us anytime</p>
+                      <p class="contact-number">+123 456-789</p>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+
+          <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="image-wrapper">
+              <div class="images position-relative" data-aos="zoom-out" data-aos-delay="400">
+                <img src="assets/img/about-5.webp" alt="Business Meeting" class="img-fluid main-image rounded-4">
+                <img src="assets/img/about-2.webp" alt="Team Discussion" class="img-fluid small-image rounded-4">
+              </div>
+              <!-- <div class="experience-badge floating">
+                <h3>15+ <span>Years</span></h3>
+                <p>Of experience in business service</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Features Section -->
+    <section id="features_one" class="features_one section block_all_h hidden_all_h features">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Features</h2>
+        <p>Якась коротка фраза стосовно теми</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="d-flex justify-content-center">
+
+          <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
+
+            <li class="nav-item">
+              <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                <h4>Перша</h4>
+              </a>
+            </li><!-- End tab nav item -->
+
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+                <h4>Друга</h4>
+              </a><!-- End tab nav item -->
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+                <h4>Третя</h4>
+              </a>
+            </li><!-- End tab nav item -->
+
+          </ul>
+
+        </div>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="tab-pane fade active show" id="features-tab-1">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Короткий заголовок</h3>
+                <p class="fst-italic text_hov">
+                  2-3 речення, в яких розкривається мета створення, ідея та в кінці згадується про 2-4 аспекти, які описуються нижче
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span class="text_hov">Перший аспект</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span class="text_hov">Другий аспект</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span class="text_hov">Третій аспект</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-illustration-1.webp" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End tab content item -->
+
+          <div class="tab-pane fade" id="features-tab-2">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Короткий заголовок
+                </h3>
+                <p class="fst-italic">
+                  2-3 речення, в яких розкривається мета створення, ідея та в кінці згадується про 2-4 аспекти, які описуються нижче
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Перший аспект</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Другий аспект</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Третій аспект</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Четвертий аспект</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-illustration-2.webp" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End tab content item -->
+
+          <div class="tab-pane fade" id="features-tab-3">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Короткий заголовок</h3>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Перший аспект</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Другий аспект</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Третій аспект</span></li>
+                </ul>
+                <p class="fst-italic">
+                  2-3 речення, в яких розкривається мета створення та ідея/інноваційність
+                </p>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="assets/img/features-illustration-3.webp" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End tab content item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Features Section -->
+
+    <!-- Features Cards Section -->
+    <section id="features_cards_two" class="features_cards_two section block_all_h hidden_all_h features-cards">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="feature-box orange">
+              <i class="bi bi-award"></i>
+              <h4>Перша перевага (наприклад винахідливісмть)</h4>
+              <p>Коротка аргументація чому</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="feature-box blue">
+              <i class="bi bi-patch-check"></i>
+              <h4>Друга перевага (кваліфікованість)</h4>
+              <p>Коротка аргументація чому</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="feature-box green">
+              <i class="bi bi-sunrise"></i>
+              <h4>Третя перевага</h4>
+              <p>Коротка аргументація чому</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+          <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="feature-box red">
+              <i class="bi bi-shield-check"></i>
+              <h4>Четверта перевага</h4>
+              <p>Коротка аргументація чому</p>
+            </div>
+          </div><!-- End Feature Borx-->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Features Cards Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section block_all_h hidden_all_h">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row content justify-content-center align-items-center position-relative">
+      <h2 class="display-4 mb-4 text-center">Our program</h2>
+      <div class="btn-ctr">
+        <button id="button" class="but_downl"></button>
+      </div>
+
+      <!-- Dot Pattern Groups -->
+      <div class="dots dots-1">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="dot-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+          </pattern>
+          <rect width="100" height="100" fill="url(#dot-pattern)"></rect>
+        </svg>
+      </div>
+
+      <div class="dots dots-2">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="dot-pattern-2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+          </pattern>
+          <rect width="100" height="100" fill="url(#dot-pattern-2)"></rect>
+        </svg>
+      </div>
+    </div>
+  </div>
+    </section><!-- /Call To Action Section -->
+
+    <section class="plans-section block_all_h hidden_all_h" id="plans-section">
+      <div class="plans-center-text plans-margin-bottom-big" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="plans-heading-secondary">
+          Hosting Plans
+        </h2>
+      </div>
+
+      <div class="plans-row" data-aos="fade-up" data-aos-delay="100">
+        <div class="plans-col-1-of-3">
+          <div class="plans-card">
+            <div class="plans-card__side plans-card__side--front-1">
+              <div class="plans-card__title plans-card__title--1">
+                <i class="fas fa-paper-plane"></i>
+                <h4 class="plans-card__heading">Basic</h4>
+              </div>
+
+              <div class="plans-card__details">
+                <ul>
+                  <li>1 Website</li>
+                  <li>50 GB SSD Storage</li>
+                  <li>Unmetered Bandwidth</li>
+                  <li>Free SSL Certificate</li>
+                  <li>1 Included Domain</li>
+                  <li>1 Included Domain</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plans-card__side plans-card__side--back plans-card__side--back-1">
+              <div class="plans-card__cta">
+                <div class="plans-card__price-box">
+                  <p class="plans-card__price-only">Only</p>
+                  <p class="plans-card__price-value">$2.95/mo*</p>
+                </div>
+                <a href="#popup" class="plans-btn plans-btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plans-col-1-of-3">
+          <div class="plans-card">
+            <div class="plans-card__side plans-card__side--front-2">
+              <div class="plans-card__title plans-card__title--2">
+                <i class="fas fa-plane"></i>
+                <h4 class="plans-card__heading">Plus</h4>
+              </div>
+
+              <div class="plans-card__details">
+                <ul>
+                  <li>Includes Basic Package Features</li>
+                  <li>Unlimited Websites</li>
+                  <li>Unlimited SSD Storage</li>
+                  <li>Unlimited Domains</li>
+                  <li>Unlimited Parked Domains</li>
+                  <li>Unlimited Sub Domains</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plans-card__side plans-card__side--back plans-card__side--back-2">
+              <div class="plans-card__cta">
+                <div class="plans-card__price-box">
+                  <p class="plans-card__price-only">Only</p>
+                  <p class="plans-card__price-value">$5.45/mo*</p>
+                </div>
+                <a href="#popup" class="plans-btn plans-btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plans-col-1-of-3">
+          <div class="plans-card">
+            <div class="plans-card__side plans-card__side--front-3">
+              <div class="plans-card__title plans-card__title--3">
+                <i class="fas fa-rocket"></i>
+                <h4 class="plans-card__heading">Pro</h4>
+              </div>
+
+              <div class="plans-card__details">
+                <ul>
+                  <li>Includes Plus Plan Features</li>
+                  <li>High Performance</li>
+                  <li>2 Spam Experts</li>
+                  <li>Free SSL Certificate</li>
+                  <li>Domain Privacy</li>
+                  <li>Site Backup - CodeGuard Basic</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plans-card__side plans-card__side--back plans-card__side--back-3">
+              <div class="plans-card__cta">
+                <div class="plans-card__price-box">
+                  <p class="plans-card__price-only">Only</p>
+                  <p class="plans-card__price-value">$13.95/mo</p>
+                </div>
+                <a href="#popup" class="plans-btn plans-btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plans-center-text plans-margin-top-huge" data-aos="fade-up" data-aos-delay="100">
+        <a href="#" class="plans-btn plans-btn--green">Get Started</a>
+      </div>
+    </section>
+
+
+<!-- Only the modified sections are shown; other parts remain unchanged -->
+<section id="topics-container" class="topics-container section block_all_h hidden_all_h">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="topics-content">
+          <div class="topics-header">
+            <h2>Chat</h2>
+          </div>
+          <div class="action-container">
+            <div class="search-container">
+              <input type="text" id="searchInput" placeholder="Пошук за назвою теми..." oninput="filterTopics()">
+            </div>
+            <div id="createTopicSection" class="hidden">
+              <button class="btn btn-primary create-topic-btn block_up_little_lit" onclick="showCreateTopicForm()">
+                <i class="bi bi-plus-lg"></i> Створити нову тему
+              </button>
+            </div>
+          </div>
+          <div id="topicForm" class="hidden">
+            <div class="form-group">
+              <input type="text" id="topicTitle" class="form-control" placeholder="Назва теми">
+            </div>
+            <button onclick="createTopic()" class="btn btn-primary block_up_little_lit">Створити</button>
+          </div>
+          <div id="authMessage" class="auth-message">
+            Будь ласка, <a href="#" onclick="toggleProfile()">увійдіть</a> щоб створити тему
+          </div>
+          <div id="topicList" class="topic-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal for delete confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Підтвердження видалення</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Ви впевнені, що хочете видалити цю тему? Це також видалить всі повідомлення в ній.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="forum-container" class="forum-container block_all_h hidden_all_h">
+  <div class="container">
+    <h2 id="topicTitle" class="mb-4">Тема форуму</h2>
+    <button class="btn btn-secondary mb-3 block_up_little_lit" onclick="toggleForumBlocks('topics-container')">
+      <i class="bi bi-arrow-left"></i> Повернутися до тем
+    </button>
+    <div id="forumAuthMessage" class="alert alert-info d-none">
+      Будь ласка, увійдіть, щоб додати повідомлення
+    </div>
+    <div id="messageInput" class="d-none">
+      <textarea id="messageText" class="form-control mb-2" rows="3" placeholder="Напишіть ваше повідомлення..."></textarea>
+      <button class="btn btn-primary block_up_little_lit" onclick="addMessage()">Відправити</button>
+    </div>
+    <div id="messageList" class="message-list mt-4"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteMessageModal" tabindex="-1" aria-labelledby="deleteMessageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteMessageModalLabel">Підтвердження видалення</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Ви впевнені, що хочете видалити це повідомлення? Це також видалить всі відповіді на нього.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteMessageBtn">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="top-messages-container" class="top-messages-container section block_all_h hidden_all_h">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="forum-content">
+          <div class="forum-header">
+            <h2 class="topic-title">Популярні теми</h2>
+          </div>
+          <div class="message-list" id="messageList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="news" class="section" style="background-color: rgb(241, 248, 256);">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title">Ecology News</h2>
+            <div class="news-container" id="newsContainer">
+                <!-- News items will be dynamically inserted here -->
+            </div>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </section>
+
+
+    <button class="chat-button" onclick="toggleChat()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+      </svg>
+  </button>
+
+  <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+          <span>Чат</span>
+          <button class="close-button" onclick="toggleChat()">×</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+          <!-- Здесь будут сообщения -->
+      </div>
+      <div class="chat-input">
+          <div class="chat-input-container">
+              <input type="text" id="messageInputUN" placeholder="Введите сообщение...">
+              <button class="test_rotate" onclick="sendMessage_nopobleminfuture()">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentCo>
+                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                  </svg>
+              </button>
+          </div>
+      </div>
+  </div>
+
+
+
+  </main>
+    <!-- Modals for Partners for Change -->
+  <div id="joinProjectModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="joinProjectTitle" class="modal-title"></h5>
+          <button type="button" class="btn-close" id="closeJoinModal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="joinProjectContent"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeJoinModalFooter">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteProjectModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Deletion</h5>
+          <button type="button" class="btn-close" id="cancelDeleteProject" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="deleteProjectMessage"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="confirmDeleteProject">Confirm</button>
+          <button type="button" class="btn btn-secondary" id="cancelDeleteProjectFooter">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contactModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Contact Project Creator</h5>
+          <button type="button" class="btn-close" id="closeContactModal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <iframe id="contactIframe" src="" class="w-100" style="height: 400px;"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeContactModalFooter">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">NeuroFlow</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hic solutasetp</h4>
+          <ul>
+            <li><a href="#">Molestiae accusamus iure</a></li>
+            <li><a href="#">Excepturi dignissimos</a></li>
+            <li><a href="#">Suscipit distinctio</a></li>
+            <li><a href="#">Dilecta</a></li>
+            <li><a href="#">Sit quas consectetur</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Nobis illum</h4>
+          <ul>
+            <li><a href="#">Ipsam</a></li>
+            <li><a href="#">Laudantium dolorum</a></li>
+            <li><a href="#">Dinera</a></li>
+            <li><a href="#">Trodelas</a></li>
+            <li><a href="#">Flexo</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">NeuroFlow</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <!--<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="https://kit.fontawesome.com/bdd89edb33.js"></script>
+  <!-- Локальні JS файли -->
+  <script src="test/test.js?ts=<%= Date.now() %>"></script>
+  <script src="assets/js/main.js?ts=ads"></script>
+  <script src="assets/folder_js_css/js/my.js?ts=ab"></script>
+  <script src="assets/folder_js_css/js/test.js?ts=<%= Date.now() %>"></script>
+  <script src="assets/folder_js_css/js/news.js"></script>
+  <!-- <script src="assets/folder_js_css/js/top_topics.js?ts=a>"></script> -->
+  <script src="assets/folder_js_css/js/script_manager_chat.js"></script>
+  <script src="assets/folder_js_css/js/partners-for-change.js?ts=as"></script>
+  <script src="assets/folder_js_css/js/topics.js?ts=abсdefghd"></script>
+</body>
+
+</html>
+
+

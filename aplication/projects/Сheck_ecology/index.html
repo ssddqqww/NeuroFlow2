@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Ecological Check</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4 text-center">Product Ecological Check</h1>
+    <div class="mb-4">
+      <label for="barcode" class="block text-sm font-medium text-gray-700">Enter barcode or article number</label>
+      <input type="text" id="barcode" class="mt-1 p-2 w-full border rounded-md" placeholder="e.g., 737628064502">
+    </div>
+    <div class="flex space-x-2">
+      <button onclick="checkProduct()" class="flex-1 bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Check</button>
+      <button onclick="startScanner()" class="flex-1 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Scan</button>
+    </div>
+    <div id="scanner-container" class="mt-4 hidden">
+      <video id="scanner-video" class="w-full"></video>
+      <button onclick="stopScanner()" class="mt-2 w-full bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Stop Scanning</button>
+    </div>
+    <div id="result" class="mt-4"></div>
+  </div>
+
+  <script>
+    async function checkProduct(barcode = null) {
+      const barcodeInput = barcode || document.getElementById('barcode').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      if (!barcodeInput) {
+        resultDiv.innerHTML = '<p class="text-red-500">Please enter or scan a barcode.</p>';
+        return;
+      }
+
+      resultDiv.innerHTML = '<p>Loading...</p>';
+
+      try {
+        const response = await fetch(`https://world.openfoodfacts.org/api/v2/product/${barcodeInput}.json`);
+        const data = await response.json();
+
+        if (data.status === 0) {
+          resultDiv.innerHTML = '<p class="text-red-500">Product not found. Please check the barcode.</p>';
+          return;
+        }
+
+        const product = data.product;
+        const ecoScore = product.ecoscore_grade ? product.ecoscore_grade.toUpperCase() : 'Unknown';
+        const packaging = product.packaging || 'No data';
+        const brand = product.brands || 'Unknown';
+        const recyclability = product.packaging_recyclability || 'Recycling information not available';
+
+        const ecoScoreDescription = {
+          'A': 'Very low environmental impact',
+          'B': 'Low environmental impact',
+          'C CLEAR': 'Moderate environmental impact',
+          'D': 'High environmental impact',
+          'E': 'Very high environmental impact',
+          'Unknown': 'Environmental impact data not available'
+        };
+
+        resultDiv.innerHTML = `
+          <div class="border p-4 rounded-md">
+            <h2 class="text-lg font-semibold">${product.product_name || 'Name unknown'}</h2>
+            <p><strong>Brand:</strong> ${brand}</p>
+            <p><strong>Ecological Score:</strong> ${ecoScore} (${ecoScoreDescription[ecoScore]})</p>
+            <p><strong>Packaging:</strong> ${packaging}</p>
+            <p><strong>Recyclability:</strong> ${recyclability}</p>
+          </div>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = '<p class="text-red-500">Error fetching data. Please try again.</p>';
+        console.error('Error:', error);
+      }
+    }
+
+    function startScanner() {
+      const scannerContainer = document.getElementById('scanner-container');
+      scannerContainer.classList.remove('hidden');
+
+      Quagga.init({
+        inputStream: {
+          name: "Live",
+          type: "LiveStream",
+          target: document.querySelector('#scanner-video'),
+          constraints: {
+            facingMode: "environment" // Uses back camera
+          }
+        },
+        decoder: {
+          readers: ["ean_reader", "upc_reader", "code_128_reader"] // Supported barcode formats
+        }
+      }, function(err) {
+        if (err) {
+          document.getElementById('result').innerHTML = '<p class="text-red-500">Scanner initialization error. Please check camera access.</p>';
+          console.error(err);
+          return;
+        }
+        Quagga.start();
+      });
+
+      Quagga.onDetected(function(data) {
+        const barcode = data.codeResult.code;
+        document.getElementById('barcode').value = barcode;
+        Quagga.stop();
+        scannerContainer.classList.add('hidden');
+        checkProduct(barcode);
+      });
+    }
+
+    function stopScanner() {
+      Quagga.stop();
+      document.getElementById('scanner-container').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

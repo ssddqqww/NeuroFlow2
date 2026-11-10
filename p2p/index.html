@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2P Chat</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f4f7fa;
+    }
+
+    .chat-section {
+      padding: 80px 0;
+      min-height: 100vh;
+      background: url('/assets/img/forum_bg.webp') no-repeat center center fixed, #f4f7fa;
+      background-size: cover;
+      position: relative;
+    }
+
+    .chat-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      z-index aluminum: 0;
+    }
+
+    .chat-section .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .section-header {
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e9ecef;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: 1px solid #dee2e6;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .search-container input:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+      outline: none;
+    }
+
+    .user-item {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e9ecef;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .user-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-item.highlighted {
+      background: #d1e7ff;
+      border-left: 4px solid #0d6efd;
+    }
+
+    .user-item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e9ecef;
+    }
+
+    .user-item span {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2c3e50;
+    }
+
+    .user-item .notification-badge {
+      background-color: #dc3545;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: auto;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .chat-container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .message-item {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      max-width: 70%;
+      position: relative;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .message-item.sent {
+      background: #0d6efd;
+      color: #fff;
+      margin-left: auto;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-item.received {
+      background: #e9ecef;
+      color: #2c3e50;
+      margin-right: auto;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message-item.unread {
+      background: #d1e7ff;
+      border-left: 4px solid #0d6efd;
+    }
+
+    .message-content {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .message-meta {
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+
+    .message-item.sent .message-meta {
+      color: #d1e7ff;
+    }
+
+    .message-actions {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .message-item:hover .message-actions {
+      opacity: 1;
+    }
+
+    .message-input {
+      margin-top: 20px;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .message-input textarea {
+      border-radius: 12px;
+      border: 1px solid #dee2e6;
+      padding: 15px;
+      resize: none;
+      width: 100%;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .message-input textarea:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+
+    .btn-custom {
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary.btn-custom {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+    }
+
+    .btn-secondary.btn-custom {
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-danger.btn-custom {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-home.btn-custom {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+
+    .auth-message {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      margin: 20px 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e9ecef;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .modal-content {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .chat-section {
+        padding: 60px 0;
+      }
+
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
+
+      .message-item {
+        max-width: 85%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="chat-section" class="chat-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Private Chat</h2>
+        <a href="../" class="btn btn-primary btn-custom btn-home">
+          <i class="bi bi-house"></i> Home
+        </a>
+      </div>
+      <div id="authMessage" class="auth-message hidden">
+        Please <a href="/auth/google">sign in</a> to start chatting
+      </div>
+      <div id="userSearch" class="hidden">
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Enter user's name or email..." oninput="filterUsers()">
+        </div>
+        <div id="userList"></div>
+      </div>
+      <div id="chatContainer" class="hidden">
+        <button class="btn btn-secondary btn-custom mb-3" onclick="showUserSearch()">
+          <i class="bi bi-arrow-left"></i> Back to User Selection
+        </button>
+        <h3 id="topicTitle"></h3>
+        <div class="chat-container" id="messageList"></div>
+        <div id="messageInput" class="message-input">
+          <textarea id="messageText" class="form-control mb-2" rows="3" placeholder="Write your message..."></textarea>
+          <button class="btn btn-primary btn-custom" onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delete Message Modal -->
+  <div class="modal fade" id="deleteMessageModal" tabindex="-1" aria-labelledby="deleteMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteMessageModalLabel">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this message?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger btn-custom" id="confirmDeleteMessageBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    let activeUser = null;
+    let allUsers = [];
+    let messages = [];
+    let currentRecipient = null;
+    let messageToDelete = null;
+    let pollingInterval = null;
+    let unreadMessageIds = [];
+    let lastMessageIds = {};
+    let unreadCounts = {};
+    let latestTimestamps = {};
+    const API_BASE_URL = '../index.html';
+
+    function aosInit() {
+      AOS.init({
+        duration: 600,
+        easing: 'ease-in-out',
+        once: false,
+        mirror: false
+      });
+    }
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function censorText(text) {
+      const words = text.split(/\s+/);
+      return words
+        .map(word => {
+          if (word.length < 3) return word;
+          const cleanWord = word.replace(/[^a-zA-Zа-яА-ЯїЇіІєЄґҐ]/g, '').toLowerCase();
+          const badWords = [
+            'хуй', 'пиз', 'пізд', 'бля', 'сук', 'їба', 'нах', 'еба', 'під', 'муд', 'дроч', 'сра', 'гов', 'піс', 'зал', 'шлюха', 'єбать',
+            'fuck', 'suck', 'dick', 'cock', 'shit', 'ass', 'bitch', 'cunt', 'pussy', 'bastard', 'damn', 'fucker', 'motherfucker',
+            'asshole', 'prick', 'twat', 'wank', 'whore', 'slut'
+          ];
+          const isSuspicious =
+            badWords.some(bad => cleanWord.includes(bad)) ||
+            /(.)\1{2,}/.test(cleanWord) ||
+            /[бпвфхжгк][лтдкщшч][аяеиіоуї]/.test(cleanWord) ||
+            /[сзц][кпб][аяеиоуї]/.test(cleanWord) ||
+            /[йєґхжшчщ][бпвф][яюєї]/.test(cleanWord) ||
+            (word === word.toUpperCase() && word.length > 3) ||
+            /[\w][@#$%^&*0-9]+[\w]/.test(word) ||
+            /([бпвфгкдт])[бпвфгкдт][аяеиоуї]/.test(cleanWord) ||
+            /^(ху|пі|су|бл|еб|йоб|їб)/i.test(cleanWord);
+          if (isSuspicious) {
+            return '*'.repeat(word.length);
+          }
+          return word;
+        })
+        .join(' ');
+    }
+
+    async function checkAuth() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/check-auth`, { credentials: 'include' });
+        const data = await response.json();
+        if (data.authenticated) {
+          activeUser = {
+            email: data.user.email,
+            name: data.user.name,
+            picture: data.user.picture
+          };
+          document.getElementById('authMessage').classList.add('hidden');
+          document.getElementById('userSearch').classList.remove('hidden');
+          loadUsers();
+        } else {
+          activeUser = null;
+          document.getElementById('authMessage').classList.remove('hidden');
+          document.getElementById('userSearch').classList.add('hidden');
+          document.getElementById('chatContainer').classList.add('hidden');
+        }
+      } catch (error) {
+        console.error('checkAuth: Authentication check error:', error);
+        showAuthMessage('Failed to check authentication.');
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/users`, { credentials: 'include' });
+        if (!response.ok) throw new Error(`Error loading users: ${response.status}`);
+        allUsers = await response.json();
+        await updateUnreadCounts();
+        filterUsers();
+      } catch (error) {
+        console.error('loadUsers: Error loading users:', error);
+        showAuthMessage('Failed to load users.');
+      }
+    }
+
+    async function updateUnreadCounts() {
+      if (!activeUser) return;
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/messages/unread-count?userEmail=${encodeURIComponent(activeUser.email)}`, {
+          credentials: 'include'
+        });
+        if (!response.ok) throw new Error(`Error fetching unread counts: ${response.status}`);
+        const data = await response.json();
+        unreadCounts = data.unreadCounts || {};
+        latestTimestamps = data.latestTimestamps || {};
+        filterUsers();
+      } catch (error) {
+        console.error('updateUnreadCounts: Error fetching unread counts:', error);
+      }
+    }
+
+    function filterUsers() {
+      const searchText = document.getElementById('searchInput').value.toLowerCase();
+      const filteredUsers = allUsers.filter(
+        user =>
+          user.name.toLowerCase().includes(searchText) ||
+          user.email.toLowerCase().includes(searchText)
+      );
+
+      // Sort users by latest message timestamp (descending)
+      filteredUsers.sort((a, b) => {
+        const timestampA = latestTimestamps[a.email] ? new Date(latestTimestamps[a.email]).getTime() : 0;
+        const timestampB = latestTimestamps[b.email] ? new Date(latestTimestamps[b.email]).getTime() : 0;
+        return timestampB - timestampA;
+      });
+
+      const userList = document.getElementById('userList');
+      userList.innerHTML = '';
+
+      filteredUsers.forEach(user => {
+        if (user.email !== activeUser.email) {
+          const unreadCount = unreadCounts[user.email] || 0;
+          const userElement = document.createElement('div');
+          userElement.className = `user-item ${unreadCount > 0 ? 'highlighted' : ''}`;
+          userElement.onclick = () => selectUser(user);
+          userElement.innerHTML = `
+            <img src="${user.picture || 'assets/img/default-avatar.png'}" alt="${user.name}">
+            <span>${user.name} (${user.email})</span>
+            ${unreadCount > 0 ? `<span class="notification-badge">${unreadCount}</span>` : ''}
+          `;
+          userList.appendChild(userElement);
+        }
+      });
+    }
+
+    function selectUser(user) {
+      currentRecipient = user;
+      unreadCounts[user.email] = 0;
+      unreadMessageIds = unreadMessageIds.filter(id => !messages.find(m => m.id === id && m.senderEmail === user.email));
+      document.getElementById('userSearch').classList.add('hidden');
+      document.getElementById('chatContainer').classList.remove('hidden');
+      const topicTitle = document.getElementById('topicTitle');
+      if (topicTitle) {
+        topicTitle.textContent = `Chat with ${user.name}`;
+      } else {
+        console.warn('Element with ID topicTitle not found');
+      }
+      loadMessages();
+      startPolling();
+      filterUsers();
+    }
+
+    function showUserSearch() {
+      stopPolling();
+      currentRecipient = null;
+      document.getElementById('chatContainer').classList.add('hidden');
+      document.getElementById('userSearch').classList.remove('hidden');
+      document.getElementById('messageList').innerHTML = '';
+    }
+
+    async function loadMessages() {
+      if (!currentRecipient) return;
+      try {
+        const url = `${API_BASE_URL}/api/messages/p2p?senderEmail=${encodeURIComponent(activeUser.email)}&recipientEmail=${encodeURIComponent(currentRecipient.email)}`;
+        const response = await fetch(url, { credentials: 'include' });
+        if (!response.ok) throw new Error(`Error loading messages: ${response.status}`);
+        const newMessages = await response.json();
+
+        const lastMessageId = lastMessageIds[currentRecipient.email] || 0;
+        newMessages.forEach(message => {
+          if (message.senderEmail === currentRecipient.email && message.id > lastMessageId && !unreadMessageIds.includes(message.id)) {
+            unreadMessageIds.push(message.id);
+          }
+        });
+
+        messages = newMessages;
+        if (messages.length > 0) {
+          lastMessageIds[currentRecipient.email] = messages[messages.length - 1].id;
+          unreadMessageIds = unreadMessageIds.filter(id => !messages.find(m => m.id === id && m.senderEmail === currentRecipient.email));
+          unreadCounts[currentRecipient.email] = 0;
+        }
+
+        displayMessages();
+        // Update unread counts and user list after marking messages as read
+        await updateUnreadCounts();
+      } catch (error) {
+        console.error('loadMessages: Error loading messages:', error);
+        showAuthMessage('Failed to load messages.');
+      }
+    }
+
+    function displayMessages() {
+      const messageList = document.getElementById('messageList');
+      if (!messageList) return;
+
+      messageList.innerHTML = '';
+      messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+      messages.forEach(message => {
+        const isSent = message.senderEmail === activeUser.email;
+        const isUnread = !isSent && unreadMessageIds.includes(message.id);
+        const messageElement = document.createElement('div');
+        messageElement.className = `message-item ${isSent ? 'sent' : 'received'} ${isUnread ? 'unread' : ''}`;
+        messageElement.innerHTML = `
+          <div class="message-content">${message.text}</div>
+          <div class="message-meta">${new Date(message.timestamp).toLocaleString()}</div>
+          ${isSent ? `
+            <div class="message-actions">
+              <button class="btn btn-sm btn-outline-danger" onclick="showDeleteMessageModal(${message.id})">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          ` : ''}
+        `;
+        messageList.appendChild(messageElement);
+      });
+
+      messageList.scrollTop = messageList.scrollHeight;
+    }
+
+    async function sendMessage() {
+      if (!activeUser || !currentRecipient) {
+        showAuthMessage('Please sign in and select a recipient.');
+        return;
+      }
+
+      const messageText = document.getElementById('messageText').value.trim();
+      if (!messageText) {
+        showAuthMessage('Enter a message text.');
+        return;
+      }
+
+      const censoredText = censorText(messageText);
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/messages/p2p`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            text: censoredText,
+            senderEmail: activeUser.email,
+            recipientEmail: currentRecipient.email,
+            senderName: activeUser.name,
+            senderPicture: activeUser.picture
+          })
+        });
+        if (!response.ok) throw new Error(`Error sending message: ${response.status}`);
+        const newMessage = await response.json();
+        messages.push(newMessage);
+        document.getElementById('messageText').value = '';
+        displayMessages();
+        // Update unread counts and user list
+        await updateUnreadCounts();
+      } catch (error) {
+        console.error('sendMessage: Error sending message:', error);
+        showAuthMessage('Failed to send message.');
+      }
+    }
+
+    function showDeleteMessageModal(messageId) {
+      if (!activeUser) {
+        showAuthMessage('Please sign in.');
+        return;
+      }
+      messageToDelete = messageId;
+      const deleteModal = new bootstrap.Modal(document.getElementById('deleteMessageModal'));
+      deleteModal.show();
+    }
+
+    async function deleteMessage() {
+      if (!messageToDelete || !activeUser) {
+        showAuthMessage('Please sign in.');
+        return;
+      }
+
+      try {
+        const url = `${API_BASE_URL}/api/messages/${messageToDelete}?userEmail=${encodeURIComponent(activeUser.email)}`;
+        const response = await fetch(url, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+        if (!response.ok) throw new Error(`Error deleting message: ${response.status}`);
+        messages = messages.filter(m => m.id !== messageToDelete);
+        unreadMessageIds = unreadMessageIds.filter(id => id !== messageToDelete);
+        displayMessages();
+        messageToDelete = null;
+        const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteMessageModal'));
+        deleteModal.hide();
+        // Update unread counts and user list
+        await updateUnreadCounts();
+      } catch (error) {
+        console.error('deleteMessage: Error deleting message:', error);
+        showAuthMessage('Failed to delete message.');
+      }
+    }
+
+    function showAuthMessage(message) {
+      const authMessage = document.getElementById('authMessage');
+      authMessage.textContent = message;
+      authMessage.classList.remove('hidden');
+      setTimeout(() => {
+        authMessage.classList.add('hidden');
+      }, 3000);
+    }
+
+    function startPolling() {
+      stopPolling();
+      pollingInterval = setInterval(() => {
+        if (currentRecipient) {
+          loadMessages();
+        } else {
+          updateUnreadCounts();
+        }
+      }, 5000);
+    }
+
+    function stopPolling() {
+      if (pollingInterval) {
+        clearInterval(pollingInterval);
+        pollingInterval = null;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+      aosInit();
+
+      const confirmDeleteMessageBtn = document.getElementById('confirmDeleteMessageBtn');
+      if (confirmDeleteMessageBtn) {
+        confirmDeleteMessageBtn.addEventListener('click', deleteMessage);
+      }
+
+      const messageText = document.getElementById('messageText');
+      if (messageText) {
+        messageText.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+      }
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchEmail = urlParams.get('searchEmail');
+      if (searchEmail) {
+        const searchBar = document.getElementById('searchInput');
+        if (searchBar) {
+          searchBar.value = decodeURIComponent(searchEmail);
+          const inputEvent = new Event('input', { bubbles: true });
+          searchBar.dispatchEvent(inputEvent);
+        } else {
+          console.error('Search bar element not found');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

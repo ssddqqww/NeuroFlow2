@@ -1,0 +1,238 @@
+.plans-center-text {
+    text-align: center !important;
+}
+
+.plans-margin-bottom-big {
+    margin-bottom: 8rem !important;
+}
+
+.plans-margin-top-huge {
+    margin-top: 10rem !important;
+}
+
+.plans-heading-secondary {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: transparent;
+    letter-spacing: 0.2rem;
+    line-height: 1;
+    transition: all 0.2s;
+    color: #eee;
+}
+
+.plans-btn, 
+.plans-btn:link, 
+.plans-btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: 1.6rem;
+    border: none;
+    cursor: pointer;
+}
+
+.plans-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.plans-btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.plans-btn:active, 
+.plans-btn:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.plans-btn--white {
+    background-color: #fff;
+    color: #777;
+}
+
+.plans-btn--white::after {
+    background-color: #fff;
+}
+
+.plans-btn--green {
+    background: linear-gradient(to right, #fc466b, #3f5efb);
+    color: #fff;
+}
+
+.plans-section {
+    background-color: #000;
+    padding: 4rem 0 4rem 0;
+    margin: 0 5rem;
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    max-width: calc(100% - 10rem);
+    box-sizing: border-box;
+}
+
+.plans-card {
+    perspective: 150rem;
+    -moz-perspective: 150rem;
+    position: relative;
+    height: 34.67rem;
+}
+
+.plans-card__side {
+    height: 34.67rem;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backface-visibility: hidden;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 1rem 2.67rem rgba(0, 0, 0, 0.15);
+}
+
+.plans-card__side--front {
+    background-color: #fff;
+}
+
+.plans-card__side--front-1 {
+    background: linear-gradient(-45deg, #f403d1, #64b5f6);
+}
+
+.plans-card__side--front-2 {
+    background: linear-gradient(-45deg, #f321d7, #ffec61);
+}
+
+.plans-card__side--front-3 {
+    background: linear-gradient(-45deg, #24ff72, #9a4eff);
+}
+
+.plans-card__side--back {
+    transform: rotateY(180deg);
+}
+
+.plans-card__side--back-1 {
+    background: linear-gradient(-45deg, #64b5f6, #f403d1);
+}
+
+.plans-card__side--back-2 {
+    background: linear-gradient(-45deg, #ffec61, #f321d7);
+}
+
+.plans-card__side--back-3 {
+    background: linear-gradient(-45deg, #9a4eff, #24ff72);
+}
+
+.plans-card:hover .plans-card__side--front-1,
+.plans-card:hover .plans-card__side--front-2,
+.plans-card:hover .plans-card__side--front-3 {
+    transform: rotateY(-180deg);
+}
+
+.plans-card:hover .plans-card__side--back {
+    transform: rotateY(0);
+}
+
+.plans-card__title {
+    height: 13.33rem;
+    padding: 2.67rem 1.33rem 1.33rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plans-card__title--1 .fas,
+.plans-card__title--2 .fas,
+.plans-card__title--3 .fas {
+    font-size: 3.33rem;
+}
+
+.plans-card__heading {
+    font-size: 2.67rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    width: 75%;
+}
+
+.plans-card__details {
+    padding: 0 1.33rem 1.33rem;
+}
+
+.plans-card__details ul {
+    list-style: none;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.plans-card__details ul li {
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.67rem;
+}
+
+.plans-card__details ul li:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.plans-card__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+}
+
+.plans-card__price-box {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 5.33rem;
+}
+
+.plans-card__price-only {
+    font-size: 0.93rem;
+    text-transform: uppercase;
+}
+
+.plans-card__price-value {
+    font-size: 4rem;
+    font-weight: 100;
+}
+
+.plans-row {
+    max-width: 114rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.plans-row:not(:last-child) {
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+}
+
+.plans-row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.plans-row [class^="plans-col-"] {
+    float: left;
+}
+
+.plans-row [class^="plans-col-"]:not(:last-child) {
+    margin-right: 4rem;
+}
+
+.plans-row .plans-col-1-of-3 {
+    width: calc((100% - 2 * 4rem) / 3);
+}

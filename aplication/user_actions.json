@@ -1,0 +1,17 @@
+{
+  "likes": {
+    "1": true,
+    "2": true,
+    "5": true
+  },
+  "dislikes": {
+    "1": false,
+    "5": false,
+    "6": true
+  },
+  "reviews": {},
+  "review_likes": {},
+  "review_dislikes": {},
+  "replies": {},
+  "show_reviews": {}
+}

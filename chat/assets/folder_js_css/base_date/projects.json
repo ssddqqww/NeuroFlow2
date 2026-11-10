@@ -1,0 +1,292 @@
+{
+  "projects": [
+    {
+      "id": 1746897491261,
+      "title": "UNRALETED",
+      "description": "FINCANCE",
+      "theme": "Finance",
+      "country": "Espana",
+      "location": "Barcelona",
+      "contact": "kirillypenko20@gmail.com",
+      "image": "https://www.photoshopbuzz.com/wp-content/uploads/Hyperlink-JPEG-Photoshop7.png",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "coordinates": [
+        41.3873974,
+        2.168568
+      ],
+      "createdAt": "2025-05-10T17:18:11.261Z",
+      "ratings": []
+    },
+    {
+      "id": 1746892994520,
+      "title": "SUPER!",
+      "description": "AI",
+      "theme": "Medicine",
+      "country": "Ukraine",
+      "location": "Lviv",
+      "contact": "kirillypenko20@gmail.com",
+      "image": "https://via.placeholder.com/150",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "coordinates": [
+        49.839683,
+        24.029717
+      ],
+      "createdAt": "2025-05-10T16:03:14.520Z",
+      "ratings": [],
+      "edited": true,
+      "editedAt": "2025-05-10T16:03:31.541Z"
+    },
+    {
+      "id": 1746807291996,
+      "title": "ff",
+      "description": "fff",
+      "theme": "Medicine",
+      "country": "Ukraine",
+      "location": "Odessa",
+      "contact": "kirillypenko20@gmail.com",
+      "image": "https://via.placeholder.com/150",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "coordinates": [
+        46.4702111,
+        30.7306393
+      ],
+      "createdAt": "2025-05-09T16:14:51.996Z",
+      "ratings": []
+    },
+    {
+      "id": 1746801799879,
+      "title": "BAANA",
+      "description": "EEATTT BAANNAS",
+      "theme": "Medicine",
+      "country": "India",
+      "location": "New Dehli",
+      "contact": "finvision.ua@gmail.com",
+      "image": "https://via.placeholder.com/150",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "coordinates": [
+        28.6139298,
+        77.2088282
+      ],
+      "createdAt": "2025-05-09T14:43:19.879Z",
+      "ratings": []
+    },
+    {
+      "id": 1746800226822,
+      "title": "dsg",
+      "description": "gdsg",
+      "theme": "Education",
+      "country": "Ukraine",
+      "location": "Київ",
+      "contact": "kirillypenko20@gmail.com",
+      "image": "https://via.placeholder.com/150",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "coordinates": [
+        50.4503596,
+        30.5245025
+      ],
+      "createdAt": "2025-05-09T14:17:06.822Z",
+      "ratings": []
+    },
+    {
+      "id": 1746686978746,
+      "title": "Kartoplya",
+      "description": "hfdsjkhgsakgkdsfkgewg weq",
+      "theme": "History",
+      "country": "USA",
+      "location": "New York",
+      "contact": "krilrwgwr@@",
+      "image": "https://via.placeholder.com/150",
+      "author": "Любов Шевчун",
+      "authorEmail": "lshevchun@harant-osvita.kyiv.ua",
+      "coordinates": [
+        40.7127753,
+        -74.0059728
+      ],
+      "createdAt": "2025-05-08T06:49:38.746Z",
+      "edited": true,
+      "editedAt": "2025-05-08T06:51:32.321Z",
+      "ratings": []
+    },
+    {
+      "id": 1746625745829,
+      "title": "Build and Craft",
+      "description": "here",
+      "theme": "Industry",
+      "country": "France",
+      "location": "Paris",
+      "contact": "finvision.ua@gmail.com",
+      "image": "https://imagekit.io/tools/asset-public-link?detail=%7B%22name%22%3A%22photo_2025-04-28_20-55-42-removebg-preview.png%22%2C%22type%22%3A%22image%2Fpng%22%2C%22signedurl_expire%22%3A%222028-05-04T17%3A19%3A01.625Z%22%2C%22signedUrl%22%3A%22https%3A%2F%2Fmedia-hosting.imagekit.io%2F296e945bc74145d9%2Fphoto_2025-04-28_20-55-42-removebg-preview.png%3FExpires%3D1841073542%26Key-Pair-Id%3DK2ZIVPTIP2VGHC%26Signature%3DJTZl0PC0sA2jp-cTE-ee0szTQ5~fqAvXvoA490W8Hgg8-FD0E5~sXM~IrgCsyB84ccwqpw3QHOELYtGLds~Cut5cTVtwYKbgaUYq~EeUF4MgFzA1vwc5Deit6JYC8G5GciPE8fwM1hjqyGDUW0m34jo0OBftynfytRPb6TaBimjZlEhfo9UaO0bdj5blRyftf-hGAfrmIHDzlxVrXP7v-QhLRtzxFP3P7xKasmAVaeLHh4iBDes3Yq8VAnWjZuHXf45jxHEZLVOfpuLf~Cup-i3z7ZQYrzGKe4lhDSNAYlBBrxgC6eY3AxJStGTm2smlrOU28c27mR-vJt4osZaSlw__%22%7D",
+      "author": "Кирило Липенко",
+      "authorEmail": "kyrylo.lypenko2019@harant-osvita.kyiv.ua",
+      "coordinates": [
+        48.8575475,
+        2.3513765
+      ],
+      "createdAt": "2025-05-07T13:49:05.829Z",
+      "ratings": []
+    },
+    {
+      "id": 1746625582211,
+      "title": "Farmer",
+      "description": "farm with me",
+      "theme": "Urban Studies",
+      "country": "China",
+      "location": "Hong Kong",
+      "contact": "gubenko.ksenichka@gmail.com",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Hong_Kong_in_China_%28zoomed%29_%28%2Ball_claims_hatched%29.svg/250px-Hong_Kong_in_China_%28zoomed%29_%28%2Ball_claims_hatched%29.svg.png",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "coordinates": [
+        22.3193039,
+        114.1693611
+      ],
+      "createdAt": "2025-05-07T13:46:22.211Z",
+      "ratings": []
+    },
+    {
+      "id": 1746621742596,
+      "title": "Crypto1",
+      "description": "earn crypro",
+      "theme": "Information Technology",
+      "country": "USA",
+      "location": "Washington",
+      "contact": "kirillypenko20@gmail.com",
+      "image": "https://washington-week-production-tc.digi-producers.pbs.org/static/images/podcast-bg.cb8bdeb66c94.jpg",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "coordinates": [
+        47.7510741,
+        -120.7401386
+      ],
+      "createdAt": "2025-05-07T12:42:22.596Z",
+      "edited": true,
+      "editedAt": "2025-05-07T13:45:08.838Z",
+      "ratings": []
+    },
+    {
+      "id": 1746618783311,
+      "title": "Old",
+      "description": "here you can cook))",
+      "theme": "ecology",
+      "country": "Ukraine",
+      "location": "Dnipro",
+      "contact": "kirillypenko20@gmail.com",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgD1auvUrklmlQ9Yn7hv5enWwFrcxi5eWNe60HqJKZ2Jk8TFCIWaKhc_SVhnJ7UNN3caINarECweyVSTrIwxrOBS9U_oTytlXdZ1e-XfJDEmM0QgBAbQ0ZuxiLaJ4AdYo2JWJ9EEyn9oyM/s640/2.png",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-05-07T11:53:03.311Z",
+      "coordinates": [
+        48.464717,
+        35.046183
+      ],
+      "edited": true,
+      "editedAt": "2025-05-07T12:11:07.447Z",
+      "ratings": []
+    },
+    {
+      "id": 1746555315265,
+      "title": "в2415",
+      "description": "ппп",
+      "theme": "ecology",
+      "country": "Afghanistan",
+      "location": "hfg",
+      "contact": "hfg",
+      "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgD1auvUrklmlQ9Yn7hv5enWwFrcxi5eWNe60HqJKZ2Jk8TFCIWaKhc_SVhnJ7UNN3caINarECweyVSTrIwxrOBS9U_oTytlXdZ1e-XfJDEmM0QgBAbQ0ZuxiLaJ4AdYo2JWJ9EEyn9oyM/s640/2.png",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-05-06T18:15:15.265Z",
+      "edited": true,
+      "editedAt": "2025-05-07T12:07:47.112Z",
+      "coordinates": [
+        33.93911,
+        67.709953
+      ],
+      "ratings": []
+    },
+    {
+      "id": 1746550804220,
+      "title": "ananas22",
+      "description": "hello",
+      "theme": "education",
+      "country": "Mozambique",
+      "location": "Las Personas2222",
+      "contact": "11111111111109122551455124552455612789423123114",
+      "image": "https://www.theladders.com/wp-content/uploads/jeff-bezos-ceo-profile.jpg",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-05-06T17:00:04.220Z",
+      "edited": true,
+      "editedAt": "2025-05-07T12:07:47.335Z",
+      "coordinates": [
+        -18.665695,
+        35.529562
+      ],
+      "ratings": []
+    },
+    {
+      "id": 1746470432427,
+      "title": "cocos",
+      "description": "here you gather cocoses",
+      "theme": "community",
+      "country": "Brazil",
+      "location": "New VEgas",
+      "contact": "1234214124",
+      "image": "https://www.photoshopbuzz.com/wp-content/uploads/Hyperlink-JPEG-Photoshop7.png",
+      "author": "robot%20venomchik",
+      "authorEmail": "kirillypenko20%40gmail.com",
+      "createdAt": "2025-05-05T18:40:32.427Z",
+      "coordinates": [
+        -14.235004,
+        -51.92528
+      ],
+      "edited": true,
+      "editedAt": "2025-05-07T12:07:47.573Z",
+      "ratings": []
+    },
+    {
+      "id": 1746467515676,
+      "title": "ECOLOGY",
+      "description": "here you can recycle",
+      "theme": "ecology",
+      "country": "Poland",
+      "location": "Kyiv",
+      "contact": "0984125081257012590125",
+      "image": "https://www.photoshopbuzz.com/wp-content/uploads/Hyperlink-JPEG-Photoshop7.png",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-05-05T17:51:55.676Z",
+      "coordinates": [
+        50.4503596,
+        30.5245025
+      ],
+      "edited": true,
+      "editedAt": "2025-05-07T12:07:47.788Z",
+      "ratings": []
+    },
+    {
+      "id": 1746453577686,
+      "title": "Browse the space",
+      "description": "GIGAGAGAGA",
+      "theme": "Cosmonautics",
+      "country": "Germany",
+      "location": "Hamburg",
+      "contact": "5215125",
+      "image": "https://imagekit.io/tools/asset-public-link?detail=%7B%22name%22%3A%22photo_2025-04-28_20-55-42-removebg-preview.png%22%2C%22type%22%3A%22image%2Fpng%22%2C%22signedurl_expire%22%3A%222028-05-04T17%3A19%3A01.625Z%22%2C%22signedUrl%22%3A%22https%3A%2F%2Fmedia-hosting.imagekit.io%2F296e945bc74145d9%2Fphoto_2025-04-28_20-55-42-removebg-preview.png%3FExpires%3D1841073542%26Key-Pair-Id%3DK2ZIVPTIP2VGHC%26Signature%3DJTZl0PC0sA2jp-cTE-ee0szTQ5~fqAvXvoA490W8Hgg8-FD0E5~sXM~IrgCsyB84ccwqpw3QHOELYtGLds~Cut5cTVtwYKbgaUYq~EeUF4MgFzA1vwc5Deit6JYC8G5GciPE8fwM1hjqyGDUW0m34jo0OBftynfytRPb6TaBimjZlEhfo9UaO0bdj5blRyftf-hGAfrmIHDzlxVrXP7v-QhLRtzxFP3P7xKasmAVaeLHh4iBDes3Yq8VAnWjZuHXf45jxHEZLVOfpuLf~Cup-i3z7ZQYrzGKe4lhDSNAYlBBrxgC6eY3AxJStGTm2smlrOU28c27mR-vJt4osZaSlw__%22%7D",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-05-05T13:59:37.686Z",
+      "edited": true,
+      "editedAt": "2025-05-07T12:49:24.520Z",
+      "coordinates": [
+        53.5488282,
+        9.987170299999999
+      ],
+      "ratings": []
+    }
+  ]
+}

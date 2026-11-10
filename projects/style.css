@@ -1,0 +1,451 @@
+/* Existing styles from provided code */
+.news-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.news-item {
+  width: 300px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+.news-item:hover {
+  transform: translateY(-5px);
+}
+
+.news-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.news-item h3 {
+  margin: 15px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.news-item p {
+  color: #555;
+  font-size: 14px;
+}
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.filter-container select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.project-actions-edit {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.edit-form.show {
+  display: block;
+}
+
+.edit-form {
+  display: none;
+  margin-top: 10px;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  margin-bottom: 10px;
+  width: 100%;
+}
+/* General Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+/* Partners Section */
+#partners-container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#partners-container h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+/* Filters */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.filter-container select,
+.filter-container input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filter-container select:focus,
+.filter-container input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.filter-container button {
+  padding: 12px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.filter-container button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Create Project Button */
+#create-project-btn {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 12px 25px;
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#create-project-btn:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+/* Project Cards */
+#projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-card-content {
+  padding: 20px;
+}
+
+.project-card-content h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.project-card-content p {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 8px;
+}
+
+.project-card-content .author {
+  font-size: 0.9rem;
+  color: #3498db;
+  font-weight: 500;
+}
+
+/* Action Buttons */
+.project-card-actions {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px 20px;
+}
+
+.project-card-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-btn {
+  background-color: #f1c40f;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #d4ac0d;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.contact-btn {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.contact-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Create Project Form */
+#create-project-form-container {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+#create-project-form-container h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#create-project-form label {
+  display: block;
+  font-size: 1rem;
+  color: #34495e;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+#create-project-form input,
+#create-project-form select,
+#create-project-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#create-project-form input:focus,
+#create-project-form select:focus,
+#create-project-form textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+#create-project-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#create-project-form button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#create-project-form button:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+/* Modals */
+.modal-content {
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.modal-body p {
+  font-size: 1rem;
+  color: #34495e;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-secondary {
+  background-color: #ecf0f1;
+  color: #34495e;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #dfe4ea;
+}
+
+/* Auth Message */
+#auth-message-projects {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #partners-container h2 {
+    font-size: 2rem;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-container select,
+  .filter-container input,
+  .filter-container button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  #create-project-form-container {
+    padding: 20px;
+  }
+
+  .project-card {
+    margin: 0 10px;
+  }
+}
+/* Class to hide elements */
+.hidden {
+  display: none;
+}
+
+/* Class to show elements */
+.visible {
+  display: block;
+}
+
+/* Ensure project form is styled appropriately */
+.project-form {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Auth message styling */
+.auth-message {
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* Project card styling */
+.project-card {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Modal content */
+.modal-content {
+  border-radius: 8px;
+}

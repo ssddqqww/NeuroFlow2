@@ -1,0 +1,64 @@
+.light-bg {
+  background-color: #f5f5f5;
+  color: #333333;
+}
+.filter-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.filter-item:hover {
+  background-color: #e5e7eb;
+}
+.filter-item.selected {
+  background-color: #d1d5db;
+  font-weight: 500;
+}
+.checkmark {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+}
+.project-card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.scrollable-filter {
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af #e5e7eb;
+}
+.scrollable-filter::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollable-filter::-webkit-scrollbar-track {
+  background: #e5e7eb;
+}
+.scrollable-filter::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 4px;
+}
+.star-rating {
+  display: inline-flex;
+  cursor: pointer;
+}
+.star {
+  color: #d1d5db;
+  font-size: 1.2rem;
+}
+.star.filled {
+  color: #fbbf24;
+}

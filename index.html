@@ -1,0 +1,1566 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>NeuroFlow</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/Testic.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link rel="stylesheet" href="assets/folder_js_css/css/style_manager_chat.css?ts=a">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/my.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/tyle_forum.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/style_topics.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/tyle_top_topics.css">
+  <link rel="stylesheet" href="assets/folder_js_css/css/news.css">
+  <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="assets/folder_js_css/css/test.css">
+  <!-- <link href="test/test.css" rel="stylesheet"> -->
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css?ts=a" rel="stylesheet">
+  <link rel="stylesheet" href="assets/folder_js_css/css/partners-for-change.css">
+  <!-- =======================================================
+  * Template Name: iLanding
+  * Template URL: https://bootstrapmade.com/ilanding-bootstrap-landing-page-template/
+  * Updated: Nov 12 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename hover-underline">NeuroFlow</h1>
+        
+      </a>
+
+<nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a id="home_func" class="block_up_little_lit home_type" onclick="toggleBlocks(this.id)">Projects</a></li>
+    <li><a id="about_func" class="block_up_little_lit about_type" onclick="toggleBlocks(this.id)">About</a></li>
+    <li><a id="features_func" class="block_up_little_lit features_type" onclick="toggleBlocks(this.id)">Features</a></li>
+    <li><a id="top_func" class="block_up_little_lit top_type" onclick="toggleBlocks(this.id)">Top</a></li>
+    <li><a id="topics_container_func" class="block_up_little_lit chat_type" onclick="toggleBlocks(this.id)">Chat</a></li>
+    <li><a id="news_func" class="block_up_little_lit" href="news/"">News</a></li>
+    <li><a id="download_func" class="block_up_little_lit download_type" onclick="toggleBlocks(this.id)">Download</a></li>
+      <li><a href="p2p" class="pfc-nav-link ">P2P</a></li>
+
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+      <div class="container_avatar_login">
+        <div class="profile-btn block_up_little_lit" onclick="toggleProfile()"></div>
+      <div class="profile-overlay" id="profile-overlay"></div>
+    
+      <div class="profile-modal" id="profile-modal">
+        <div class="profile-modal-header">
+            <button class="profile-close-btn" onclick="toggleProfile()">✕</button>
+        </div>
+        <div class="profile-avatar-container">
+            <img src="assets/folder_js_css/assets/img/cart.jpg" alt="" class="profile-avatar" id="profile-avatar" onclick="document.getElementById('profile-avatarInput').click()">
+        </div>
+        <input type="file" id="profile-avatarInput" accept="image/*" onchange="changeAvatar(event)">
+        <div class="profile-nickname" id="profile-nickname" onclick="editNickname()">User123</div>
+        <div class="profile-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7d2d4c2d5969594e7c2dfc6cad7cbc289c4c8ca">[email&#160;protected]</a></div>
+        <div class="profile-info-item">Status: <span class="mint_grean">online</span></div>
+        <div class="profile-info-item">Registration date: 15.03.2023</div>
+      </div>
+      <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function toggleProfile() {
+          const modal = document.getElementById('profile-modal');
+          const overlay = document.getElementById('profile-overlay');
+          
+          const nicknameInput = document.querySelector('.profile-nickname-input');
+          if (nicknameInput) {
+              const nicknameValue = nicknameInput.value.trim();
+              if (!nicknameValue) {
+                  return;
+              }
+              const newNicknameDiv = document.createElement('div');
+              newNicknameDiv.textContent = nicknameValue;
+              newNicknameDiv.className = 'profile-nickname';
+              newNicknameDiv.id = 'profile-nickname';
+              newNicknameDiv.onclick = editNickname;
+              nicknameInput.replaceWith(newNicknameDiv);
+          }
+  
+          modal.classList.toggle('active');
+          overlay.classList.toggle('active');
+      }
+  
+        function editNickname() {
+          const nicknameDiv = document.getElementById('profile-nickname');
+          const currentNickname = nicknameDiv.textContent;
+  
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.value = currentNickname;
+          input.className = 'profile-nickname-input';
+          input.maxLength = 18;
+          
+          nicknameDiv.replaceWith(input);
+          input.focus();
+  
+          input.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter') {
+                  const newNickname = input.value.trim();
+                  if (newNickname) {
+                      const newNicknameDiv = document.createElement('div');
+                      newNicknameDiv.textContent = newNickname;
+                      newNicknameDiv.className = 'profile-nickname';
+                      newNicknameDiv.id = 'profile-nickname';
+                      newNicknameDiv.onclick = editNickname;
+                      input.replaceWith(newNicknameDiv);
+                  }
+              }
+          });
+          
+      }
+  
+        function changeAvatar(event) {
+          const file = event.target.files[0];
+          if (file) {
+              const reader = new FileReader();
+              const avatar = document.getElementById('profile-avatar');
+              
+              reader.onload = function(e) {
+                  avatar.src = e.target.result;
+                  const avatar_main = document.querySelector('.profile-btn');
+                  avatar_main.style.background = `url(${e.target.result})`;
+                  avatar_main.style.backgroundSize = '40px 40px';
+              };
+              reader.readAsDataURL(file);
+          }
+      }
+  
+        document.getElementById('profile-overlay').addEventListener('click', function() {
+            toggleProfile();
+        });
+  
+        document.getElementById('profile-modal').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+      </script>
+
+      <link href="assets/folder_js_css/css/my_button_download.css" rel="stylesheet">
+      <div class="login_container block_up_little_lit" onclick="handleClick(this)">
+        <span class="login_text">LOGIN</span>
+        <svg class="login_fingerprint login_fingerprint-base" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+            <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+            <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_fingerprint login_fingerprint-active" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+            <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+            <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_ok" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <path d="M34.912 50.75l10.89 10.125L67 36.75" fill="none" stroke="#fff" stroke-width="6"></path>
+        </svg>
+      </div>
+      
+      <script>
+        const container = document.querySelector('.login_container');
+        
+        function handleClick(element) {
+          element.classList.toggle('active');
+          setTimeout(() => {
+            window.location.href = 'login/login.html';
+          }, 5000);
+        }
+        
+        container.addEventListener('animationend', () => {
+          container.classList.remove('active');
+        });
+      </script>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+   <style>
+        /* Стили для главной страницы */
+    .main-neuroflow-reset {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Стили для главной страницы */
+    .main-neuroflow-body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9f8f6;
+      font-family: 'Inter', 'Arial', sans-serif;
+      color: #1f2937;
+    }
+
+    /* Контейнер секции */
+    .main-neuroflow-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .main-neuroflow-section {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+
+    /* Flex для текста и картинки */
+    .main-neuroflow-flex-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Стили для текста */
+    .main-neuroflow-text-content {
+      flex: 1;
+    }
+
+    .main-neuroflow-text-content h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+
+    .main-neuroflow-text-content h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: #007bff;
+    }
+
+    .main-neuroflow-text-content ul {
+      list-style: none;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: #4b5563;
+    }
+
+    .main-neuroflow-text-content ul li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .main-neuroflow-text-content ul li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #007bff;
+    }
+
+    /* Кнопки */
+    .main-neuroflow-buttons-container {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .main-neuroflow-cta-button, .main-neuroflow-get-started-button {
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .main-neuroflow-cta-button {
+      background: #007bff;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .main-neuroflow-get-started-button {
+      background: #2ecc71;
+      color: white;
+      box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+    }
+
+    .main-neuroflow-cta-button:hover, .main-neuroflow-get-started-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Картинка */
+    .main-neuroflow-image-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .main-neuroflow-image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      transform: none !important;
+    }
+
+    /* Адаптивность */
+    @media (min-width: 768px) {
+      .main-neuroflow-flex-container {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .main-neuroflow-text-content {
+        padding-right: 2rem;
+      }
+
+      .main-neuroflow-text-content h1 {
+        font-size: 3.5rem;
+      }
+
+      .main-neuroflow-text-content h2 {
+        font-size: 1.75rem;
+      }
+    }
+
+    .main-neuroflow-color {
+      color: #f9f8f6;  
+    }
+  </style>
+    <!-- Hero Section -->
+   <div class="main-neuroflow-container">
+    <section id="hero" class="main-neuroflow-section hero section block_all_h">
+         <div class="main-neuroflow-flex-container main-neuroflow-color">
+        <div class="main-neuroflow-text-content">
+          <h1 class="opacity-0" id="main-neuroflow-header">Welcome to NeuroFlow</h1>
+          <h2 class="opacity-0" id="main-neuroflow-subheader">Your Platform for Innovation</h2>
+          <ul class="opacity-0" id="main-neuroflow-features">
+            <li>Create and share your own apps with ease.</li>
+            <li>Connect with creators and collaborate in real-time.</li>
+            <li>Stay updated with the latest tech news.</li>
+            <li>Explore a vibrant community of innovators.</li>
+          </ul>
+          <div class="main-neuroflow-buttons-container">
+            <a href="projects/top_projects.html" class="main-neuroflow-cta-button" id="main-neuroflow-cta">Join the Flow</a>
+            <a href="aplication/" class="main-neuroflow-get-started-button" id="main-neuroflow-get-started">Get Started</a>
+          </div>
+        </div>
+        <div class="main-neuroflow-image-container">
+          <img src="assets/img/ggg.png" 
+               alt="NeuroFlow Digital Interface" 
+               class="opacity-0" 
+               id="main-neuroflow-image"
+               onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\' viewBox=\'0 0 400 300\'%3E%3Crect width=\'400\' height=\'300\' fill=\'%23f0f0f0\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'24\' fill=\'%23999\'%3EImage not found%3C/text%3E%3C/svg%3E';">
+        </div>
+      </div>
+      <script>
+    // Функция для безопасной инициализации анимаций
+    function initializeAnimations() {
+      try {
+        if (typeof gsap === 'undefined') {
+          console.warn('GSAP не загрузился. Анимации будут отключены.');
+          // Показываем элементы без анимации
+          document.querySelectorAll('.opacity-0').forEach(el => {
+            el.classList.remove('opacity-0');
+          });
+          return;
+        }
+
+        // GSAP анимации с проверкой существования элементов
+        const elements = {
+          header: document.querySelector("#main-neuroflow-header"),
+          subheader: document.querySelector("#main-neuroflow-subheader"),
+          features: document.querySelector("#main-neuroflow-features"),
+          buttons: document.querySelector(".main-neuroflow-buttons-container"),
+          image: document.querySelector("#main-neuroflow-image")
+        };
+
+        if (elements.header) {
+          gsap.from(elements.header, { duration: 1, y: 50, opacity: 0, ease: "power2.out" });
+        }
+        if (elements.subheader) {
+          gsap.from(elements.subheader, { duration: 1, y: 40, opacity: 0, delay: 0.2, ease: "power2.out" });
+        }
+        if (elements.features) {
+          gsap.from("#main-neuroflow-features li", { duration: 0.8, x: -30, opacity: 0, delay: 0.4, stagger: 0.15, ease: "power2.out" });
+        }
+        if (elements.buttons) {
+          gsap.from(elements.buttons, { duration: 1, y: 30, opacity: 0, delay: 0.8, ease: "power2.out" });
+        }
+        if (elements.image) {
+          gsap.from(elements.image, { duration: 1.2, scale: 0.9, opacity: 0, delay: 1, ease: "power2.out" });
+        }
+      } catch (error) {
+        console.error('Ошибка при инициализации анимаций:', error);
+      }
+    }
+
+    // Функция для безопасной инициализации параллакса
+    function initializeParallax() {
+      try {
+        const img = document.querySelector("#main-neuroflow-image");
+        if (!img) return;
+
+        document.addEventListener("mousemove", (e) => {
+          const x = (window.innerWidth / 2 - e.clientX) / 100;
+          const y = (window.innerHeight / 2 - e.clientY) / 100;
+          img.style.transform = `translate(${x}px, ${y}px)`;
+        });
+      } catch (error) {
+        console.error('Ошибка при инициализации параллакса:', error);
+      }
+    }
+
+    // Инициализация после загрузки страницы
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeAnimations();
+      initializeParallax();
+    });
+  </script>      
+      </section></div><!-- /Hero Section -->
+    <style>
+    .home-container {
+      --home-primary: #007bff;
+      --home-secondary: #27ae60;
+      --home-text-primary: #1a1a1a;
+      --home-text-secondary: #4a4a4a;
+      --home-background: #ffffff;
+      --home-shadow: rgba(0, 123, 255, 0.1);
+      
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      background: var(--home-background);
+      color: var(--home-text-primary);
+    }
+
+    body {
+      background: #ffffff;
+    }
+
+    .home-flex {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      width: 100%;
+      position: relative;
+    }
+
+    .home-text {
+      text-align: left;
+      position: relative;
+      z-index: 2;
+    }
+
+    .home-text__title {
+      font-size: 4.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, var(--home-primary), var(--home-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      max-width: 800px;
+    }
+
+    .home-text__subtitle {
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--home-text-secondary);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .home-text__paragraph {
+      font-size: 1.25rem;
+      color: var(--home-text-secondary);
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-left: 2rem;
+      line-height: 1.6;
+    }
+
+    .home-text__paragraph::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      background: var(--home-primary);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    .home-image {
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+      margin: 0;
+    }
+
+    .home-image__img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px var(--home-shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .home-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: 20px;
+      bottom: 20px;
+      border: 2px solid var(--home-primary);
+      border-radius: 24px;
+      z-index: -1;
+    }
+
+    .home-image::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: -20px;
+      bottom: -20px;
+      border: 2px solid var(--home-secondary);
+      border-radius: 24px;
+      z-index: -1;
+    }
+
+    .home-shape {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, var(--home-primary), var(--home-secondary));
+      opacity: 0.05;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .home-shape--top {
+      top: -200px;
+      right: -200px;
+    }
+
+    .home-shape--bottom {
+      bottom: -200px;
+      left: -200px;
+      width: 400px;
+      height: 400px;
+    }
+
+    @media (min-width: 1024px) {
+      .home-flex {
+        flex-direction: row;
+        align-items: center;
+        gap: 6rem;
+      }
+
+      .home-image {
+        order: -1;
+        flex: 1.2;
+      }
+
+      .home-text {
+        flex: 1;
+      }
+
+      .home-text__title {
+        font-size: 5rem;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .home-container {
+        padding: 1rem;
+      }
+
+      .home-text__title {
+        font-size: 3rem;
+      }
+
+      .home-text__subtitle {
+        font-size: 1.75rem;
+      }
+
+      .home-text__paragraph {
+        font-size: 1.125rem;
+      }
+
+      .home-shape {
+        display: none;
+      }
+    }
+  </style>
+    <!-- Features Section -->
+    <section id="features" class="home-container features section block_all_h">
+       <div class="home-flex">
+      <div class="home-text">
+        <h1 class="home-text__title">Welcome to Our Platform</h1>
+        <h2 class="home-text__subtitle">A Space for Change</h2>
+        <p class="home-text__paragraph">
+          Our website is a space where users can create changes. Here, they can initiate their own project: from medical and cultural heritage to engineering, choosing their status and the main goal with which the project was initiated.
+        </p>
+        <p class="home-text__paragraph">
+          All such features can be seen on the interactive map, where each individual who created their own project markets the country. It gives an opportunity to see initiatives from every corner of the world.
+        </p>
+        <p class="home-text__paragraph">
+          Besides, our website allows users to have a live chat, where everyone can discuss various topics, find like-minded people, and add their own topic for discussion.
+        </p>
+        <p class="home-text__paragraph">
+          Our platform includes innovations, creativity, and actions for changing our future!
+        </p>
+      </div>
+      <div class="home-image">
+        <img src="assets/img/world.png" alt="Collaborative Platform Interface" class="home-image__img">
+      </div>
+    </div>
+    </section><!-- /Features Section -->
+
+
+    <!-- About Section -->
+    <style>
+         .about-neuroflow-text {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .about-neuroflow-text--heading {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .about-neuroflow-text--subheading {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .about-neuroflow-text--body {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+        }
+
+        .about-neuroflow-text--highlight {
+            color: #162f4a;
+            font-weight: 600;
+        }
+
+        .about-neuroflow-container {
+            width: 80%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 80%;
+            max-height: 850px;
+            margin-top: 20px;
+        }
+
+        .about-neuroflow-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .about-neuroflow-about {
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .about-neuroflow-title {
+            text-align: left;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: aboutNeuroflowFadeIn 0.8s ease forwards;
+        }
+
+        .about-neuroflow-title__heading {
+            background: linear-gradient(135deg, #1f2937 0%, #1f2937 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .about-neuroflow-title__heading::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #007bff 0%, #007bff 100%);
+            border-radius: 2px;
+        }
+
+        .about-neuroflow-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 48px;
+            align-items: start;
+            margin-bottom: 64px;
+        }
+
+        .about-neuroflow-description {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: aboutNeuroflowFadeIn 0.8s ease forwards 0.2s;
+        }
+
+        .about-neuroflow-photo {
+            height: 100%;
+            min-height: 200px;
+            max-height: 400px;
+            background: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: aboutNeuroflowFadeIn 0.8s ease forwards 0.3s;
+            transition: all 0.3s ease;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-neuroflow-photo:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-neuroflow-features {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: aboutNeuroflowFadeIn 0.8s ease forwards 0.4s;
+        }
+
+        .about-neuroflow-features__title {
+            background: linear-gradient(135deg, #007bff 0%, #007bff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 32px;
+        }
+
+        .about-neuroflow-features__list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .about-neuroflow-feature {
+            position: relative;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: aboutNeuroflowFadeIn 0.8s ease forwards;
+            border: 1px solid #e2e8f0;
+        }
+
+        .about-neuroflow-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #2ecc71 0%, #2ecc71 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .about-neuroflow-feature:hover {
+            background: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-neuroflow-feature:hover::before {
+            opacity: 1;
+        }
+
+        .about-neuroflow-feature:nth-child(1) { animation-delay: 0.6s; }
+        .about-neuroflow-feature:nth-child(2) { animation-delay: 0.8s; }
+        .about-neuroflow-feature:nth-child(3) { animation-delay: 1s; }
+        .about-neuroflow-feature:nth-child(4) { animation-delay: 1.2s; }
+
+        @keyframes aboutNeuroflowFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .about-neuroflow-wrapper {
+                padding: 0 40px;
+            }
+
+            .about-neuroflow-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .about-neuroflow-photo {
+                position: relative;
+                top: 0;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-neuroflow-wrapper {
+                padding: 0 24px;
+            }
+
+            .about-neuroflow-about {
+                margin: 40px auto;
+            }
+
+            .about-neuroflow-text--heading {
+                font-size: 2.5rem;
+            }
+            
+            .about-neuroflow-features__list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<!--  <div class="about-neuroflow-container"> -->
+    <section id="about" class="about-neuroflow-about about section block_all_h hidden_all_h">
+        <div class="about-neuroflow-title">
+                <h1 class="about-neuroflow-text--heading about-neuroflow-title__heading">Neuro Flow</h1>
+            </div>
+            <div class="about-neuroflow-content">
+                <div class="about-neuroflow-description">
+                    <p class="about-neuroflow-text--body">We are a tight-knit squad of young innovators where everyone brings unique value: <span class="about-neuroflow-text--highlight"><b>Ivan</b></span>, our 17-year-old leader, combines technical curiosity with a natural talent for team coordination; <span class="about-neuroflow-text--highlight"><b>Kyrylo</b></span>, the 16-year-old coding prodigy, brings complex tech solutions to life through web development and neural networks; <span class="about-neuroflow-text--highlight"><b>Kseniia</b></span>, our 15-year-old creative designer, transforms advanced technologies into elegant and user-friendly experiences.</p>
+                </div>
+                <div class="about-neuroflow-photo">
+                    <img src="assets/img/team.png" alt="Neuro Flow Team" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+            </div>
+            <div class="about-neuroflow-features">
+                <h2 class="about-neuroflow-text--subheading about-neuroflow-features__title">Why Choose Us?</h2>
+                <ul class="about-neuroflow-features__list">
+                    <li class="about-neuroflow-feature about-neuroflow-text--body">Perfect blend of technical and creative skills</li>
+                    <li class="about-neuroflow-feature about-neuroflow-text--body">Deep expertise in cutting-edge technologies</li>
+                    <li class="about-neuroflow-feature about-neuroflow-text--body">Commitment to excellence in every project</li>
+                    <li class="about-neuroflow-feature about-neuroflow-text--body">Seamless teamwork and synergy</li>
+                </ul>
+            </div>
+ <!--      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 align-items-center justify-content-between">
+
+          <div class="col-xl-5" data-aos="fade-up" data-aos-delay="200">
+            <span class="about-meta">MORE ABOUT US</span>
+            <h2 class="about-title">Building the Future of Technology</h2>
+            <p class="about-description">We are a team of passionate developers driven by innovation and the power of technology. Our mission is to create cutting-edge solutions that solve real-world problems and enhance the digital experience.</p>
+
+            <div class="row feature-list-wrapper">
+              <div class="col-md-6">
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle-fill"></i> Smart & impactful solutions</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Breaking boundaries & innovating</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Creativity & precision</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle-fill"></i> User-focused technology</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Cutting-edge development</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Future-driven mindset</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="info-wrapper">
+               <div class="row gy-4">
+                <div class="col-lg-5">
+                  <div class="profile d-flex align-items-center gap-3">
+                    <img src="assets/img/avatar-1.webp" alt="CEO Profile" class="profile-image">
+                    <div>
+                      <h4 class="profile-name">Mario Smith</h4>
+                      <p class="profile-position">CEO &amp; Founder</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-7">
+                  <div class="contact-info d-flex align-items-center gap-2">
+                    <i class="bi bi-telephone-fill"></i>
+                    <div>
+                      <p class="contact-label">Call us anytime</p>
+                      <p class="contact-number">+123 456-789</p>
+                    </div>
+                  </div>
+                </div>
+              </div>             </div>
+          </div>
+
+          <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="image-wrapper">
+              <div class="images position-relative" data-aos="zoom-out" data-aos-delay="400">
+                <img src="assets/img/about-5.webp" alt="Business Meeting" class="img-fluid main-image rounded-4">
+                <img src="assets/img/about-2.webp" alt="Team Discussion" class="img-fluid small-image rounded-4">
+              </div>
+              <div class="experience-badge floating">
+                <h3>15+ <span>Years</span></h3>
+                <p>Of experience in business service</p>
+              </div> 
+            </div>
+          </div>
+        </div>
+
+      </div>
+     -->
+    </section><!-- /About Section -->
+    <!-- </div> -->
+
+    <style>
+    .uiblock-section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f0f2f5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+    }
+
+    .uiblock-container {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 1475px;
+      width: 90%;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: uiblock-fadeIn 1s ease-out;
+      margin-left: 6%;
+      margin-right: 20px;
+      box-sizing: border-box; /* Добавлено для точного расчёта ширины */
+    }
+
+    .uiblock-btn {
+      display: inline-block;
+      padding: 8px 12px;
+      font-size: 14px;
+      color: #ffffff;
+      background: linear-gradient(90deg, #2ecc71 40%, #27ae60 40%, #2ecc71 60%);
+      background-size: 200% 100%;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: uiblock-btnAppear 1.2s ease-out, uiblock-gradientFlow 3s ease-in-out infinite;
+      text-transform: uppercase;
+      width: 120px;
+      margin: 0 auto;
+    }
+
+    .uiblock-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+    }
+
+    .uiblock-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(46, 204, 113, 0.2);
+    }
+
+    .uiblock-title {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 24px;
+      font-weight: 500;
+      animation: uiblock-slideIn 1s ease-out;
+    }
+
+    /* Анимации */
+    @keyframes uiblock-fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes uiblock-slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes uiblock-btnAppear {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes uiblock-gradientFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section block_all_h hidden_all_h">
+    <div class="uiblock-container">
+      <h2 class="uiblock-title">Try the app</h2>
+      <button class="uiblock-btn" onclick="downloadFile()">Download</button>
+    </div>
+    </section><!-- /Call To Action Section -->
+
+    <script>
+        function downloadFile() {
+             const link = document.createElement('a');
+             link.href = '/files/app.apk';
+             link.download = 'app.apk';
+             document.body.appendChild(link);
+             link.click();
+             document.body.removeChild(link);
+         }
+    </script>
+
+    <section class="plans-section block_all_h hidden_all_h" id="plans-section">
+      <div class="plans-center-text plans-margin-bottom-big" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="plans-heading-secondary">
+          Hosting Plans
+        </h2>
+      </div>
+
+      <div class="plans-row" data-aos="fade-up" data-aos-delay="100">
+        <div class="plans-col-1-of-3">
+          <div class="plans-card">
+            <div class="plans-card__side plans-card__side--front-1">
+              <div class="plans-card__title plans-card__title--1">
+                <i class="fas fa-paper-plane"></i>
+                <h4 class="plans-card__heading">Basic</h4>
+              </div>
+
+              <div class="plans-card__details">
+                <ul>
+                  <li>1 Website</li>
+                  <li>50 GB SSD Storage</li>
+                  <li>Unmetered Bandwidth</li>
+                  <li>Free SSL Certificate</li>
+                  <li>1 Included Domain</li>
+                  <li>1 Included Domain</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plans-card__side plans-card__side--back plans-card__side--back-1">
+              <div class="plans-card__cta">
+                <div class="plans-card__price-box">
+                  <p class="plans-card__price-only">Only</p>
+                  <p class="plans-card__price-value">$2.95/mo*</p>
+                </div>
+                <a href="#popup" class="plans-btn plans-btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plans-col-1-of-3">
+          <div class="plans-card">
+            <div class="plans-card__side plans-card__side--front-2">
+              <div class="plans-card__title plans-card__title--2">
+                <i class="fas fa-plane"></i>
+                <h4 class="plans-card__heading">Plus</h4>
+              </div>
+
+              <div class="plans-card__details">
+                <ul>
+                  <li>Includes Basic Package Features</li>
+                  <li>Unlimited Websites</li>
+                  <li>Unlimited SSD Storage</li>
+                  <li>Unlimited Domains</li>
+                  <li>Unlimited Parked Domains</li>
+                  <li>Unlimited Sub Domains</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plans-card__side plans-card__side--back plans-card__side--back-2">
+              <div class="plans-card__cta">
+                <div class="plans-card__price-box">
+                  <p class="plans-card__price-only">Only</p>
+                  <p class="plans-card__price-value">$5.45/mo*</p>
+                </div>
+                <a href="#popup" class="plans-btn plans-btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plans-col-1-of-3">
+          <div class="plans-card">
+            <div class="plans-card__side plans-card__side--front-3">
+              <div class="plans-card__title plans-card__title--3">
+                <i class="fas fa-rocket"></i>
+                <h4 class="plans-card__heading">Pro</h4>
+              </div>
+
+              <div class="plans-card__details">
+                <ul>
+                  <li>Includes Plus Plan Features</li>
+                  <li>High Performance</li>
+                  <li>2 Spam Experts</li>
+                  <li>Free SSL Certificate</li>
+                  <li>Domain Privacy</li>
+                  <li>Site Backup - CodeGuard Basic</li>
+                </ul>
+              </div>
+            </div>
+            <div class="plans-card__side plans-card__side--back plans-card__side--back-3">
+              <div class="plans-card__cta">
+                <div class="plans-card__price-box">
+                  <p class="plans-card__price-only">Only</p>
+                  <p class="plans-card__price-value">$13.95/mo</p>
+                </div>
+                <a href="#popup" class="plans-btn plans-btn--white">Select</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plans-center-text plans-margin-top-huge" data-aos="fade-up" data-aos-delay="100">
+        <a href="#" class="plans-btn plans-btn--green">Get Started</a>
+      </div>
+    </section>
+
+
+<!-- Only the modified sections are shown; other parts remain unchanged -->
+<section id="topics-container" class="topics-container section block_all_h hidden_all_h">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="topics-content">
+          <div class="topics-header">
+            <h2>Chat</h2>
+          </div>
+          <div class="action-container">
+            <div class="search-container">
+              <input type="text" id="searchInput" placeholder="Пошук за назвою теми..." oninput="filterTopics()">
+            </div>
+            <div id="createTopicSection" class="hidden">
+              <button class="btn btn-primary create-topic-btn block_up_little_lit" onclick="showCreateTopicForm()">
+                <i class="bi bi-plus-lg"></i> Створити нову тему
+              </button>
+            </div>
+          </div>
+          <div id="topicForm" class="hidden">
+            <div class="form-group">
+              <input type="text" id="topicTitle" class="form-control" placeholder="Назва теми">
+            </div>
+            <button onclick="createTopic()" class="btn btn-primary block_up_little_lit">Створити</button>
+          </div>
+          <div id="authMessage" class="auth-message">
+            Будь ласка, <a href="#" onclick="toggleProfile()">увійдіть</a> щоб створити тему
+          </div>
+          <div id="topicList" class="topic-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal for delete confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Підтвердження видалення</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Ви впевнені, що хочете видалити цю тему? Це також видалить всі повідомлення в ній.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="forum-container" class="forum-container block_all_h hidden_all_h">
+  <div class="container">
+    <h2 id="topicTitle" class="mb-4">Тема форуму</h2>
+    <button class="btn btn-secondary mb-3 block_up_little_lit" onclick="toggleForumBlocks('topics-container')">
+      <i class="bi bi-arrow-left"></i> Повернутися до тем
+    </button>
+    <div id="forumAuthMessage" class="alert alert-info d-none">
+      Будь ласка, увійдіть, щоб додати повідомлення
+    </div>
+    <div id="messageInput" class="d-none">
+      <textarea id="messageText" class="form-control mb-2" rows="3" placeholder="Напишіть ваше повідомлення..."></textarea>
+      <button class="btn btn-primary block_up_little_lit" onclick="addMessage()">Відправити</button>
+    </div>
+    <div id="messageList" class="message-list mt-4"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteMessageModal" tabindex="-1" aria-labelledby="deleteMessageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteMessageModalLabel">Підтвердження видалення</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Ви впевнені, що хочете видалити це повідомлення? Це також видалить всі відповіді на нього.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteMessageBtn">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section class="hidden_all_h">
+<section id="features-cards" class=""></section>
+<section id="services" class=""></section>
+<section id="clients" class=""></section>
+<section id="faq" class=""></section>
+<section id="stats" class=""></section>
+<section id="features_one" class=""></section>
+<section id="features_cards_two" class=""></section>
+<section id="forum-container" class=""></section>
+<section id="news" class=""></section>
+<section>
+
+<section id="top-messages-container" class="top-messages-container section block_all_h hidden_all_h">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="forum-content">
+          <div class="forum-header">
+            <h2 class="topic-title">Популярні теми</h2>
+          </div>
+          <div class="message-list" id="messageList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<button class="chat-button" onclick="toggleChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        </svg>
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Chat</span>
+            <button class="close-button" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Здесь будут сообщения -->
+        </div>
+        <div class="chat-input">
+            <div class="chat-input-container">
+                <input type="text" id="messageInputUN" placeholder="Enter a message...">
+                <button class="test_rotate" onclick="sendMessage_nopobleminfuture()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+  </main>
+    <!-- Modals for Partners for Change -->
+  <div id="joinProjectModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="joinProjectTitle" class="modal-title"></h5>
+          <button type="button" class="btn-close" id="closeJoinModal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="joinProjectContent"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeJoinModalFooter">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteProjectModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Deletion</h5>
+          <button type="button" class="btn-close" id="cancelDeleteProject" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="deleteProjectMessage"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="confirmDeleteProject">Confirm</button>
+          <button type="button" class="btn btn-secondary" id="cancelDeleteProjectFooter">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contactModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Contact Project Creator</h5>
+          <button type="button" class="btn-close" id="closeContactModal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <iframe id="contactIframe" src="" class="w-100" style="height: 400px;"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="closeContactModalFooter">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!--
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">NeuroFlow</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Hic solutasetp</h4>
+          <ul>
+            <li><a href="#">Molestiae accusamus iure</a></li>
+            <li><a href="#">Excepturi dignissimos</a></li>
+            <li><a href="#">Suscipit distinctio</a></li>
+            <li><a href="#">Dilecta</a></li>
+            <li><a href="#">Sit quas consectetur</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Nobis illum</h4>
+          <ul>
+            <li><a href="#">Ipsam</a></li>
+            <li><a href="#">Laudantium dolorum</a></li>
+            <li><a href="#">Dinera</a></li>
+            <li><a href="#">Trodelas</a></li>
+            <li><a href="#">Flexo</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">NeuroFlow</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer> -->
+  <!-- Scroll Top -->
+  <!--<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/folder_js_css/js/partners-for-change.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="https://kit.fontawesome.com/bdd89edb33.js"></script>
+  <!-- Локальні JS файли -->
+  <script src="test/test.js?ts=<%= Date.now() %>"></script>
+  <script src="assets/js/main.js?ts=<%= Date.now() %>"></script>
+  <script src="assets/folder_js_css/js/my.js?ts=asdefg"></script>
+  <script src="assets/folder_js_css/js/test.js?ts=<%= Date.now() %>"></script>
+  <script src="assets/folder_js_css/js/topics.js?ts=<%= Date.now() %>"></script>
+  <script src="assets/folder_js_css/js/news.js"></script>
+  <script src="assets/folder_js_css/js/topp_topics.js?ts=<%= Date.now() %>"></script>
+  <script src="assets/folder_js_css/js/script_manager_chat.js?ts=abcde"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+

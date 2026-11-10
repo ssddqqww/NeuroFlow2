@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Сохранение имени</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: green;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            user-select: none;
+        }
+        .button:hover {
+            background: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Введите ваше имя</h2>
+        <input type="text" id="username" placeholder="Ваше имя">
+        <div class="button" id="saveButton">OK</div>
+    </div>
+
+    <script>
+        let ws = null;
+
+        function connectWebSocket() {
+            ws = new WebSocket('ws://localhost:8080');
+
+            ws.onopen = function() {
+                console.log('Соединение установлено');
+            };
+
+            ws.onmessage = function(event) {
+                const response = JSON.parse(event.data);
+                if (response.type === 'success') {
+                    console.log('Имя успешно сохранено!');
+                } else if (response.type === 'error') {
+                    console.error('Ошибка:', response.message);
+                }
+            };
+
+            ws.onerror = function(error) {
+                console.error('Ошибка WebSocket:', error);
+            };
+
+            ws.onclose = function() {
+                console.log('Соединение закрыто');
+                setTimeout(connectWebSocket, 5000);
+            };
+        }
+
+        connectWebSocket();
+
+        const saveButton = document.getElementById('saveButton');
+        const usernameInput = document.getElementById('username');
+
+        function sendUsername() {
+            const username = usernameInput.value;
+            
+            if (!username.trim()) {
+                console.log('Пожалуйста, введите имя');
+                return;
+            }
+
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    type: 'saveUsername',
+                    username: username
+                }));
+            } else {
+                console.log('Нет соединения с сервером. Пожалуйста, подождите...');
+            }
+        }
+
+        saveButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            sendUsername();
+        });
+
+        usernameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendUsername();
+            }
+        });
+    </script>
+</body>
+</html>

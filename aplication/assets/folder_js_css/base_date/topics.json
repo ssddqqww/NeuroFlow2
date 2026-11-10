@@ -1,0 +1,120 @@
+{
+  "topics": [
+    {
+      "id": 1746628558531,
+      "title": "5",
+      "author": "Кирило Липенко",
+      "authorEmail": "kyrylo.lypenko2019@harant-osvita.kyiv.ua",
+      "createdAt": "2025-05-07T14:35:58.531Z",
+      "messageIds": []
+    },
+    {
+      "id": 1745437163054,
+      "title": "івап",
+      "author": "Іван Гайдаров",
+      "authorEmail": "ivnsell13@gmail.com",
+      "createdAt": "2025-04-23T19:39:23.054Z",
+      "messageIds": [
+        1745437183574,
+        1745437194723
+      ]
+    },
+    {
+      "id": 1745437120816,
+      "title": "явіапфі",
+      "author": "Test User",
+      "authorEmail": "test@example.com",
+      "createdAt": "2025-04-23T19:38:40.816Z",
+      "messageIds": [
+        1746687141499,
+        1746687156096
+      ]
+    },
+    {
+      "id": 1745436927972,
+      "title": "аіфапф",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-04-23T19:35:27.972Z",
+      "messageIds": [
+        1745436935444,
+        1745436947566
+      ],
+      "edited": true,
+      "editedAt": "2025-05-07T15:24:19.022Z"
+    },
+    {
+      "id": 1745415884908,
+      "title": "***",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-04-23T13:44:44.908Z",
+      "messageIds": [],
+      "edited": true,
+      "editedAt": "2025-05-05T17:06:31.993Z"
+    },
+    {
+      "id": 1745349657955,
+      "title": "уеу",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-04-22T19:20:57.955Z",
+      "messageIds": [],
+      "edited": true,
+      "editedAt": "2025-05-02T15:35:12.288Z"
+    },
+    {
+      "id": 1745346508069,
+      "title": "2fdf",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-04-22T18:28:28.069Z",
+      "messageIds": [
+        1745346516488,
+        1746628614106
+      ],
+      "edited": true,
+      "editedAt": "2025-05-07T15:02:52.463Z"
+    },
+    {
+      "id": 1745333019246,
+      "title": "5",
+      "author": "Кирило Липенко",
+      "authorEmail": "kyrylo.lypenko2019@harant-osvita.kyiv.ua",
+      "createdAt": "2025-04-22T14:43:39.246Z",
+      "messageIds": [
+        1745437051056,
+        1745437053453
+      ]
+    },
+    {
+      "id": 1745332763131,
+      "title": "rwe",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-04-22T14:39:23.131Z",
+      "messageIds": [
+        1746465004497,
+        1746465008666,
+        1746641161810,
+        1746791299470,
+        1746791305226
+      ]
+    },
+    {
+      "id": 1745332670586,
+      "title": "h",
+      "author": "robot venomchik",
+      "authorEmail": "kirillypenko20@gmail.com",
+      "createdAt": "2025-04-22T14:37:50.586Z",
+      "messageIds": [
+        1745332728729,
+        1745332740070,
+        1745332742320,
+        1746464809797
+      ],
+      "edited": true,
+      "editedAt": "2025-04-22T14:38:39.239Z"
+    }
+  ]
+}

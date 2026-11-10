@@ -1,0 +1,119 @@
+/* Общие стили */
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Контейнер для секции */
+#call-to-action .container {
+    position: relative;
+}
+
+/* Контейнер для контента */
+.content {
+    display: flex;
+    flex-direction: column; /* Устанавливаем вертикальное расположение */
+    align-items: center; /* Центрируем элементы по горизонтали */
+}
+
+/* Стили для заголовка */
+h2.display-4 {
+    margin-bottom: 20px; /* Уменьшаем отступ снизу, чтобы кнопка была ближе */
+    position: relative;
+    z-index: 1; /* Устанавливаем низкий z-index, чтобы не перекрывать кнопку */
+}
+
+/* Контейнер для кнопки */
+.btn-ctr {
+    position: relative; /* Меняем с absolute на relative, чтобы не выбивалось из потока */
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    z-index: 2; /* Устанавливаем выше, чем у h2, чтобы кнопка была кликабельной */
+}
+
+/* Стили кнопки */
+.but_downl {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 130px;
+    border-radius: 40px;
+    background: #fff;
+    border: 2px solid #1ECD97;
+    color: #1ECD97;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    transform: rotate(0deg);
+}
+
+.but_downl:hover {
+    color: white;
+    background: #1ECD97;
+}
+
+.but_downl:active {
+    letter-spacing: 2px;
+}
+
+.but_downl:after {
+    content: "SUBMIT";
+}
+
+.btn-spin {
+    width: 40px;
+    border-color: #bbbbbb;
+    border-width: 3px;
+    font-size: 0;
+    border-left-color: #1ECD97;
+    animation: btn-rot 2s 0.25s linear;
+}
+
+.btn-spin:after {
+    content: "";
+}
+
+.btn-spin:hover {
+    color: #1ECD97;
+    background: white;
+}
+
+.btn-ok {
+    font-size: 13px;
+    color: white;
+    background: #1ECD97;
+    transform: rotate(0deg);
+}
+
+.btn-ok:after {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+}
+
+@keyframes btn-rot {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Стили для точек (если нужно) */
+.dots {
+    position: absolute;
+    z-index: 0; /* Устанавливаем ниже кнопки и текста */
+}
+
+.dots-1 {
+    top: 0;
+    left: 0;
+}
+
+.dots-2 {
+    bottom: 0;
+    right: 0;
+}

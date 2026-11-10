@@ -1,0 +1,104 @@
+{
+  "ratings": [],
+  "1746686978746": {
+    "ratings": [],
+    "average": 0,
+    "count": 0
+  },
+  "1746625745829": {
+    "ratings": [],
+    "average": 0,
+    "count": 0
+  },
+  "1746470432427": {
+    "ratings": [],
+    "average": 0,
+    "count": 0
+  },
+  "1747991904106": {
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 4,
+        "timestamp": "2025-05-23T12:44:57.273Z"
+      }
+    ],
+    "average": 4,
+    "count": 1
+  },
+  "1747992048033": {
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-23T09:21:08.648Z"
+      }
+    ],
+    "average": 5,
+    "count": 1
+  },
+  "1747993808330": {
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 4,
+        "timestamp": "2025-05-23T09:50:25.552Z"
+      }
+    ],
+    "average": 4,
+    "count": 1
+  },
+  "1747994472849": {
+    "ratings": [],
+    "average": 0,
+    "count": 0
+  },
+  "1747994644340": {
+    "ratings": [],
+    "average": 0,
+    "count": 0
+  },
+  "1747995834581": {
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-23T12:45:02.115Z"
+      }
+    ],
+    "average": 5,
+    "count": 1
+  },
+  "1747995985350": {
+    "ratings": [],
+    "average": 0,
+    "count": 0
+  },
+  "1747996512172": {
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-23T12:45:06.625Z"
+      }
+    ],
+    "average": 5,
+    "count": 1
+  },
+  "1748077238997": {
+    "ratings": [
+      {
+        "userEmail": "kirillypenko20@gmail.com",
+        "rating": 5,
+        "timestamp": "2025-05-24T09:02:52.731Z"
+      }
+    ],
+    "average": 5,
+    "count": 1
+  },
+  "1748077338803": {
+    "ratings": [],
+    "average": 0,
+    "count": 0
+  }
+}

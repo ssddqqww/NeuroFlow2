@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Quizlet",
+    "category": "Innovations",
+    "likes": 1,
+    "dislikes": 0,
+    "reviews": []
+  },
+  {
+    "id": 2,
+    "name": "Medetation",
+    "category": "Mental",
+    "likes": 1,
+    "dislikes": 0,
+    "reviews": []
+  },
+  {
+    "id": 3,
+    "name": "Count_plastic",
+    "category": "Ecology",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": []
+  },
+  {
+    "id": 4,
+    "name": "Сheck_ecology",
+    "category": "Ecology",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": []
+  },
+  {
+    "id": 5,
+    "name": "Flood-Resilient_Homes",
+    "category": "Innovations",
+    "likes": 1,
+    "dislikes": 0,
+    "reviews": []
+  },
+  {
+    "id": 6,
+    "name": "test",
+    "category": "test",
+    "likes": 0,
+    "dislikes": 1,
+    "reviews": []
+  },
+  {
+    "id": 7,
+    "name": "Hui",
+    "category": "test",
+    "likes": 0,
+    "dislikes": 0,
+    "reviews": []
+  }
+]

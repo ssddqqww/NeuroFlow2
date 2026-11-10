@@ -1,0 +1,36 @@
+{
+  "messages": [
+    {
+      "id": "1",
+      "chatId": "1",
+      "userId": "1",
+      "text": "Добро пожаловать в чат!",
+      "timestamp": "2024-03-20T12:00:00.000Z",
+      "edited": false
+    },
+    {
+      "id": "1747174444021",
+      "chatId": "1747174436303",
+      "userId": "user_93133vr2z",
+      "text": "привет как дела",
+      "timestamp": "2025-05-13T22:14:04.021Z",
+      "edited": false
+    },
+    {
+      "id": "1747174453060",
+      "chatId": null,
+      "userId": "user_sbkuzus59",
+      "text": "фыва",
+      "timestamp": "2025-05-13T22:14:13.060Z",
+      "edited": false
+    },
+    {
+      "id": "1747174478803",
+      "chatId": "1747174436303",
+      "userId": "user_wmqqsebrw",
+      "text": "фывап",
+      "timestamp": "2025-05-13T22:14:38.803Z",
+      "edited": false
+    }
+  ]
+}

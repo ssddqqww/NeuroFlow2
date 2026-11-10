@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Playground</title>
+    <link href="test_style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="test_all">
+        <div class="container" id="mainContainer">
+            <div class="editor" id="editor">
+                <div>
+                    <label for="htmlCode">HTML</label>
+                    <textarea id="htmlCode" class="test_areas" placeholder="Введите HTML код..."></textarea>
+                </div>
+                <div>
+                    <label for="cssCode">CSS</label>
+                    <textarea id="cssCode" class="test_areas" placeholder="Введите CSS код..."></textarea>
+                </div>
+                <div>
+                    <label for="jsCode">JS</label>
+                    <textarea id="jsCode" class="test_areas" placeholder="Введите JavaScript код..."></textarea>
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="testBtn" onclick="runCode()">Протестировать</button>
+                <button id="publishBtn" onclick="showPublishForm()">Опубликовать</button>
+            </div>
+            <div class="publish-form" id="publishForm">
+                <input type="text" id="projectName" placeholder="Название проекта">
+                <input type="text" id="projectCategory" placeholder="Категория">
+                <button onclick="publishProject()">Сохранить проект</button>
+                <button onclick="cancelPublish()">Отмена</button>
+            </div>
+            <div>
+                <label>Результат</label>
+                <iframe id="output"></iframe>
+            </div>
+            <div class="project-list" id="projectList"></div>
+        </div>
+        <div class="result-view" id="resultView">
+            <button class="close-btn" onclick="showMainView()">✕</button>
+            <iframe id="resultOutput"></iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

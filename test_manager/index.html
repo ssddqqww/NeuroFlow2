@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroFlow Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            margin-left: auto;
+            margin-right: 10px;
+            text-align: right;
+        }
+        .bot-message {
+            background-color: #e9ecef;
+            color: #333;
+            margin-right: auto;
+            margin-left: 10px;
+        }
+        .input-container {
+            display: flex;
+            padding: 15px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 1em;
+            outline: none;
+        }
+        #user-input:focus {
+            border-color: #007bff;
+        }
+        #send-button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            color: #666;
+            font-style: italic;
+        }
+        @media (max-width: 600px) {
+            .chat-container {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+            .chat-box {
+                padding: 10px;
+            }
+            .input-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">NeuroFlow Chat</div>
+        <div class="chat-box" id="chat-box"></div>
+        <div id="loading">Віка пише...</div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Введіть ваше повідомлення..." autocomplete="off">
+            <button id="send-button" onclick="sendMessage()">Надіслати</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '/api/generate';
+        const systemPrompt = `Ви — Віка, менеджер компанії NeuroFlow, яка займається розробкою рішень на основі штучного інтелекту для бізнесу та приватних клієнтів. Ви ввічливі, професійні та завжди намагаєтесь бути максимально корисною. Відповідайте корот��о, по суті та з дружнім тоном. Якщо користувач задає питання, що вимагає актуальної інформації (наприклад, про погоду, новини чи поточну дату), використовуйте надані результати пошуку. Якщо результатів пошуку немає, відповідайте на основі своїх знань, але уточнюйте, що інформація може бути неактуальною. Завжди дотримуйтесь мовних інструкцій. Додавайте емодзі 💕 в кінці відповідей, якщо це доречно.`;
+
+        function addMessage(text, sender) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender === 'user' ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = text;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function detectLanguage(message) {
+            const latinPattern = /^[a-zA-Z\s?!.,]*$/;
+            const ukrainianPattern = /[іїєґ]/i;
+            const ukrainianKeywords = /\b(що|як|коли|де|чому)\b/i;
+
+            if (latinPattern.test(message)) {
+                return 'en';
+            }
+            return 'uk';
+        }
+
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Показываем сообщение пользователя
+            addMessage(message, 'user');
+            userInput.value = '';
+
+            // Показываем индикатор загрузки
+            const loadingDiv = document.getElementById('loading');
+            loadingDiv.style.display = 'block';
+
+            let attempts = 0;
+            const maxAttempts = 10;  // Устанавливаем 10 попыток
+            const timeout = 3000;
+
+            while (attempts < maxAttempts) {
+                attempts++;
+                if (attempts > 1) {
+                    loadingDiv.textContent = `Спробуємо ще раз (${attempts}/${maxAttempts})...`;
+                }
+
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+                    const detectedLanguage = detectLanguage(message);
+                    console.log(`Спроба ${attempts}: Визначена мова: ${detectedLanguage}`);
+
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            prompt: `${systemPrompt}\n\nКористувач (${detectedLanguage}): ${message}\n\nВіка:`,
+                            language: detectedLanguage,
+                            message: message
+                        }),
+                        signal: controller.signal
+                    });
+
+                    clearTimeout(timeoutId);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const reader = response.body.getReader();
+                    let botMessage = '';
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message bot-message';
+                    document.getElementById('chat-box').appendChild(messageDiv);
+
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+
+                        const text = new TextDecoder().decode(value);
+                        const lines = text.split('\n');
+                        for (const line of lines) {
+                            if (line.startsWith('data: ')) {
+                                const data = line.slice(6);
+                                if (data === '[DONE]') continue;
+                                try {
+                                    const parsed = JSON.parse(data);
+                                    if (parsed.output) {
+                                        botMessage += parsed.output;
+                                        messageDiv.textContent = botMessage;
+                                        document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+                                    } else if (parsed.error) {
+                                        throw new Error(parsed.error);
+                                    }
+                                } catch (e) {
+                                    console.error('Помилка парсингу даних:', e);
+                                }
+                            }
+                        }
+                    }
+
+                    break;
+
+                } catch (error) {
+                    console.error(`Спроба ${attempts}: Помилка:`, error);
+                    if (error.name === 'AbortError') {
+                        console.log(`Спроба ${attempts} з ${maxAttempts} не вдалася через таймаут`);
+                        if (attempts === maxAttempts) {
+                            addMessage('Вибачте, сервер не відповідає. Спробуйте пізніше 😔', 'bot');
+                            break;
+                        }
+                        continue;
+                    }
+                    addMessage('Вибачте, сталася помилка під час обробки вашого запиту 😔', 'bot');
+                    break;
+                }
+            }
+            loadingDiv.style.display = 'none';
+            loadingDiv.textContent = 'Віка пише...';
+        }
+
+        // Отправка сообщения по нажатию Enter
+        document.getElementById('user-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

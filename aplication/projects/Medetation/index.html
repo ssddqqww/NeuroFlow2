@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta http-equiv="Cross-Origin-Resource-Policy" content="cross-origin">
+  <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+  <title>MindfulMoment</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.15/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const MindfulMoment = () => {
+      const [mood, setMood] = useState('');
+      const [duration, setDuration] = useState(1);
+      const [meditationStarted, setMeditationStarted] = useState(false);
+      const [progress, setProgress] = useState(0);
+      const [garden, setGarden] = useState(JSON.parse(localStorage.getItem('garden')) || []);
+      const [customSound, setCustomSound] = useState(null);
+      const audioContextRef = useRef(null);
+      const progressIntervalRef = useRef(null);
+      const audioSourceRef = useRef(null);
+
+      // Создаем генератор шума
+      const createNoiseGenerator = (type) => {
+        if (!type) return null;
+        
+        try {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          audioContextRef.current = audioContext;
+
+          let noise;
+          switch(type) {
+            case 'anxiety':
+              // Белый шум с низкой частотой для тревожности
+              noise = audioContext.createBiquadFilter();
+              noise.type = 'lowshelf';
+              noise.frequency.value = 300;
+              noise.gain.value = 0.7;
+              break;
+            case 'tired':
+              // Розовый шум для усталости
+              noise = audioContext.createBiquadFilter();
+              noise.type = 'lowshelf';
+              noise.frequency.value = 800;
+              noise.gain.value = -8;
+              break;
+            case 'calm':
+              // Коричневый шум для спокойствия
+              noise = audioContext.createBiquadFilter();
+              noise.type = 'lowshelf';
+              noise.frequency.value = 200;
+              noise.gain.value = 0.5;
+              break;
+            default:
+              return null;
+          }
+
+          const bufferSize = 2 * audioContext.sampleRate;
+          const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          
+          for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+          }
+
+          const noiseSource = audioContext.createBufferSource();
+          noiseSource.buffer = noiseBuffer;
+          noiseSource.loop = true;
+
+          const gainNode = audioContext.createGain();
+          gainNode.gain.value = 0.1; // Уменьшаем громкость
+
+          noiseSource.connect(noise);
+          noise.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
+          return {
+            source: noiseSource,
+            gain: gainNode,
+            context: audioContext
+          };
+        } catch (error) {
+          console.error('Error creating noise generator:', error);
+          return null;
+        }
+      };
+
+      useEffect(() => {
+        localStorage.setItem('garden', JSON.stringify(garden));
+      }, [garden]);
+
+      const handleCustomSoundUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            setCustomSound(e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+
+      const startMeditation = () => {
+        if (!mood) return;
+        
+        setMeditationStarted(true);
+        setProgress(0);
+        
+        try {
+          const audio = createNoiseGenerator(mood);
+          if (audio && audio.source) {
+            audioSourceRef.current = audio;
+            audio.source.start();
+            
+            // Start progress tracking
+            const startTime = Date.now();
+            const totalDuration = duration * 60 * 1000;
+            
+            progressIntervalRef.current = setInterval(() => {
+              const elapsed = Date.now() - startTime;
+              const newProgress = (elapsed / totalDuration) * 100;
+              
+              if (newProgress >= 100) {
+                clearInterval(progressIntervalRef.current);
+                stopMeditation(audio.source, audio.gain);
+              } else {
+                setProgress(newProgress);
+              }
+            }, 100);
+          }
+        } catch (error) {
+          console.error('Error starting meditation:', error);
+          setMeditationStarted(false);
+        }
+      };
+
+      const stopMeditation = (source, gain) => {
+        if (source) source.stop();
+        if (gain) gain.disconnect();
+        if (audioContextRef.current) {
+          audioContextRef.current.close();
+          audioContextRef.current = null;
+        }
+        
+        setMeditationStarted(false);
+        setProgress(0);
+        
+        // Добавляем растение только если медитация была завершена полностью
+        if (progress >= 100) {
+          setGarden([...garden, { 
+            type: 'plant', 
+            timestamp: Date.now(),
+            mood: mood 
+          }]);
+        }
+      };
+
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-4">
+          <div className="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full">
+            <h1 className="text-3xl font-bold text-purple-600 mb-6 text-center">MindfulMoment</h1>
+            {!meditationStarted ? (
+              <>
+                <div className="mb-6">
+                  <label className="block text-gray-700 text-lg mb-2">How are you feeling?</label>
+                  <select
+                    value={mood}
+                    onChange={(e) => setMood(e.target.value)}
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  >
+                    <option value="">Select your mood</option>
+                    <option value="anxiety">Anxiety</option>
+                    <option value="tired">Tired</option>
+                    <option value="calm">Calm</option>
+                  </select>
+                </div>
+                <div className="mb-6">
+                  <label className="block text-gray-700 text-lg mb-2">Duration (minutes):</label>
+                  <input
+                    type="number"
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                    min="1"
+                    max="5"
+                  />
+                </div>
+                
+                <button
+                  onClick={startMeditation}
+                  className="w-full bg-purple-600 text-white p-4 rounded-lg hover:bg-purple-700 transition-colors duration-300 text-lg font-semibold"
+                  disabled={!mood || !duration}
+                >
+                  Start Meditation
+                </button>
+                <div className="mt-8">
+                  <h2 className="text-xl font-semibold mb-4">Your Virtual Garden</h2>
+                </div>
+              </>
+            ) : (
+              <div className="text-center">
+                <p className="text-xl font-semibold mb-4">Meditation in progress... Breathe deeply!</p>
+                <div className="relative w-32 h-32 mx-auto mb-6">
+                  <div className="absolute inset-0 rounded-full border-4 border-purple-200 animate-pulse"></div>
+                  <div className="absolute inset-4 rounded-full border-4 border-purple-400 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                  <div className="absolute inset-8 rounded-full border-4 border-purple-600 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
+                  <div 
+                    className="bg-purple-600 h-4 rounded-full transition-all duration-300"
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
+                <p className="text-gray-600 mb-4">{Math.round(progress)}% Complete</p>
+                <button
+                  onClick={() => {
+                    clearInterval(progressIntervalRef.current);
+                    stopMeditation(null, null);
+                  }}
+                  className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
+                >
+                  Exit Meditation
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<MindfulMoment />);
+  </script>
+</body>
+</html> 

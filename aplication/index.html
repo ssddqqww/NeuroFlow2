@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroFlow</title>
+    <link rel="icon" href="../chat/Testic.png">
+    <link href="index_style.css?ts=abсdef" rel="stylesheet" onload="this.onload=null;">
+    <link href="test_style.css" rel="stylesheet" onload="this.onload=null;">
+    <link href="my.css?ts=abc" rel="stylesheet">
+    <link href="main.css?ts=asdf" rel="stylesheet">
+    <!-- <link href="style_manager_chat.css?ts=a" rel="stylesheet"> -->
+    <link href="bootstrap.min.css?ts=asdf" rel="stylesheet">
+    <style>
+        .no-underline-silk {
+            text-decoration: none;
+        }
+        .fullscreen-iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 1000;
+            background: white;
+        }
+
+        .close-fullscreen {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-fullscreen:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .close-app-creation {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 1001;
+        }
+
+        .close-app-creation:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+
+
+
+<!-- Favicons -->
+  <link href="../assets/img/Testic.png?ts=asdf" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png?ts=asdf" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500">
+
+  <!-- Vendor CSS Files -->
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css?ts=asdf" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css?ts=asdf" rel="stylesheet">
+  <link rel="stylesheet" href="assets/folder_js_css/css/news.css?ts=asdf">
+  <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+
+
+
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div id="main_slid_top" class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="../index.html"  class="no-underline-silk logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename hover-underline">NeuroFlow</h1>
+        
+      </a>
+
+<nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a id="home_func" class="block_up_little_lit home_type no-underline-silk" href="../projects">Projects</a></li>
+    <li><a id="about_func" class="block_up_little_lit about_type no-underline-silk" onclick="toggleBlocks(this.id)">About</a></li>
+    <li><a id="features_func" class="active block_up_little_lit features_type no-underline-silk">Features</a></li>
+    <li><a id="top_func" class="block_up_little_lit top_type no-underline-silk" href="../projects/top_projects.html">Top</a></li>
+    <li><a id="topics_container_func" class="block_up_little_lit chat_type no-underline-silk" href="../chat">Chat</a></li>
+    <li><a id="news_func" class="block_up_little_lit no-underline-silk" href="../news">News</a></li>
+    <li><a id="download_func" class="block_up_little_lit download_type no-underline-silk" onclick="toggleBlocks(this.id)">Download</a></li>
+    <li><a href="../p2p" class="block_up_little_lit pfc-nav-link no-underline-silk">P2P</a></li>
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+      <div class="container_avatar_login">
+        <div class="profile-btn block_up_little_lit" onclick="toggleProfile()"></div>
+      <div class="profile-overlay" id="profile-overlay"></div>
+    
+      <div class="profile-modal" id="profile-modal">
+        <div class="profile-modal-header">
+            <button class="profile-close-btn" onclick="toggleProfile()">✕</button>
+        </div>
+        <div class="profile-avatar-container">
+            <img src="../assets/folder_js_css/assets/img/cart.jpg" alt="" class="profile-avatar" id="profile-avatar" onclick="document.getElementById('profile-avatarInput').click()">
+        </div>
+        <input type="file" id="profile-avatarInput" accept="image/*" onchange="changeAvatar(event)">
+        <div class="profile-nickname" id="profile-nickname" onclick="editNickname()">User123</div>
+        <div class="profile-email">user123@example.com</div>
+        <div class="profile-info-item">Status: <span class="mint_grean">online</span></div>
+        <div class="profile-info-item">Registration date: 15.03.2023</div>
+      </div>
+      <script>
+        function toggleProfile() {
+          const modal = document.getElementById('profile-modal');
+          const overlay = document.getElementById('profile-overlay');
+          
+          const nicknameInput = document.querySelector('.profile-nickname-input');
+          if (nicknameInput) {
+              const nicknameValue = nicknameInput.value.trim();
+              if (!nicknameValue) {
+                  return;
+              }
+              const newNicknameDiv = document.createElement('div');
+              newNicknameDiv.textContent = nicknameValue;
+              newNicknameDiv.className = 'profile-nickname';
+              newNicknameDiv.id = 'profile-nickname';
+              newNicknameDiv.onclick = editNickname;
+              nicknameInput.replaceWith(newNicknameDiv);
+          }
+  
+          modal.classList.toggle('active');
+          overlay.classList.toggle('active');
+      }
+  
+        function editNickname() {
+          const nicknameDiv = document.getElementById('profile-nickname');
+          const currentNickname = nicknameDiv.textContent;
+  
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.value = currentNickname;
+          input.className = 'profile-nickname-input';
+          input.maxLength = 18;
+          
+          nicknameDiv.replaceWith(input);
+          input.focus();
+  
+          input.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter') {
+                  const newNickname = input.value.trim();
+                  if (newNickname) {
+                      const newNicknameDiv = document.createElement('div');
+                      newNicknameDiv.textContent = newNickname;
+                      newNicknameDiv.className = 'profile-nickname';
+                      newNicknameDiv.id = 'profile-nickname';
+                      newNicknameDiv.onclick = editNickname;
+                      input.replaceWith(newNicknameDiv);
+                  }
+              }
+          });
+          
+      }
+  
+        function changeAvatar(event) {
+          const file = event.target.files[0];
+          if (file) {
+              const reader = new FileReader();
+              const avatar = document.getElementById('profile-avatar');
+              
+              reader.onload = function(e) {
+                  avatar.src = e.target.result;
+                  const avatar_main = document.querySelector('.profile-btn');
+                  avatar_main.style.background = `url(${e.target.result})`;
+                  avatar_main.style.backgroundSize = '40px 40px';
+              };
+              reader.readAsDataURL(file);
+          }
+      }
+  
+        document.getElementById('profile-overlay').addEventListener('click', function() {
+            toggleProfile();
+        });
+  
+        document.getElementById('profile-modal').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+      </script>
+
+      <link href="Test/my_button_download.css" rel="stylesheet">
+      <div class="login_container block_up_little_lit" onclick="handleClick(this)">
+        <span class="login_text">LOGIN</span>
+        <svg class="login_fingerprint login_fingerprint-base" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+            <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+            <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_fingerprint login_fingerprint-active" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <g class="login_fingerprint-out" fill="none" stroke-width="2" stroke-linecap="round">
+            <path class="login_odd" d="m 25.117139,57.142857 c 0,0 -1.968558,-7.660465 -0.643619,-13.149003 1.324939,-5.488538 4.659682,-8.994751 4.659682,-8.994751"></path>
+            <path class="login_odd" d="m 31.925369,31.477584 c 0,0 2.153609,-2.934998 9.074971,-5.105078 6.921362,-2.17008 11.799844,-0.618718 11.799844,-0.618718"></path>
+            <path class="login_odd" d="m 57.131213,26.814448 c 0,0 5.127709,1.731228 9.899495,7.513009 4.771786,5.781781 4.772971,12.109204 4.772971,12.109204"></path>
+            <path class="login_odd" d="m 72.334009,50.76769 0.09597,2.298098 -0.09597,2.386485"></path>
+            <path class="login_even" d="m 27.849282,62.75 c 0,0 1.286086,-1.279223 1.25,-4.25 -0.03609,-2.970777 -1.606117,-7.675266 -0.625,-12.75 0.981117,-5.074734 4.5,-9.5 4.5,-9.5"></path>
+            <path class="login_even" d="m 36.224282,33.625 c 0,0 8.821171,-7.174484 19.3125,-2.8125 10.491329,4.361984 11.870558,14.952665 11.870558,14.952665"></path>
+            <path class="login_even" d="m 68.349282,49.75 c 0,0 0.500124,3.82939 0.5625,5.8125 0.06238,1.98311 -0.1875,5.9375 -0.1875,5.9375"></path>
+            <path class="login_odd" d="m 31.099282,65.625 c 0,0 1.764703,-4.224042 2,-7.375 0.235297,-3.150958 -1.943873,-9.276886 0.426777,-15.441942 2.370649,-6.165056 8.073223,-7.933058 8.073223,-7.933058"></path>
+            <path class="login_odd" d="m 45.849282,33.625 c 0,0 12.805566,-1.968622 17,9.9375 4.194434,11.906122 1.125,24.0625 1.125,24.0625"></path>
+            <path class="login_even" d="m 59.099282,70.25 c 0,0 0.870577,-2.956221 1.1875,-4.5625 0.316923,-1.606279 0.5625,-5.0625 0.5625,-5.0625"></path>
+            <path class="login_even" d="m 60.901059,56.286612 c 0,0 0.903689,-9.415996 -3.801777,-14.849112 -3.03125,-3.5 -7.329245,-4.723939 -11.867187,-3.8125 -5.523438,1.109375 -7.570313,5.75 -7.570313,5.75"></path>
+            <path class="login_even" d="m 34.072577,68.846248 c 0,0 2.274231,-4.165782 2.839205,-9.033748 0.443558,-3.821814 -0.49394,-5.649939 -0.714206,-8.05386 -0.220265,-2.403922 0.21421,-4.63364 0.21421,-4.63364"></path>
+            <path class="login_odd" d="m 37.774165,70.831845 c 0,0 2.692139,-6.147592 3.223034,-11.251208 0.530895,-5.103616 -2.18372,-7.95562 -0.153491,-13.647655 2.030229,-5.692035 8.108442,-4.538898 8.108442,-4.538898"></path>
+            <path class="login_odd" d="m 54.391174,71.715729 c 0,0 2.359472,-5.427681 2.519068,-16.175068 0.159595,-10.747388 -4.375223,-12.993087 -4.375223,-12.993087"></path>
+            <path class="login_even" d="m 49.474282,73.625 c 0,0 3.730297,-8.451831 3.577665,-16.493718 -0.152632,-8.041887 -0.364805,-11.869326 -4.765165,-11.756282 -4.400364,0.113044 -3.875,4.875 -3.875,4.875"></path>
+            <path class="login_even" d="m 41.132922,72.334447 c 0,0 2.49775,-5.267079 3.181981,-8.883029 0.68423,-3.61595 0.353553,-9.413359 0.353553,-9.413359"></path>
+            <path class="login_odd" d="m 45.161782,73.75 c 0,0 1.534894,-3.679847 2.40625,-6.53125 0.871356,-2.851403 1.28125,-7.15625 1.28125,-7.15625"></path>
+            <path class="login_odd" d="m 48.801947,56.125 c 0,0 0.234502,-1.809418 0.109835,-3.375 -0.124667,-1.565582 -0.5625,-3.1875 -0.5625,-3.1875"></path>
+          </g>
+        </svg>
+        <svg class="login_ok" xmlns="http://www.w3.org/2000/svg" width="41.66" height="41.66" viewBox="0 0 100 100">
+          <path d="M34.912 50.75l10.89 10.125L67 36.75" fill="none" stroke="#fff" stroke-width="6"></path>
+        </svg>
+      </div>
+      
+      <script>
+        const container = document.querySelector('.login_container');
+        
+        function handleClick(element) {
+          element.classList.toggle('active');
+          setTimeout(() => {
+            window.location.href = '../login/login.html';
+          }, 5000);
+        }
+        
+        container.addEventListener('animationend', () => {
+          container.classList.remove('active');
+        });
+      </script>
+      </div>
+
+    </div>
+  </header>
+
+
+
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="search-bar search_style">
+            <input type="text" id="search" placeholder="Search by name...">
+        </div>
+        <div class="filter">
+            <select id="category-filter">
+                <option value="all">All categories</option>
+            </select>
+            <button onclick="openCategoryModal()">Create category</button>
+            <button onclick="openAppCreation()">Create application</button>
+        </div>
+        <div class="app-list" id="app-list"></div>
+        <div class="app-creation" id="app-creation" style="display: none;">
+            <h3>New application</h3>
+            <input type="text" id="new-app-name" placeholder="Application name">
+            <select id="new-app-category">
+                <!-- Filled dynamically -->
+            </select>
+            <button onclick="addApp()">Save</button>
+            <button onclick="closeAppCreation()">Back</button>
+        </div>
+    </div>
+
+    <div class="modal" id="category-modal">
+        <div class="modal-content">
+            <h3>New category</h3>
+            <input type="text" id="new-category-name" placeholder="Category name">
+            <label id="lab">
+                <p>Publicly available</p>
+                <input type="checkbox" id="public-category" checked> 
+            </label>
+            <button onclick="addCategory()">Save</button>
+            <button onclick="closeCategoryModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="modal" id="publish-modal">
+        <div class="modal-content">
+            <h3>Publish application</h3>
+            <input type="text" id="projectName" placeholder="Application name">
+            <select id="projectCategory">
+                <!-- Filled dynamically -->
+            </select>
+            <button onclick="publishProject()">Next</button>
+            <button onclick="cancelPublish()">Cancel</button>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <div class="test_all hidden_all_h">
+        <button class="close-app-creation" onclick="closeAppCreation()">✕</button>
+        <div class="container" id="mainContainer">
+            <div class="editor" id="editor">
+                <div>
+                    <label for="htmlCode">HTML</label>
+                    <textarea id="htmlCode" class="test_areas" placeholder="Enter HTML code..."></textarea>
+                </div>
+                <div>
+                    <label for="cssCode">CSS</label>
+                    <textarea id="cssCode" class="test_areas" placeholder="Enter CSS code..."></textarea>
+                </div>
+                <div>
+                    <label for="jsCode">JS</label>
+                    <textarea id="jsCode" class="test_areas" placeholder="Enter JavaScript code..."></textarea>
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="testBtn" onclick="runCode()">Test</button>
+                <button id="publishBtn" onclick="showPublishForm()">Publish</button>
+            </div>
+            <div>
+                <label>Result</label>
+                <iframe id="output"></iframe>
+            </div>
+        </div>
+        <div class="result-view" id="resultView">
+            <button class="close-btn" onclick="showMainView()">✕</button>
+            <iframe id="resultOutput"></iframe>
+        </div>
+    </div>
+
+    <script>
+        let apps = [];
+        let userActions = {
+            likes: {},
+            dislikes: {},
+            reviews: {},
+            review_likes: {},
+            review_dislikes: {},
+            replies: {},
+            show_reviews: {}
+        };
+
+        async function fetchUserActions() {
+            try {
+                // Всегда сначала загружаем с сервера
+                const response = await fetch('/aplication/user-actions');
+                if (!response.ok) throw new Error('Error loading user actions');
+                const data = await response.json();
+                userActions = {
+                    likes: data.likes || {},
+                    dislikes: data.dislikes || {},
+                    reviews: data.reviews || {},
+                    review_likes: data.review_likes || {},
+                    review_dislikes: data.review_dislikes || {},
+                    replies: data.replies || {},
+                    show_reviews: data.show_reviews || {}
+                };
+                
+                // После загрузки с сервера обновляем localStorage
+                localStorage.setItem('userActions', JSON.stringify(userActions));
+            } catch (error) {
+                console.error('Ошибка загрузки действий пользователя:', error);
+                // В случае ошибки используем значения по умолчанию
+                userActions = {
+                    likes: {},
+                    dislikes: {},
+                    reviews: {},
+                    review_likes: {},
+                    review_dislikes: {},
+                    replies: {},
+                    show_reviews: {}
+                };
+                // В случае ошибки тоже сохраняем в localStorage
+                localStorage.setItem('userActions', JSON.stringify(userActions));
+            }
+        }
+
+        // Функция для сохранения действий в localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('userActions', JSON.stringify(userActions));
+        }
+
+        // Функция для сохранения данных на сервер
+        async function saveToServer() {
+            try {
+                const response = await fetch('/aplication/user-actions', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest' // Добавляем заголовок для AJAX запроса
+                    },
+                    body: JSON.stringify(userActions)
+                });
+
+                if (!response.ok) throw new Error('Error saving to server');
+                console.log('Данные успешно сохранены на сервер');
+            } catch (error) {
+                console.error('Ошибка сохранения на сервер:', error);
+                throw error;
+            }
+        }
+
+        // Удаляем обработчик beforeunload, так как теперь сохраняем сразу
+        window.removeEventListener('beforeunload', saveToServer);
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        async function fetchCategories() {
+            try {
+                const response = await fetch('/aplication/categories');
+                if (!response.ok) throw new Error('Ошибка загрузки категорий');
+                const categories = await response.json();
+                return categories;
+            } catch (error) {
+                console.error('Ошибка загрузки категорий:', error);
+                showNotification('Ошибка загрузки категорий: ' + error.message);
+                return [];
+            }
+        }
+
+        async function saveCategory(name) {
+            try {
+                const response = await fetch('/aplication/categories', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name })
+                });
+                const result = await response.json();
+                if (!result.success) {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error('Ошибка сохранения категории:', error);
+                throw error;
+            }
+        }
+
+        async function fetchApps() {
+            try {
+                const response = await fetch('/aplication/apps');
+                if (!response.ok) throw new Error('Error loading applications');
+                const appsData = await response.json();
+                apps = appsData;
+                return apps;
+            } catch (error) {
+                console.error('Ошибка загрузки приложений:', error);
+                showNotification('Ошибка загрузки приложений: ' + error.message);
+                return [];
+            }
+        }
+
+        async function saveApps() {
+            try {
+                const response = await fetch('/aplication/apps', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(apps)
+                });
+                const result = await response.json();
+                if (!result.success) {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error('Ошибка сохранения приложений:', error);
+                showNotification('Ошибка сохранения приложений: ' + error.message);
+                throw error;
+            }
+        }
+
+        async function renderCategories() {
+            const filter = document.getElementById('category-filter');
+            const appCategory = document.getElementById('new-app-category');
+            const projectCategory = document.getElementById('projectCategory');
+            filter.innerHTML = '<option value="all">All categories</option>';
+            appCategory.innerHTML = '';
+            projectCategory.innerHTML = '';
+
+            const categories = await fetchCategories();
+            categories.forEach(category => {
+                filter.innerHTML += `<option value="${category}">${category}</option>`;
+                appCategory.innerHTML += `<option value="${category}">${category}</option>`;
+                projectCategory.innerHTML += `<option value="${category}">${category}</option>`;
+            });
+        }
+
+        async function renderApps() {
+            const appList = document.getElementById('app-list');
+            const search = document.getElementById('search').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+
+            await fetchApps();
+            await fetchUserActions();
+            
+            let filteredApps = apps.filter(app => 
+                app.name.toLowerCase().includes(search) &&
+                (category === 'all' || app.category === category)
+            );
+
+            filteredApps.sort((a, b) => b.likes - a.likes);
+
+            appList.innerHTML = '';
+            filteredApps.forEach(app => {
+                const userLiked = userActions.likes[app.id] || false;
+                const userDisliked = userActions.dislikes[app.id] || false;
+                const userReviewed = userActions.reviews[app.id] || false;
+                const showReviews = userActions.show_reviews[app.id] === undefined ? false : userActions.show_reviews[app.id];
+                
+                const reviewSectionContent = `
+                    <textarea class="review-input" id="review-${app.id}" placeholder="Write a review..."></textarea>
+                    <button class="review-submit" data-app-id="${app.id}">Send</button>
+                `;
+                
+                appList.innerHTML += `
+                    <div class="app-card" data-app-id="${app.id}">
+                        <h3>${app.name}</h3>
+                        <p>Category: ${app.category}</p>
+                        <button class="launch-btn" onclick="launchApp('${app.name}')">Launch</button>
+                        <div class="reactions">
+                            <span class="like-btn ${userLiked ? 'active' : ''}" data-app-id="${app.id}">👍 ${app.likes}</span>
+                            <span class="dislike-btn ${userDisliked ? 'active' : ''}" data-app-id="${app.id}">👎 ${app.dislikes}</span>
+                            <span class="review-toggle" data-app-id="${app.id}">${showReviews ? 'Hide reviews' : `Reviews (${app.reviews.length})`}</span>
+                        </div>
+                        <div class="review-section" id="review-section-${app.id}">
+                            ${reviewSectionContent}
+                        </div>
+                        <div class="review-list" id="review-list-${app.id}" style="${showReviews ? '' : 'display: none;'}">
+                            ${app.reviews.map(review => `
+                                <div class="review" data-review-id="${review.id}">
+                                    <p>${review.text}</p>
+                                    <div class="reactions">
+                                        <span class="review-like-btn ${userActions.review_likes[review.id] ? 'active' : ''}" data-app-id="${app.id}" data-review-id="${review.id}">👍 ${review.likes}</span>
+                                        <span class="review-dislike-btn ${userActions.review_dislikes[review.id] ? 'active' : ''}" data-app-id="${app.id}" data-review-id="${review.id}">👎 ${review.dislikes}</span>
+                                    </div>
+                                    <div class="replies-container">
+                                        ${review.replies.map(reply => `<p style="margin-left: 20px;">↳ ${reply}</p>`).join('')}
+                                    </div>
+                                    ${!userActions.replies[review.id] ? `
+                                        <div class="reply-form">
+                                            <textarea class="reply-input" id="reply-${review.id}" placeholder="Ответить..."></textarea>
+                                            <button class="review-submit" data-app-id="${app.id}" data-review-id="${review.id}">Ответить</button>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Добавляем обработчики событий после рендеринга
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleLike(parseInt(btn.dataset.appId), e);
+                });
+            });
+
+            document.querySelectorAll('.dislike-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleDislike(parseInt(btn.dataset.appId), e);
+                });
+            });
+
+            document.querySelectorAll('.review-toggle').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    await toggleReviews(parseInt(btn.dataset.appId), e);
+                });
+            });
+
+            document.querySelectorAll('.review-like-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    await toggleReviewLike(
+                        parseInt(btn.dataset.appId),
+                        parseInt(btn.dataset.reviewId),
+                        e
+                    );
+                });
+            });
+
+            document.querySelectorAll('.review-dislike-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    await toggleReviewDislike(
+                        parseInt(btn.dataset.appId),
+                        parseInt(btn.dataset.reviewId),
+                        e
+                    );
+                });
+            });
+
+            document.querySelectorAll('.review-submit').forEach(btn => {
+                if (btn.dataset.reviewId) {
+                    btn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        await addReply(
+                            parseInt(btn.dataset.appId),
+                            parseInt(btn.dataset.reviewId),
+                            e
+                        );
+                    });
+                } else {
+                    btn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        await addReview(parseInt(btn.dataset.appId), e);
+                    });
+                }
+            });
+        }
+
+        // Добавляем флаг для отслеживания изменений
+        let hasUnsavedChanges = false;
+
+        // Функция для сохранения изменений при уходе со страницы
+        async function saveChangesBeforeUnload(e) {
+            if (hasUnsavedChanges) {
+                try {
+                    // Сохраняем данные без показа диалога
+                    await Promise.all([
+                        saveToServer(),
+                        saveApps()
+                    ]);
+                    console.log('Изменения сохранены перед уходом со страницы');
+                    // Сбрасываем флаг после успешного сохранения
+                    hasUnsavedChanges = false;
+                } catch (error) {
+                    console.error('Ошибка при сохранении изменений:', error);
+                }
+            }
+        }
+
+        // Добавляем обработчики событий для отслеживания ухода со страницы
+        window.addEventListener('beforeunload', (e) => {
+            // Не показываем диалог, просто сохраняем данные
+            saveChangesBeforeUnload(e);
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                saveChangesBeforeUnload();
+            }
+        });
+
+        // Добавляем периодическое сохранение каждые 30 секунд
+        setInterval(() => {
+            if (hasUnsavedChanges) {
+                saveChangesBeforeUnload();
+            }
+        }, 30000);
+
+        async function toggleLike(appId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            try {
+                const app = apps.find(a => a.id === appId);
+                if (!app) return;
+
+                const userLiked = userActions.likes[appId] || false;
+                const userDisliked = userActions.dislikes[appId] || false;
+
+                // Сначала снимаем дизлайк если он есть
+                if (userDisliked) {
+                    app.dislikes--;
+                    userActions.dislikes[appId] = false;
+                }
+
+                // Затем обрабатываем лайк
+                if (userLiked) {
+                    app.likes--;
+                    userActions.likes[appId] = false;
+                } else {
+                    app.likes++;
+                    userActions.likes[appId] = true;
+                }
+
+                // Обновляем UI
+                const likeSpan = document.querySelector(`.like-btn[data-app-id="${appId}"]`);
+                const dislikeSpan = document.querySelector(`.dislike-btn[data-app-id="${appId}"]`);
+                
+                if (likeSpan) {
+                    likeSpan.textContent = `👍 ${app.likes}`;
+                    likeSpan.className = `like-btn ${userActions.likes[appId] ? 'active' : ''}`;
+                }
+                if (dislikeSpan) {
+                    dislikeSpan.textContent = `👎 ${app.dislikes}`;
+                    dislikeSpan.className = `dislike-btn ${userActions.dislikes[appId] ? 'active' : ''}`;
+                }
+
+                // Отмечаем, что есть несохраненные изменения
+                hasUnsavedChanges = true;
+                //showNotification('Лайк поставлен');
+            } catch (error) {
+                console.error('Ошибка при сохранении:', error);
+                showNotification('Ошибка при сохранении: ' + error.message);
+            }
+        }
+
+        async function toggleDislike(appId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            try {
+                const app = apps.find(a => a.id === appId);
+                if (!app) return;
+
+                const userLiked = userActions.likes[appId] || false;
+                const userDisliked = userActions.dislikes[appId] || false;
+
+                // Сначала снимаем лайк если он есть
+                if (userLiked) {
+                    app.likes--;
+                    userActions.likes[appId] = false;
+                }
+
+                // Затем обрабатываем дизлайк
+                if (userDisliked) {
+                    app.dislikes--;
+                    userActions.dislikes[appId] = false;
+                } else {
+                    app.dislikes++;
+                    userActions.dislikes[appId] = true;
+                }
+
+                // Обновляем UI
+                const likeSpan = document.querySelector(`.like-btn[data-app-id="${appId}"]`);
+                const dislikeSpan = document.querySelector(`.dislike-btn[data-app-id="${appId}"]`);
+                
+                if (likeSpan) {
+                    likeSpan.textContent = `👍 ${app.likes}`;
+                    likeSpan.className = `like-btn ${userActions.likes[appId] ? 'active' : ''}`;
+                }
+                if (dislikeSpan) {
+                    dislikeSpan.textContent = `👎 ${app.dislikes}`;
+                    dislikeSpan.className = `dislike-btn ${userActions.dislikes[appId] ? 'active' : ''}`;
+                }
+
+                // Отмечаем, что есть несохраненные изменения
+                hasUnsavedChanges = true;
+                //showNotification('Дизлайк поставлен');
+            } catch (error) {
+                console.error('Ошибка при сохранении:', error);
+                showNotification('Ошибка при сохранении: ' + error.message);
+            }
+        }
+
+        async function toggleReviews(appId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            try {
+                const showReviews = userActions.show_reviews[appId] === undefined ? false : userActions.show_reviews[appId];
+                userActions.show_reviews[appId] = !showReviews;
+                
+                const reviewSection = document.getElementById(`review-section-${appId}`);
+                const reviewList = document.getElementById(`review-list-${appId}`);
+                const reviewToggle = document.querySelector(`.review-toggle[data-app-id="${appId}"]`);
+                
+                if (reviewSection) {
+                    reviewSection.style.display = 'block';
+                }
+                if (reviewList) {
+                    reviewList.style.display = !showReviews ? 'block' : 'none';
+                }
+                if (reviewToggle) {
+                    const app = apps.find(a => a.id === appId);
+                    reviewToggle.textContent = !showReviews ? 'Hide reviews' : `Reviews (${app.reviews.length})`;
+                }
+
+                hasUnsavedChanges = true;
+            } catch (error) {
+                console.error('Ошибка при сохранении:', error);
+                showNotification('Ошибка при сохранении: ' + error.message);
+            }
+        }
+
+        async function addReview(appId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            try {
+                const reviewText = document.getElementById(`review-${appId}`).value;
+                if (reviewText) {
+                    await fetchApps();
+                    const app = apps.find(a => a.id === appId);
+                    const newReview = { id: Date.now(), text: reviewText, likes: 0, dislikes: 0, replies: [] };
+                    app.reviews.push(newReview);
+                    userActions.reviews[appId] = true;
+                    
+                    const reviewList = document.getElementById(`review-list-${appId}`);
+                    const reviewToggle = document.querySelector(`.review-toggle[data-app-id="${appId}"]`);
+                    
+                    if (reviewList) {
+                        reviewList.innerHTML += `
+                            <div class="review" data-review-id="${newReview.id}">
+                                <p>${newReview.text}</p>
+                                <div class="reactions">
+                                    <span class="review-like-btn" data-app-id="${appId}" data-review-id="${newReview.id}">👍 0</span>
+                                    <span class="review-dislike-btn" data-app-id="${appId}" data-review-id="${newReview.id}">👎 0</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    if (reviewToggle) {
+                        reviewToggle.textContent = `Reviews (${app.reviews.length})`;
+                    }
+
+                    // Очищаем поле ввода, но не удаляем его
+                    document.getElementById(`review-${appId}`).value = '';
+
+                    // Отмечаем изменения для сохранения
+                    hasUnsavedChanges = true;
+                    //showNotification('Отзыв добавлен!');
+                }
+            } catch (error) {
+                console.error('Ошибка при сохранении:', error);
+                showNotification('Ошибка при сохранении: ' + error.message);
+            }
+        }
+
+        async function toggleReviewLike(appId, reviewId, event) {
+            if (event) event.preventDefault();
+            try {
+                await fetchApps();
+                const app = apps.find(a => a.id === appId);
+                const review = app.reviews.find(r => r.id === reviewId);
+                const userLiked = userActions.review_likes[reviewId] || false;
+                const userDisliked = userActions.review_dislikes[reviewId] || false;
+
+                if (userLiked) {
+                    review.likes--;
+                    userActions.review_likes[reviewId] = false;
+                } else if (!userDisliked) {
+                    review.likes++;
+                    userActions.review_likes[reviewId] = true;
+                }
+
+                const likeSpan = document.querySelector(`.review-like-btn[data-review-id="${reviewId}"]`);
+                if (likeSpan) {
+                    likeSpan.textContent = `👍 ${review.likes}`;
+                    likeSpan.className = `review-like-btn ${userActions.review_likes[reviewId] ? 'active' : ''}`;
+                }
+
+                await Promise.all([
+                    saveApps(),
+                    saveToServer()
+                ]);
+            } catch (error) {
+                console.error('Ошибка при сохранении:', error);
+                showNotification('Ошибка при сохранении: ' + error.message);
+            }
+        }
+
+        async function toggleReviewDislike(appId, reviewId, event) {
+            if (event) event.preventDefault();
+            try {
+                await fetchApps();
+                const app = apps.find(a => a.id === appId);
+                const review = app.reviews.find(r => r.id === reviewId);
+                const userLiked = userActions.review_likes[reviewId] || false;
+                const userDisliked = userActions.review_dislikes[reviewId] || false;
+
+                if (userDisliked) {
+                    review.dislikes--;
+                    userActions.review_dislikes[reviewId] = false;
+                } else if (!userLiked) {
+                    review.dislikes++;
+                    userActions.review_dislikes[reviewId] = true;
+                }
+
+                const dislikeSpan = document.querySelector(`.review-dislike-btn[data-review-id="${reviewId}"]`);
+                if (dislikeSpan) {
+                    dislikeSpan.textContent = `👎 ${review.dislikes}`;
+                    dislikeSpan.className = `review-dislike-btn ${userActions.review_dislikes[reviewId] ? 'active' : ''}`;
+                }
+
+                await Promise.all([
+                    saveApps(),
+                    saveToServer()
+                ]);
+            } catch (error) {
+                console.error('Ошибка при сохранении:', error);
+                showNotification('Ошибка при сохранении: ' + error.message);
+            }
+        }
+
+        async function addReply(appId, reviewId, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            try {
+                const replyText = document.getElementById(`reply-${reviewId}`).value;
+                if (replyText && !userActions.replies[reviewId]) {
+                    await fetchApps();
+                    const app = apps.find(a => a.id === appId);
+                    const review = app.reviews.find(r => r.id === reviewId);
+                    review.replies.push(replyText);
+                    userActions.replies[reviewId] = true;
+
+                    const reviewElement = document.querySelector(`.review[data-review-id="${reviewId}"]`);
+                    if (reviewElement) {
+                        const repliesContainer = reviewElement.querySelector('.replies-container') || document.createElement('div');
+                        repliesContainer.className = 'replies-container';
+                        repliesContainer.innerHTML += `<p style="margin-left: 20px;">↳ ${replyText}</p>`;
+                        if (!reviewElement.querySelector('.replies-container')) {
+                            reviewElement.appendChild(repliesContainer);
+                        }
+                        
+                        const replyForm = reviewElement.querySelector('.reply-form');
+                        if (replyForm) {
+                            replyForm.remove();
+                        }
+                    }
+
+                    // Отмечаем изменения для сохранения
+                    hasUnsavedChanges = true;
+                    //showNotification('Ответ добавлен!');
+                }
+            } catch (error) {
+                console.error('Ошибка при сохранении:', error);
+                showNotification('Ошибка при сохранении: ' + error.message);
+            }
+        }
+
+        function launchApp(name) {
+            document.querySelector('.container').style.display = 'none';
+            
+            const iframe = document.createElement('iframe');
+            iframe.className = 'fullscreen-iframe';
+            iframe.src = `projects/${name}/index.html`;
+            
+            const closeButton = document.createElement('button');
+            closeButton.className = 'close-fullscreen';
+            closeButton.innerHTML = '✕';
+            closeButton.onclick = () => {
+                iframe.remove();
+                closeButton.remove();
+                document.querySelector('.container').style.display = 'block';
+            };
+            
+            document.body.appendChild(iframe);
+            document.body.appendChild(closeButton);
+
+        }
+
+        function openAppCreation() {
+            document.getElementById('header').classList.add('hidden_all_h');
+            document.querySelector('.test_all').classList.remove('hidden_all_h');
+            document.querySelector('.search-bar').classList.add('hidden_all_h');
+            document.querySelector('.filter').classList.add('hidden_all_h');
+            document.getElementById('app-list').classList.add('hidden_all_h');
+            document.getElementById('app-creation').classList.add('hidden_all_h');
+            
+            // Очищаем поля ввода
+            document.getElementById('htmlCode').value = '';
+            document.getElementById('cssCode').value = '';
+            document.getElementById('jsCode').value = '';
+            
+            // Убеждаемся, что кнопки отображаются
+            const buttons = document.querySelector('.buttons');
+            if (buttons) {
+                buttons.innerHTML = `
+                    <button id="testBtn" onclick="runCode()">Test</button>
+                    <button id="publishBtn" onclick="showPublishForm()">Publish</button>
+                `;
+            }
+        }
+
+        function closeAppCreation() {
+            document.getElementById('header').classList.remove('hidden_all_h');
+            // Скрываем блок создания приложения
+            document.querySelector('.test_all').classList.add('hidden_all_h');
+            
+            // Показываем все основные элементы
+            document.querySelector('.search-bar').classList.remove('hidden_all_h');
+            document.querySelector('.filter').classList.remove('hidden_all_h');
+            document.getElementById('app-list').classList.remove('hidden_all_h');
+            document.getElementById('app-creation').classList.remove('hidden_all_h');
+            
+            // Очищаем поля ввода
+            document.getElementById('htmlCode').value = '';
+            document.getElementById('cssCode').value = '';
+            document.getElementById('jsCode').value = '';
+        }
+
+        async function addApp() {
+            const name = document.getElementById('new-app-name').value.trim();
+            const category = document.getElementById('new-app-category').value;
+            if (name && category) {
+                await fetchApps();
+                if (apps.some(app => app.name.toLowerCase() === name.toLowerCase())) {
+                    alert('An application with this name already exists!');
+                    return;
+                }
+                const newAppId = apps.length + 1;
+                const newApp = {
+                    id: newAppId,
+                    name,
+                    category,
+                    likes: 0,
+                    dislikes: 0,
+                    reviews: []
+                };
+                apps.push(newApp);
+                
+                // Инициализируем все необходимые поля в userActions
+                if (!userActions.likes) userActions.likes = {};
+                if (!userActions.dislikes) userActions.dislikes = {};
+                if (!userActions.reviews) userActions.reviews = {};
+                if (!userActions.show_reviews) userActions.show_reviews = {};
+                
+                userActions.likes[newAppId] = false;
+                userActions.dislikes[newAppId] = false;
+                userActions.reviews[newAppId] = false;
+                userActions.show_reviews[newAppId] = false;
+                
+                await Promise.all([
+                    saveApps(),
+                    saveToLocalStorage()
+                ]);
+                
+                await fetchUserActions(); // Обновляем действия пользователя
+                renderApps();
+                closeAppCreation();
+                //showNotification('Приложение создано!');
+            }
+        }
+
+        function openCategoryModal() {
+            document.getElementById('new-category-name').value = '';
+            document.getElementById('public-category').checked = true;
+            document.getElementById('category-modal').style.display = 'flex';
+        }
+
+        function closeCategoryModal() {
+            document.getElementById('category-modal').style.display = 'none';
+        }
+
+        async function addCategory() {
+            const name = document.getElementById('new-category-name').value.trim();
+            const isPublic = document.getElementById('public-category').checked;
+            if (name && isPublic) {
+                try {
+                    // Сначала проверяем, существует ли категория
+                    const categories = await fetchCategories();
+                    if (categories.includes(name)) {
+                        alert('A category with this name already exists!');
+                        return;
+                    }
+
+                    // Отправляем категорию на сервер
+                    const response = await fetch('/aplication/categories', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: name })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Ошибка при сохранении категории');
+                    }
+
+                    const result = await response.json();
+                    if (!result.success) {
+                        throw new Error(result.error || 'Ошибка при сохранении категории');
+                    }
+
+                    // Обновляем UI
+                    await renderCategories();
+                    closeCategoryModal();
+                    showNotification('Категория успешно создана!');
+                } catch (error) {
+                    console.error('Ошибка при создании категории:', error);
+                    showNotification('Ошибка при создании категории: ' + error.message);
+                }
+            }
+        }
+
+        function showPublishForm() {
+            document.getElementById('projectName').value = '';
+            document.getElementById('publish-modal').style.display = 'flex';
+            renderCategories();
+        }
+
+        function cancelPublish() {
+            document.getElementById('publish-modal').style.display = 'none';
+        }
+
+        async function publishProject() {
+            document.getElementById('header').classList.remove('hidden_all_h');
+            const name = document.getElementById('projectName').value.trim();
+            const category = document.getElementById('projectCategory').value;
+            if (name && category) {
+                const htmlCode = document.getElementById('htmlCode').value;
+                const cssCode = document.getElementById('cssCode').value;
+                const jsCode = document.getElementById('jsCode').value;
+
+                const projectData = {
+                    name: name,
+                    category: category,
+                    html: htmlCode,
+                    css: cssCode,
+                    js: jsCode
+                };
+
+                try {
+                    const response = await fetch('/aplication/save-project', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(projectData)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Ошибка при сохранении проекта');
+                    }
+
+                    await fetchApps();
+                    if (apps.some(app => app.name.toLowerCase() === name.toLowerCase())) {
+                        alert('An application with this name already exists!');
+                        return;
+                    }
+                    apps.push({
+                        id: apps.length + 1,
+                        name,
+                        category,
+                        likes: 0,
+                        dislikes: 0,
+                        reviews: []
+                    });
+                    await saveApps();
+                    renderApps();
+
+                    document.getElementById('publish-modal').style.display = 'none';
+                    document.querySelector('.test_all').classList.add('hidden_all_h');
+                    document.querySelector('.search-bar').classList.remove('hidden_all_h');
+                    document.querySelector('.filter').classList.remove('hidden_all_h');
+                    document.getElementById('app-list').classList.remove('hidden_all_h');
+                    document.getElementById('app-creation').classList.remove('hidden_all_h');
+                    //showNotification('Проект успешно опубликован!');
+                } catch (error) {
+                    showNotification('Ошибка при сохранении проекта: ' + error.message);
+                }
+            } else {
+                alert('Please fill in all fields!');
+            }
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    e.preventDefault();
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('search').addEventListener('input', (e) => {
+            e.preventDefault();
+            renderApps();
+        });
+
+        document.getElementById('category-filter').addEventListener('change', (e) => {
+            e.preventDefault();
+            renderApps();
+        });
+
+        // Добавляем обработчики для кнопок в модальных окнах
+        document.querySelector('button[onclick="openCategoryModal()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            openCategoryModal();
+        });
+
+        document.querySelector('button[onclick="openAppCreation()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            openAppCreation();
+        });
+
+        document.querySelector('button[onclick="addApp()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            addApp();
+        });
+
+        document.querySelector('button[onclick="closeAppCreation()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            closeAppCreation();
+        });
+
+        document.querySelector('button[onclick="addCategory()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            addCategory();
+        });
+
+        document.querySelector('button[onclick="closeCategoryModal()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            closeCategoryModal();
+        });
+
+        document.querySelector('button[onclick="publishProject()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            publishProject();
+        });
+
+        document.querySelector('button[onclick="cancelPublish()"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            cancelPublish();
+        });
+
+        document.getElementById('testBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            runCode();
+        });
+
+        document.getElementById('publishBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showPublishForm();
+        });
+
+        document.querySelector('.close-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            showMainView();
+        });
+
+        // Функция для инициализации при загрузке страницы
+        async function initializeApp() {
+            await fetchUserActions(); // Загружаем данные с сервера и обновляем localStorage
+            await renderCategories();
+            await renderApps();
+        }
+
+        // Запускаем инициализацию при загрузке страницы
+        initializeApp();
+
+        // Добавляем обработчики событий для форм
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+            });
+        });
+
+        // Модифицируем обработчики событий для кнопок
+        document.querySelectorAll('button').forEach(button => {
+            if (!button.hasAttribute('onclick')) {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            }
+        });
+    </script>
+
+
+
+    <button class="chat-button" onclick="toggleChat()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        </svg>
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Chat</span>
+            <button class="close-button" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Здесь будут сообщения -->
+        </div>
+        <div class="chat-input">
+            <div class="chat-input-container">
+                <input type="text" id="messageInputUN" placeholder="Enter a message...">
+                <button class="test_rotate" onclick="sendMessage_nopobleminfuture()">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+        
+    <script>
+        window.addEventListener('load', () => {
+            const favicon = document.createElement('link');
+            favicon.rel = 'icon';
+            favicon.href = '/chat/Testic.png?v=' + new Date().getTime(); // Параметр для избежания кэша
+            favicon.type = 'image/png';
+            document.head.appendChild(favicon);
+        });
+    </script>   
+    <script src="script.js?ts=abсdefgihea"></script>
+    <script src="assets/js/main.js?ts=qwer"></script>
+</body>
+</html>
+

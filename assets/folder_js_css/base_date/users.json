@@ -1,0 +1,53 @@
+{
+  "Users": {
+    "kirillypenko20@gmail.com": {
+      "email": "kirillypenko20@gmail.com",
+      "name": "robot venomchik",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocLQ4GKFsSol2G8XaqKoY8iJK11X_Me47yXAHx5u96whNitKQqZA=s96-c",
+      "registrationDate": "2025-03-01T20:21:03.590Z",
+      "lastLogin": "2025-05-28T18:15:52.262Z"
+    },
+    "ivnsell13@gmail.com": {
+      "email": "ivnsell13@gmail.com",
+      "name": "Іван Гайдаров",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocKo6wwU_TLBydoxPpjTUaXbXCYSrY-oeey8pnt0qsGwIndWsqw=s96-c",
+      "registrationDate": "2025-04-08T18:22:13.916Z",
+      "lastLogin": "2025-05-28T15:29:22.173Z"
+    },
+    "kyrylo.lypenko2019@harant-osvita.kyiv.ua": {
+      "email": "kyrylo.lypenko2019@harant-osvita.kyiv.ua",
+      "name": "Кирило Липенко",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocK3oE6AO8cVFlSB6znJ98PA_HWFpKAQMJFW_zApz7kov8rqKg=s96-c",
+      "registrationDate": "2025-04-18T14:00:02.641Z",
+      "lastLogin": "2025-05-23T17:23:39.097Z"
+    },
+    "gubenko.ksenichka@gmail.com": {
+      "email": "gubenko.ksenichka@gmail.com",
+      "name": "Ксюша Губенко",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocJXnFZVIEVBQc4BsK6GkZtiVqb8Dy688kj6WPJRkxUTzVblDXfq=s96-c",
+      "registrationDate": "2025-05-23T08:15:54.172Z",
+      "lastLogin": "2025-05-23T09:48:46.616Z"
+    },
+    "gpercuk@gmail.com": {
+      "email": "gpercuk@gmail.com",
+      "name": "Ashurg",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocJHzwRA4QOcT9h1H_yq_GCYGwJSE-iEKoZ2cxu0vcFwhe2h6G8=s96-c",
+      "registrationDate": "2025-05-28T15:19:10.881Z",
+      "lastLogin": "2025-05-28T15:19:10.881Z"
+    },
+    "abancila@stripe.com": {
+      "email": "abancila@stripe.com",
+      "name": "Andrei Bancila",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocISzf42vC5IdUvfJ6qZXyee6Xb1tP4CfFx83n0MiRoKGQ4VuhM=s96-c",
+      "registrationDate": "2025-05-29T07:51:54.456Z",
+      "lastLogin": "2025-05-29T07:51:54.456Z"
+    },
+    "katherina.shypovskaya@gmail.com": {
+      "email": "katherina.shypovskaya@gmail.com",
+      "name": "Katherina Shypovskaya",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocIq1tsP34iPPZrMKlnOsi3iXb1l68f6WGB-k81kGLpAP_inxU_K=s96-c",
+      "registrationDate": "2025-05-29T16:18:50.812Z",
+      "lastLogin": "2025-05-29T16:18:50.812Z"
+    }
+  }
+}
